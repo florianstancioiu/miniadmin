@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="496d4c6b-5ea9-47a6-91da-1e6b5ea1c6d0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/seeders/UserSeeder.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/CategoryFactory.php" afterPath="$PROJECT_DIR$/database/factories/CategoryFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/CommentFactory.php" afterPath="$PROJECT_DIR$/database/factories/CommentFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/PageFactory.php" afterPath="$PROJECT_DIR$/database/factories/PageFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/PostFactory.php" afterPath="$PROJECT_DIR$/database/factories/PostFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_10_12_143249_create_pages_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_10_12_143249_create_pages_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_10_12_143255_create_posts_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_10_12_143255_create_posts_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_10_12_143301_create_categories_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_10_12_143301_create_categories_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2020_10_12_143535_create_comments_table.php" afterPath="$PROJECT_DIR$/database/migrations/2020_10_12_143535_create_comments_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeders/CategorySeeder.php" afterPath="$PROJECT_DIR$/database/seeders/CategorySeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeders/CommentSeeder.php" afterPath="$PROJECT_DIR$/database/seeders/CommentSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeders/PageSeeder.php" afterPath="$PROJECT_DIR$/database/seeders/PageSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeders/PostSeeder.php" afterPath="$PROJECT_DIR$/database/seeders/PostSeeder.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -283,7 +269,7 @@
       <workItem from="1602513088612" duration="2454000" />
       <workItem from="1602569323854" duration="2154000" />
       <workItem from="1602748043255" duration="1763000" />
-      <workItem from="1602943043248" duration="1671000" />
+      <workItem from="1602943043248" duration="1700000" />
     </task>
     <task id="LOCAL-00001" summary="Create basic model classes with everything needed&#10;&#10;Generate laravel auth for the application">
       <created>1602514435466</created>
@@ -292,11 +278,18 @@
       <option name="project" value="LOCAL" />
       <updated>1602514435466</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update database files">
+      <created>1602944740206</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602944740209</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8042000" />
+    <option name="totallyTimeSpent" value="8071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="2560" height="1053" extended-state="6" />
@@ -331,7 +324,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="Create basic model classes with everything needed&#10;&#10;Generate laravel auth for the application" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create basic model classes with everything needed&#10;&#10;Generate laravel auth for the application" />
+    <MESSAGE value="Update database files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update database files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
