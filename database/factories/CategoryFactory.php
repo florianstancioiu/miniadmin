@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CategoryFactory extends Factory
 {
@@ -21,8 +23,14 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->realText();
+        $slug = Str::slug($title);
+
         return [
-            //
+            'title' => $title,
+            'slug' => $slug,
+            'image' => $this->faker->imageUrl(),
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
