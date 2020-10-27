@@ -16,4 +16,4 @@ require('jquery-knob-chif/dist/jquery.knob.min');
 require('overlayscrollbars/js/OverlayScrollbars.min');
 require('./adminlte/adminlte');
 // require('./adminlte/pages/dashboard');
-require('./adminlte/demo');
+// require('./adminlte/demo');
