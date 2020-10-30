@@ -10,18 +10,13 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
         <li class="breadcrumb-item active">Pages</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="card">
-        <!--
-        <div class="card-header">
-            <h3 class="card-title">Bordered Table</h3>
-        </div>
-        -->
         <!-- /.card-header -->
         <div class="card-body">
             <table class="table table-bordered">
