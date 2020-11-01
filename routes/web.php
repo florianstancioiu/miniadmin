@@ -32,10 +32,11 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('/pages')->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('admin.pages.index');
-        Route::get('/edit/:id', [PageController::class, 'edit'])->name('admin.pages.edit');
+        Route::get('/create', [PageController::class, 'create'])->name('admin.pages.create');
+        Route::get('/edit/{id}', [PageController::class, 'edit'])->name('admin.pages.edit');
         Route::post('/', [PageController::class, 'store'])->name('admin.pages.store');
-        Route::put('/:id', [PageController::class, 'update'])->name('admin.pages.update');
-        Route::delete('/:id', [PageController::class, 'destroy'])->name('admin.pages.delete');
+        Route::put('/{id}', [PageController::class, 'update'])->name('admin.pages.update');
+        Route::delete('/{id}', [PageController::class, 'destroy'])->name('admin.pages.delete');
     });
 
     Route::prefix('/posts')->group(function () {

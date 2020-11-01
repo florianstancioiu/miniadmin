@@ -6,6 +6,7 @@
 
 @section('page-title')
     Pages
+    <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary">Add +</a>
 @endsection
 
 @section('breadcrumbs')
@@ -23,22 +24,28 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>Task</th>
-                        <th>Progress</th>
-                        <th style="width: 40px">Label</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($pages as $page)
                         <tr>
                             <td>{{ $page->id }}</td>
+                            <td>
+                                <img src="{{ $page->image_url }}" width="80" height="80" alt="">
+                            </td>
                             <td>{{ $page->title }}</td>
                             <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
+                                <form action="{{ route('admin.pages.delete', ['id' => $page->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                </form>
+
+                                <a href="{{ route('admin.pages.edit', ['id' => $page->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                             </td>
-                            <td><span class="badge bg-danger">55%</span></td>
                         </tr>
                     @endforeach
                 </tbody>
