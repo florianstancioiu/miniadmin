@@ -1,5 +1,5 @@
 @if($errors->all())
-    <div class="card bg-danger">
+    <div class="card card-danger">
         <div class="card-header">
             <h3 class="card-title">Failure!</h3>
         </div>
@@ -12,7 +12,7 @@
 @endif
 
 @if(session()->has('message'))
-    <div class="card bg-primary">
+    <div class="card card-success">
         <div class="card-header">
             <h3 class="card-title">Success!</h3>
         </div>
