@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PageStore;
 use App\Http\Requests\PageUpdate;
 use App\Http\Requests\PageDestroy;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
@@ -48,21 +49,63 @@ class PageController extends Controller
             ->with('message', 'The page record has been successfully stored');
     }
 
-    public function edit(Page $page)
+    public function edit(int $id)
     {
+        $page = Page::findOrFail($id);
+
         return view('admin.pages.edit', compact('page'));
     }
 
-    public function update(PageUpdate $request, Page $page)
+    public function update(PageUpdate $request, int $id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $original_image = $page->image;
+        $page = $page->fill($request->validated());
+        $page->slug = Str::slug($request->title);
+
+        try {
+            if ($request->hasFile('image')) {
+                // delete existing image
+                Storage::delete($original_image);
+
+                // store the new one
+                $page->image = $request->image->store('pages');
+            }
+
+
+            $page->save();
+
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.pages.index')
+                ->withErrors([
+                    'An exception was raised while updating the page: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.pages.index')
+            ->with('message', 'The page record has been successfully updated');
     }
 
     public function destroy(PageDestroy $request, int $id)
     {
-        $page = Page::findOrFail($id);
-        $page->delete();
+        try {
+            $page = Page::findOrFail($id);
+            // delete existing image
+            Storage::delete($page->image);
+            // delete record
+            $page->delete();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.pages.index')
+                ->withErrors([
+                    'An exception was raised while deleting the page: ' . $e->getMessage()
+                ]);
+        }
 
-        return redirect(route('admin.pages.index'));
+        return redirect()
+            ->route('admin.pages.index')
+            ->with('message', 'The page record has been successfully deleted');
     }
 }
