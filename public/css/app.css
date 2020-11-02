@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
@@ -50746,5 +50746,17 @@ THEMES:
 .os-host-rtl.os-theme-light > .os-scrollbar-vertical .os-scrollbar-handle:before {
   right: -6px;
   left: -2px;
+}
+
+.actions-cell a,
+.actions-cell form {
+  display: block;
+  float: left;
+  margin: 5px;
+}
+
+.pagination-img {
+  max-width: 60px;
+  max-height: 60px;
 }
 

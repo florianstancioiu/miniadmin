@@ -34,17 +34,23 @@
                         <tr>
                             <td>{{ $page->id }}</td>
                             <td>
-                                <img src="{{ $page->image_url }}" width="80" height="80" alt="">
+                                <img src="{{ $page->image_url }}" class="pagination-img" alt="">
                             </td>
                             <td>{{ $page->title }}</td>
-                            <td>
+                            <td class="actions-cell">
+                                <a href="{{ route('admin.pages.edit', ['id' => $page->id]) }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-wrench"></i>
+                                    Edit
+                                </a>
+
                                 <form action="{{ route('admin.pages.delete', ['id' => $page->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                    <button class="btn btn-danger btn-sm" type="submit">
+                                        <i class="fas fa-trash"></i>
+                                        Delete
+                                    </button>
                                 </form>
-
-                                <a href="{{ route('admin.pages.edit', ['id' => $page->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                             </td>
                         </tr>
                     @endforeach
