@@ -23,7 +23,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link @if(request()->routeIs('admin.dashboard')) active @endif">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Dashboard
@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.pages.index') }}" class="nav-link">
+                    <a href="{{ route('admin.pages.index') }}" class="nav-link @if(request()->routeIs('admin.pages.index')) active @endif">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Pages
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.posts.index') }}" class="nav-link">
+                    <a href="{{ route('admin.posts.index') }}" class="nav-link @if(request()->routeIs('admin.posts.index')) active @endif">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
                             Posts
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.users.index') }}" class="nav-link">
+                    <a href="{{ route('admin.users.index') }}" class="nav-link @if(request()->routeIs('admin.users.index')) active @endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Users
@@ -56,7 +56,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.settings') }}" class="nav-link">
+                    <a href="{{ route('admin.settings') }}" class="nav-link @if(request()->routeIs('admin.settings')) active @endif">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
                             Settings
