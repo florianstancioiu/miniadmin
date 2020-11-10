@@ -23,7 +23,7 @@ class PageFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->realText();
+        $title = $this->faker->unique()->realText();
         $slug = Str::slug($title);
 
         return [
