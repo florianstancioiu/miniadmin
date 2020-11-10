@@ -14,6 +14,6 @@ require('jquery-knob-chif/dist/jquery.knob.min');
 // require('tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min');
 // require('summernote/dist/summernote');
 require('overlayscrollbars/js/OverlayScrollbars.min');
-require('./adminlte/adminlte');
+require('./adminlte');
 // require('./adminlte/pages/dashboard');
 // require('./adminlte/demo');
