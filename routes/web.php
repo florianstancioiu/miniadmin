@@ -19,15 +19,12 @@ use App\Http\Controllers\Admin\SettingController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::prefix('/pages')->group(function () {
@@ -41,10 +38,11 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('/posts')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('admin.posts.index');
-        Route::get('/edit/:id', [PostController::class, 'edit'])->name('admin.posts.edit');
+        Route::get('/create', [PostController::class, 'create'])->name('admin.posts.create');
+        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('admin.posts.edit');
         Route::post('/', [PostController::class, 'store'])->name('admin.posts.store');
-        Route::put('/:id', [PostController::class, 'update'])->name('admin.posts.update');
-        Route::delete('/:id', [PostController::class, 'destroy'])->name('admin.posts.delete');
+        Route::put('/{id}', [PostController::class, 'update'])->name('admin.posts.update');
+        Route::delete('/{id}', [PostController::class, 'destroy'])->name('admin.posts.delete');
     });
 
     Route::prefix('/users')->group(function () {
