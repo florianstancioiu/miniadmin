@@ -2,66 +2,66 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Post;
+use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostStore;
-use App\Http\Requests\PostUpdate;
-use App\Http\Requests\PostDestroy;
+use App\Http\Requests\UserStore;
+use App\Http\Requests\UserUpdate;
+use App\Http\Requests\UserDestroy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class PostController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate();
+        $users = User::orderBy('id', 'DESC')->paginate();
 
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.users.create');
     }
 
-    public function store(PostStore $request)
+    public function store(UserStore $request)
     {
-        $post = new Post($request->validated());
-        $post->slug = Str::slug($request->title);
+        $user = new User($request->validated());
+        $user->slug = Str::slug($request->title);
 
         try {
             if ($request->hasFile('image')) {
-                $post->image = $request->image->store('posts');
+                $user->image = $request->image->store('users');
             }
 
-            $post->save();
+            $user->save();
 
         } catch (\Exception $e) {
             return redirect()
-                ->route('admin.posts.index')
+                ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while storing the post: ' . $e->getMessage()
+                    'An exception was raised while storing the user: ' . $e->getMessage()
                 ]);
         }
 
         return redirect()
-            ->route('admin.posts.index')
-            ->with('message', 'The post record has been successfully stored');
+            ->route('admin.users.index')
+            ->with('message', 'The user record has been successfully stored');
     }
 
     public function edit(int $id)
     {
-        $post = Post::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.users.edit', compact('user'));
     }
 
-    public function update(PostUpdate $request, int $id)
+    public function update(UserUpdate $request, int $id)
     {
-        $post = Post::findOrFail($id);
-        $original_image = $post->image;
-        $post = $post->fill($request->validated());
-        $post->slug = Str::slug($request->title);
+        $user = User::findOrFail($id);
+        $original_image = $user->image;
+        $user = $user->fill($request->validated());
+        $user->slug = Str::slug($request->title);
 
         try {
             if ($request->hasFile('image')) {
@@ -69,43 +69,43 @@ class PostController extends Controller
                 Storage::delete($original_image);
 
                 // store the new one
-                $post->image = $request->image->store('posts');
+                $user->image = $request->image->store('users');
             }
 
 
-            $post->save();
+            $user->save();
 
         } catch (\Exception $e) {
             return redirect()
-                ->route('admin.posts.index')
+                ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while updating the post: ' . $e->getMessage()
+                    'An exception was raised while updating the user: ' . $e->getMessage()
                 ]);
         }
 
         return redirect()
-            ->route('admin.posts.index')
-            ->with('message', 'The post record has been successfully updated');
+            ->route('admin.users.index')
+            ->with('message', 'The user record has been successfully updated');
     }
 
-    public function destroy(PostDestroy $request, int $id)
+    public function destroy(UserDestroy $request, int $id)
     {
         try {
-            $post = Post::findOrFail($id);
+            $user = User::findOrFail($id);
             // delete existing image
-            Storage::delete($post->image);
+            Storage::delete($user->image);
             // delete record
-            $post->delete();
+            $user->delete();
         } catch (\Exception $e) {
             return redirect()
-                ->route('admin.posts.index')
+                ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while deleting the post: ' . $e->getMessage()
+                    'An exception was raised while deleting the user: ' . $e->getMessage()
                 ]);
         }
 
         return redirect()
-        ->route('admin.posts.index')
-        ->with('message', 'The post record has been successfully deleted');
+        ->route('admin.users.index')
+        ->with('message', 'The user record has been successfully deleted');
     }
 }

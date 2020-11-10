@@ -3,84 +3,109 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostStore;
+use App\Http\Requests\PostUpdate;
+use App\Http\Requests\PostDestroy;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $posts = Post::orderBy('id', 'DESC')->paginate();
+
+        return view('admin.posts.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(PostStore $request)
     {
-        //
+        $post = new Post($request->validated());
+        $post->slug = Str::slug($request->title);
+
+        try {
+            if ($request->hasFile('image')) {
+                $post->image = $request->image->store('posts');
+            }
+
+            $post->save();
+
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.posts.index')
+                ->withErrors([
+                    'An exception was raised while storing the post: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.posts.index')
+            ->with('message', 'The post record has been successfully stored');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
+    public function edit(int $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.edit', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
+    public function update(PostUpdate $request, int $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $original_image = $post->image;
+        $post = $post->fill($request->validated());
+        $post->slug = Str::slug($request->title);
+
+        try {
+            if ($request->hasFile('image')) {
+                // delete existing image
+                Storage::delete($original_image);
+
+                // store the new one
+                $post->image = $request->image->store('posts');
+            }
+
+
+            $post->save();
+
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.posts.index')
+                ->withErrors([
+                    'An exception was raised while updating the post: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.posts.index')
+            ->with('message', 'The post record has been successfully updated');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
+    public function destroy(PostDestroy $request, int $id)
     {
-        //
-    }
+        try {
+            $post = Post::findOrFail($id);
+            // delete existing image
+            Storage::delete($post->image);
+            // delete record
+            $post->delete();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.posts.index')
+                ->withErrors([
+                    'An exception was raised while deleting the post: ' . $e->getMessage()
+                ]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
+        return redirect()
+        ->route('admin.posts.index')
+        ->with('message', 'The post record has been successfully deleted');
     }
 }
