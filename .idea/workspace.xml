@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="496d4c6b-5ea9-47a6-91da-1e6b5ea1c6d0" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/client/partials/header.blade.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Client/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Client/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Post.php" afterPath="$PROJECT_DIR$/app/Models/Post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sass/client.scss" afterPath="$PROJECT_DIR$/resources/sass/client.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/client/about.blade.php" afterPath="$PROJECT_DIR$/resources/views/client/about.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/client/home.blade.php" afterPath="$PROJECT_DIR$/resources/views/client/home.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/client/pages/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/client/pages/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/client/pages/show.blade.php" afterPath="$PROJECT_DIR$/resources/views/client/pages/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/client/partials/navigation.blade.php" afterPath="$PROJECT_DIR$/resources/views/client/partials/navigation.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/client.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/client.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
-    </list>
+    <list default="true" id="496d4c6b-5ea9-47a6-91da-1e6b5ea1c6d0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/client/pages/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
-              <caret line="57" column="38" lean-forward="true" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+              <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
               <folding>
                 <element signature="e#76#124#0#HTML" expanded="true" />
               </folding>
@@ -409,7 +396,7 @@
       <workItem from="1604597476386" duration="31000" />
       <workItem from="1604930249339" duration="502000" />
       <workItem from="1604994521837" duration="2092000" />
-      <workItem from="1605091092191" duration="988000" />
+      <workItem from="1605091092191" duration="1585000" />
     </task>
     <task id="LOCAL-00001" summary="Create basic model classes with everything needed&#10;&#10;Generate laravel auth for the application">
       <created>1602514435466</created>
@@ -492,7 +479,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37699000" />
+    <option name="totallyTimeSpent" value="38296000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -505,7 +492,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="911" y="113" width="1390" height="819" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2631579" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -953,7 +939,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/client/pages/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="57" column="38" lean-forward="true" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
+          <caret line="57" column="38" lean-forward="false" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
           <folding>
             <element signature="e#76#124#0#HTML" expanded="true" />
           </folding>

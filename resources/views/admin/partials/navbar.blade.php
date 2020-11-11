@@ -26,7 +26,7 @@
         <li class="nav-item">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button class="btn btn-warning" type="submit">
+                <button class="btn btn-sm btn-warning" type="submit">
                     <i class="fas fa-sign-out-alt"></i>
                     Logout
                 </button>
