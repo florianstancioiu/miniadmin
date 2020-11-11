@@ -16,7 +16,7 @@
 
 
         <!-- Page Header -->
-        @include('client.partials.header')
+        @yield('header')
 
         <!-- Main Content -->
         <div class="container">
