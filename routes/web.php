@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Client\PageController as ClientPageController;
+use App\Http\Controllers\Client\PostController as ClientPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+Route::get('/contact', [App\Http\Controllers\Client\HomeController::class, 'contact'])->name('contact');
+
+Route::prefix('/posts')->group(function () {
+    Route::get('/', [ClientPostController::class, 'index'])->name('client.posts.index');
+    Route::get('/{slug}', [ClientPostController::class, 'show'])->name('client.posts.show');
+});
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -55,3 +63,5 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
 });
+
+Route::get('/{slug}', [ClientPageController::class, 'show'])->name('client.pages.show');
