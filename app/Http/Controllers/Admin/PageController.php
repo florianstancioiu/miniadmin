@@ -8,6 +8,7 @@ use App\Http\Requests\PageStore;
 use App\Http\Requests\PageUpdate;
 use App\Http\Requests\PageDestroy;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
@@ -28,6 +29,7 @@ class PageController extends Controller
     {
         $page = new Page($request->validated());
         $page->slug = Str::slug($request->title);
+        $page->user_id = Auth::id();
 
         try {
             if ($request->hasFile('image')) {

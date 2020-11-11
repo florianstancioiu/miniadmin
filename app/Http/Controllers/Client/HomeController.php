@@ -15,8 +15,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate(20);
+        $posts = Post::orderBy('id', 'DESC')
+            ->with(['user'])
+            ->paginate(20);
 
         return view('client.home', compact('posts'));
     }
+
+    public function contact()
+    {
+        return view('client.contact');
+    }
+
 }
