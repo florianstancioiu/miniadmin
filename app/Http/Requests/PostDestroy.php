@@ -13,7 +13,7 @@ class PostDestroy extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class PostDestroy extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'integer|exists:pages,id'
         ];
     }
 }

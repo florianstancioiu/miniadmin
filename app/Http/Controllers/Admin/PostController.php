@@ -8,6 +8,7 @@ use App\Http\Requests\PostStore;
 use App\Http\Requests\PostUpdate;
 use App\Http\Requests\PostDestroy;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -28,6 +29,7 @@ class PostController extends Controller
     {
         $post = new Post($request->validated());
         $post->slug = Str::slug($request->title);
+        $post->user_id = Auth::id();
 
         try {
             if ($request->hasFile('image')) {
