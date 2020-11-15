@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
+use App\Models\Page;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -13,6 +16,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $pages_total = Page::count();
+        $posts_total = Post::count();
+        $users_total = User::count(); 
+        
+        return view('admin.dashboard', compact(
+            'pages_total', 
+            'posts_total',
+            'users_total'
+        ));
     }
 }

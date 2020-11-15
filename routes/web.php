@@ -26,6 +26,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 Route::get('/contact', [App\Http\Controllers\Client\HomeController::class, 'contact'])->name('contact');
+Route::get('/about', [App\Http\Controllers\Client\HomeController::class, 'about'])->name('about');
 
 Route::prefix('/posts')->group(function () {
     Route::get('/', [ClientPostController::class, 'index'])->name('client.posts.index');
@@ -61,7 +62,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::delete('/:id', [UserController::class, 'destroy'])->name('admin.users.delete');
     });
 
-    Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
+    Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings.index');
+    Route::post('/settings', [SettingController::class, 'store'])->name('admin.settings.store');
 });
 
 Route::get('/{slug}', [ClientPageController::class, 'show'])->name('client.pages.show');

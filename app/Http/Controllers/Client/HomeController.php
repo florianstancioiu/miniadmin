@@ -22,6 +22,11 @@ class HomeController extends Controller
         return view('client.home', compact('posts'));
     }
 
+    public function about()
+    {
+        return view('client.about');
+    }
+
     public function contact()
     {
         return view('client.contact');
