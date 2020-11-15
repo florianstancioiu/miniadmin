@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ->call(CategorySeeder::class)
             ->call(PageSeeder::class)
             ->call(PostSeeder::class)
+            ->call(SettingSeeder::class)
             ->call(CommentSeeder::class);
     }
 }

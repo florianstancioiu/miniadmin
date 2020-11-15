@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SettingStore;
 
 class SettingController extends Controller
 {
+    const FILES_FIELDS = [
+        'site-favicon',
+        'site-logo'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,62 +21,39 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $settings = Setting::all();
+
+        return view('admin.settings.index', compact('settings'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
+   /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SettingStore $request)
     {
-        //
-    }
+        $settings = $request->setting;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Setting $setting)
-    {
-        //
-    }
+        foreach($settings as $key => $value) {
+            $db_setting = Setting::where('key', $key)->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Setting $setting)
-    {
-        //
-    }
+            // don't store anything if we cant find the setting in the db
+            if (! $db_setting) {
+                continue;
+            }
+            
+            // store files in the storage dir
+            if (in_array($key, self::FILES_FIELDS)) {
+                $value = $value->store('settings');
+            }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Setting $setting)
-    {
-        //
+            $db_setting->value = $value;
+            $db_setting->save();
+        }
+
+        return redirect()->route('admin.settings.index');
     }
 
     /**
@@ -81,6 +64,6 @@ class SettingController extends Controller
      */
     public function destroy(Setting $setting)
     {
-        //
+        // TODO: Implement function
     }
 }
