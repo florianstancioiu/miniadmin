@@ -1,5 +1,9 @@
 @extends('layouts.client')
 
+@section('title')
+    {{ $post->title }}
+@endsection
+
 @section('header')
     <header class="masthead" style="background-image: url('{{ $post->image_url }}')">
         <div class="overlay"></div>

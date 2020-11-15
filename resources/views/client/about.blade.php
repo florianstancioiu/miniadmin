@@ -1,5 +1,9 @@
 @extends('layouts.client')
 
+@section('title')
+    About
+@endsection
+
 @section('header')
     <header class="masthead" style="background-image: url('img/about-bg.jpg')">
         <div class="overlay"></div>

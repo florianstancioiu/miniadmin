@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="{{ setting('site-tagline') }}">
+        <meta name="author" content="Florian Stancioiu">
 
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title>@yield('title') | {{ setting('site-title') }}</title>
 
         @include('client.partials.styles')
     </head>
