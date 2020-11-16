@@ -53,14 +53,15 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::put('/{id}', [PostController::class, 'update'])->name('admin.posts.update');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('admin.posts.delete');
     });
-
     Route::prefix('/users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
-        Route::get('/edit/:id', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::get('/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
         Route::post('/', [UserController::class, 'store'])->name('admin.users.store');
-        Route::put('/:id', [UserController::class, 'update'])->name('admin.users.update');
-        Route::delete('/:id', [UserController::class, 'destroy'])->name('admin.users.delete');
+        Route::put('/{id}', [UserController::class, 'update'])->name('admin.users.update');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
     });
+
 
     Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings.index');
     Route::post('/settings', [SettingController::class, 'store'])->name('admin.settings.store');

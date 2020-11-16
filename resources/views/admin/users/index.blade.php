@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
 @section('title')
-    Posts
+    Users
 @endsection
 
 @section('page-title')
-    Posts
-    <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">Add +</a>
+    Users
+    <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">Add +</a>
 @endsection
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
-        <li class="breadcrumb-item active">Posts</li>
+        <li class="breadcrumb-item active">Users</li>
     </ol>
 @endsection
 
@@ -25,25 +25,25 @@
                     <tr>
                         <th style="width: 10px">#</th>
                         <th>Image</th>
-                        <th>Title</th>
+                        <th>Full Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($posts as $post)
+                    @foreach($users as $user)
                         <tr>
-                            <td>{{ $post->id }}</td>
+                            <td>{{ $user->id }}</td>
                             <td>
-                                <img src="{{ $post->image_url }}" class="pagination-img" alt="">
+                                <img src="{{ $user->image_url }}" class="pagination-img" alt="">
                             </td>
-                            <td>{{ $post->title }}</td>
+                            <td>{{ $user->full_name }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-wrench"></i>
                                     Edit
                                 </a>
 
-                                <form action="{{ route('admin.posts.delete', ['id' => $post->id]) }}" method="POST">
+                                <form action="{{ route('admin.users.delete', ['id' => $user->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" type="submit">
@@ -60,7 +60,7 @@
         <!-- /.card-body -->
 
         <div class="card-footer clearfix">
-            {{ $posts->links() }}
+            {{ $users->links() }}
         </div>
     </div>
     <!-- /.card -->

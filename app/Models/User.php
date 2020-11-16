@@ -17,6 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'image',
         'first_name',
         'last_name',
         'email',
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;   
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return url('storage/'. $this->image);
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
 use App\Http\Requests\UserDestroy;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -27,7 +27,7 @@ class UserController extends Controller
     public function store(UserStore $request)
     {
         $user = new User($request->validated());
-        $user->slug = Str::slug($request->title);
+        $user->password = Hash::make($request->password);
 
         try {
             if ($request->hasFile('image')) {
@@ -60,8 +60,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $original_image = $user->image;
+        $original_password = $user->password;
+
         $user = $user->fill($request->validated());
-        $user->slug = Str::slug($request->title);
+        if (strlen($request->password) >= 6) {
+            $user->password = Hash::make($request->password);
+        } else {
+            $user->password = $original_password;
+        }
 
         try {
             if ($request->hasFile('image')) {
