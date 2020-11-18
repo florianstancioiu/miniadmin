@@ -5,7 +5,7 @@
 @endsection
 
 @section('header')
-    <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+    <header class="masthead" style="background-image: url({{ asset('storage/' . setting('site-home-bg')) }})">
         <div class="overlay"></div>
 
         <div class="container">

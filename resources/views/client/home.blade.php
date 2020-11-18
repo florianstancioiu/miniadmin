@@ -30,7 +30,7 @@
                     <h2 class="post-title">{{ $post->title }}</h2>
                 </a>
                 <p class="post-meta">Posted by
-                    <a href="#">{{ $post->user->full_name }}</a>
+                    <a href="#">{{ $post->user['full_name'] }}</a>
                     on {{ $post->created_at->format('d/m/Y') }}</p>
             </div>
             <hr>
