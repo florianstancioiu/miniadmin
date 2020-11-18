@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->unique()->realText();
+        $title = $this->faker->unique()->sentence();
         $slug = Str::slug($title);
 
         return [

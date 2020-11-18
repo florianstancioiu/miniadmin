@@ -24,14 +24,14 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->unique()->realText();
+        $title = $this->faker->unique()->sentence();
         $slug = Str::slug($title);
 
         return [
             'title' => $title,
             'slug' => $slug,
             'image' => $this->faker->imageUrl(),
-            'content' => $this->faker->realText(),
+            'content' => $this->faker->paragraph(10),
             'user_id' => User::inRandomOrder()->first()->id,
             'category_id' => Category::inRandomOrder()->first()->id,
         ];

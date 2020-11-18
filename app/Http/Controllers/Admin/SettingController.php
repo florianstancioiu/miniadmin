@@ -11,7 +11,9 @@ class SettingController extends Controller
 {
     const FILES_FIELDS = [
         'site-favicon',
-        'site-logo'
+        'site-logo',
+        'site-user-logo',
+        'site-home-bg'
     ];
 
     /**
