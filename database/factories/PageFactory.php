@@ -29,7 +29,7 @@ class PageFactory extends Factory
         return [
             'title' => $title,
             'slug' => $slug,
-            'image' => $this->faker->imageUrl(),
+            //'image' => $this->faker->imageUrl(),
             'content' => $this->faker->paragraph(10),
             'user_id' => User::inRandomOrder()->first()->id,
         ];
