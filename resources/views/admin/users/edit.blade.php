@@ -4,10 +4,6 @@
     Update User
 @endsection
 
-@section('page-title')
-    Update User
-@endsection
-
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>
@@ -28,7 +24,7 @@
                 @csrf
                 @method('PUT')
                 <div class="card-body">
-                    
+
                     <input type="hidden" name="id" value="{{ $user->id }}"/>
 
                     <div class="form-group">

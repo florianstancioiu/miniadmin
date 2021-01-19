@@ -4,10 +4,6 @@
     Create User
 @endsection
 
-@section('page-title')
-    Create User
-@endsection
-
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Users</a></li>

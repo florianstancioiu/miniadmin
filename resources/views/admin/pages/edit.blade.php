@@ -4,10 +4,6 @@
     Edit Page
 @endsection
 
-@section('page-title')
-    Edit Page
-@endsection
-
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.pages.index') }}">Pages</a></li>

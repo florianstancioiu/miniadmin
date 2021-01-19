@@ -4,10 +4,6 @@
     Edit Post
 @endsection
 
-@section('page-title')
-    Edit Post
-@endsection
-
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Posts</a></li>

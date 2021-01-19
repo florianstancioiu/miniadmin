@@ -18,10 +18,10 @@ class DashboardController extends Controller
     {
         $pages_total = Page::count();
         $posts_total = Post::count();
-        $users_total = User::count(); 
-        
-        return view('admin.dashboard', compact(
-            'pages_total', 
+        $users_total = User::count();
+
+        return view('admin.dashboard.index', compact(
+            'pages_total',
             'posts_total',
             'users_total'
         ));

@@ -4,11 +4,6 @@
     Pages
 @endsection
 
-@section('page-title')
-    Pages
-    <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary">Add +</a>
-@endsection
-
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
@@ -18,7 +13,25 @@
 
 @section('content')
     <div class="card">
-        <!-- /.card-header -->
+        <div class="card-header">
+            <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus"></i>
+                <span>
+                    Add New Page
+                </span>
+            </a>
+
+            <form class="form-inline">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>

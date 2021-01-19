@@ -4,11 +4,6 @@
     Posts
 @endsection
 
-@section('page-title')
-    Posts
-    <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">Add +</a>
-@endsection
-
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
@@ -18,7 +13,12 @@
 
 @section('content')
     <div class="card">
-        <!-- /.card-header -->
+        <div class="card-header">
+            <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus"></i>
+                <span>Add New Post</span>
+            </a>
+        </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
