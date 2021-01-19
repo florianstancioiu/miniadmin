@@ -11,3 +11,12 @@
     max-width: 60px;
     max-height: 60px;
 }
+
+.form-image {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}

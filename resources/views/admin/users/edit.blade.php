@@ -29,6 +29,9 @@
 
                     <div class="form-group">
                         <label for="form-image">Image</label>
+                        @if ($user->image)
+                            <img src="{{ $user->image_url }}" alt="" class="form-image">
+                        @endif
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="form-image" accept="image/*">

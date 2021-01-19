@@ -41,6 +41,9 @@
                         @elseif($setting->type === 'image')
                             <div class="form-group">
                                 <label for="input-{{ $setting->key }}">{{ $setting->title }}</label>
+                                @if ($setting->value != null)
+                                    <img src="{{ url('storage/'. $setting->value) }}" alt="" class="form-image">
+                                @endif
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" name="setting[{{ $setting->key }}]" class="custom-file-input" id="input-{{ $setting->key }}" accept="image/*">

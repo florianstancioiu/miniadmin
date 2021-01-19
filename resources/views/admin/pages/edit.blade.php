@@ -30,10 +30,8 @@
                     </div>
                     <div class="form-group">
                         <label for="form-image">Image</label>
-                        @if($page->image)
-                            <div>
-                                <img src="{{ $page->image_url }}" style="max-width: 200px; max-height: 100px" alt="" />
-                            </div>
+                        @if ($page->image)
+                            <img src="{{ $page->image_url }}" alt="" class="form-image">
                         @endif
                         <div class="input-group">
                             <div class="custom-file">
