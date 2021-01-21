@@ -12,7 +12,9 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="{{ url('/register') }}"><b>Admin</b>LTE</a>
+    <a href="{{ url('/register') }}">
+        {{ setting('site-title') }}
+    </a>
   </div>
 
   <div class="card">
@@ -39,7 +41,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" placeholder="Email">
           <div class="input-group-append">

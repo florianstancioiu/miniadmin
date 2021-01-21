@@ -34,7 +34,9 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>
-                                <img src="{{ $user->image_url }}" class="pagination-img" alt="">
+                                @if ($user->image)
+                                    <img src="{{ $user->image_url }}" class="pagination-img" alt="">
+                                @endif
                             </td>
                             <td>{{ $user->full_name }}</td>
                             <td class="actions-cell">
