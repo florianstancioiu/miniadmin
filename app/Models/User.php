@@ -45,11 +45,19 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . " " . $this->last_name;   
+        return $this->first_name . " " . $this->last_name;
     }
 
     public function getImageUrlAttribute()
     {
         return url('storage/'. $this->image);
+    }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query
+            ->whereRaw('LOWER(`email`) LIKE ? ', ['%' . strtolower($keyword) .'%'])
+            ->orWhereRaw('LOWER(`first_name`) LIKE ? ', ['%' . strtolower($keyword) .'%'])
+            ->orWhereRaw('LOWER(`last_name`) LIKE ? ', ['%' . strtolower($keyword) .'%']);
     }
 }

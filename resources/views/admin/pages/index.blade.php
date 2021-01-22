@@ -23,7 +23,7 @@
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.pages.index') }}">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search" aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search" value="{{ $keyword }}" aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>

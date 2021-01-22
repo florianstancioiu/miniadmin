@@ -10,14 +10,19 @@ use App\Http\Requests\PostDestroy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate();
+        $keyword = $request->keyword ?? '';
+        $posts = Post::orderBy('id', 'DESC')
+            ->search($keyword)
+            ->paginate()
+            ->appends(request()->query());
 
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts', 'keyword'));
     }
 
     public function create()

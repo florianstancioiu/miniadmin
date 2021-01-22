@@ -16,13 +16,13 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->keyword ?? '';
+        $keyword = $request->keyword ?? '';
         $pages = Page::orderBy('id', 'DESC')
-            ->search($search)
+            ->search($keyword)
             ->paginate()
             ->appends(request()->query());
 
-        return view('admin.pages.index', compact('pages'));
+        return view('admin.pages.index', compact('pages', 'keyword'));
     }
 
     public function create()

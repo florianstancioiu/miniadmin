@@ -27,4 +27,11 @@ class Post extends Model
     {
         return url('storage/'. $this->image);
     }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query
+            ->whereRaw('LOWER(`title`) LIKE ? ', ['%' . strtolower($keyword) .'%'])
+            ->orWhereRaw('LOWER(`content`) LIKE ? ', ['%' . strtolower($keyword) .'%']);
+    }
 }

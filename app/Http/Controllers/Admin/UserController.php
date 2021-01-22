@@ -9,14 +9,19 @@ use App\Http\Requests\UserUpdate;
 use App\Http\Requests\UserDestroy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'DESC')->paginate();
+        $keyword = $request->keyword ?? '';
+        $users = User::orderBy('id', 'DESC')
+            ->search($keyword)
+            ->paginate()
+            ->appends(request()->query());
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'keyword'));
     }
 
     public function create()

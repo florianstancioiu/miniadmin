@@ -18,6 +18,17 @@
                 <i class="fas fa-plus"></i>
                 <span>Add New Post</span>
             </a>
+
+            <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.posts.index') }}">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" name="keyword" value="{{ $keyword }}" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
