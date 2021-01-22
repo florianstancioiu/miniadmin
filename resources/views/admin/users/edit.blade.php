@@ -54,21 +54,42 @@
                         <label for="form-email">Email</label>
                         <input type="text" name="email" class="form-control" id="form-email" placeholder="Enter email" value="{{ $user->email }}">
                     </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Update User</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Update Password</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" action="{{ route('admin.users.update-password', ['id'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+
+                    <input type="hidden" name="id" value="{{ $user->id }}"/>
 
                     <div class="form-group">
-                        <label for="form-password">Password</label>
+                        <label for="form-password">New Password</label>
                         <input type="password" name="password" class="form-control" id="form-password" placeholder="Enter password">
                     </div>
 
                     <div class="form-group">
-                        <label for="form-confirm-password">Confirm Password</label>
+                        <label for="form-confirm-password">Confirm New Password</label>
                         <input type="password" name="password_confirmation" class="form-control" id="form-confirm-password" placeholder="Enter password confirmation">
                     </div>
-
+                </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
                 </div>
             </form>
         </div>
+
     </div>
 @endsection

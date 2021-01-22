@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
+use App\Http\Requests\UserUpdatePassword;
 use App\Http\Requests\UserDestroy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
@@ -65,14 +66,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $original_image = $user->image;
-        $original_password = $user->password;
-
         $user = $user->fill($request->validated());
-        if (strlen($request->password) >= 6) {
-            $user->password = Hash::make($request->password);
-        } else {
-            $user->password = $original_password;
-        }
 
         try {
             if ($request->hasFile('image')) {
@@ -97,6 +91,32 @@ class UserController extends Controller
         return redirect()
             ->route('admin.users.index')
             ->with('message', 'The user record has been successfully updated');
+    }
+
+    public function updatePassword(UserUpdatePassword $request, int $id)
+    {
+        $user = User::findOrFail($id);
+        $original_password = $user->password;
+
+        if (strlen($request->password) >= 6) {
+            $user->password = Hash::make($request->password);
+        } else {
+            $user->password = $original_password;
+        }
+
+        try {
+            $user->save();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.users.index')
+                ->withErrors([
+                    'An exception was raised while changing the password: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('message', 'The user password has been successfully updated');
     }
 
     public function destroy(UserDestroy $request, int $id)

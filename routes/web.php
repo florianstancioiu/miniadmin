@@ -53,7 +53,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::put('/{id}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.delete');
     });
-    
+
     Route::prefix('/users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/create', [UserController::class, 'create'])->name('users.create');
@@ -62,6 +62,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::put('/{id}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.delete');
     });
+
+    Route::put('/users/{id}/update-password', [UserController::class, 'updatePassword'])->name('users.update-password');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
