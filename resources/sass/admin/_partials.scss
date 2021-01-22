@@ -23,3 +23,14 @@
     object-fit: cover;
     object-position: center;
 }
+
+.admin-search-form {
+    display: inline-flex;
+    float: right;
+    .input-group-append {
+        border: 1px solid #ccc;
+        .btn {
+            line-height: 0.5;
+        }
+    }
+}
