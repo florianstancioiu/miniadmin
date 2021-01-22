@@ -10,12 +10,17 @@ use App\Http\Requests\PageDestroy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pages = Page::orderBy('id', 'DESC')->paginate();
+        $search = $request->keyword ?? '';
+        $pages = Page::orderBy('id', 'DESC')
+            ->search($search)
+            ->paginate()
+            ->appends(request()->query());
 
         return view('admin.pages.index', compact('pages'));
     }

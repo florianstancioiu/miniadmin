@@ -16,7 +16,7 @@ class Page extends Model
         'image',
         'content'
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -25,5 +25,12 @@ class Page extends Model
     public function getImageUrlAttribute()
     {
         return url('storage/'. $this->image);
+    }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query
+            ->whereRaw('LOWER(`title`) LIKE ? ', ['%' . strtolower($keyword) .'%'])
+            ->orWhereRaw('LOWER(`content`) LIKE ? ', ['%' . strtolower($keyword) .'%']);
     }
 }
