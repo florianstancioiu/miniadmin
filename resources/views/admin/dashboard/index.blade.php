@@ -84,6 +84,33 @@
                 </div>
             </div>
 
+            <div class="col-12">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Created at</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($latest_users as $user)
+                        <tr>
+                            <th scope="row">
+                                @if ($user->image)
+                                    <img class="dashboard-user-img" src="{{ $user->image_url }}" alt="">
+                                @endif
+                            </th>
+                            <td>{{ $user->first_name }}</td>
+                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                </table>
+            </div>
+
         </div>
     </div><!-- /.container-fluid -->
 @endsection
