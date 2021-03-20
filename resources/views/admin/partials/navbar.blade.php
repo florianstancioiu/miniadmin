@@ -6,7 +6,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a target="_blank" href="{{ url('/') }}" class="nav-link">Home</a>
+            <a target="_blank" href="{{ url('/') }}" class="nav-link">{{ __('partials.home') }}</a>
         </li>
     </ul>
 
@@ -16,13 +16,11 @@
                 @csrf
                 <button class="btn btn-sm btn-primary" type="submit">
                     <i class="fas fa-sign-out-alt"></i>
-                    Logout
+                    {{ __('partials.logout') }}
                 </button>
             </form>
         </li>
     </ul>
-
-
 
 </nav>
 <!-- /.navbar -->

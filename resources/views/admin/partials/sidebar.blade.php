@@ -30,7 +30,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link @if(request()->routeIs('admin.dashboard')) active @endif">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Dashboard
+                            {{ __('partials.dashboard') }}
                         </p>
                     </a>
                 </li>
@@ -38,7 +38,7 @@
                     <a href="{{ route('admin.pages.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/pages')) active @endif">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
-                            Pages
+                            {{ __('partials.pages') }}
                         </p>
                     </a>
                 </li>
@@ -46,7 +46,7 @@
                     <a href="{{ route('admin.posts.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/posts'))) active @endif">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
-                            Posts
+                            {{ __('partials.posts') }}
                         </p>
                     </a>
                 </li>
@@ -54,7 +54,7 @@
                     <a href="{{ route('admin.users.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/users'))) active @endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Users
+                            {{ __('partials.users') }}
                         </p>
                     </a>
                 </li>
@@ -63,7 +63,7 @@
                     <a href="{{ route('admin.settings.index') }}" class="nav-link @if(request()->routeIs('admin.settings.index')) active @endif">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
-                            Settings
+                            {{ __('partials.settings') }}
                         </p>
                     </a>
                 </li>

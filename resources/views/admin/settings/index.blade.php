@@ -1,17 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-    Settings
-@endsection
-
-@section('page-title')
-    Settings
+    {{ __('general.settings') }}
 @endsection
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
-        <li class="breadcrumb-item active">Settings</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
+        <li class="breadcrumb-item active">{{ __('general.settings') }}</li>
     </ol>
 @endsection
 
@@ -20,7 +16,7 @@
     <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Settings</h3>
+                <h3 class="card-title">{{ __('general.settings') }}</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -57,7 +53,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">{{ __('general.save') }}</button>
                 </div>
             </form>
         </div>

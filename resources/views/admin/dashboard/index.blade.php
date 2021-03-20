@@ -6,8 +6,8 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
+        <li class="breadcrumb-item"><a href="#">{{ __('dashboard.home') }}</a></li>
+        <li class="breadcrumb-item active">{{ __('dashboard.dashboard') }}</li>
     </ol>
 @endsection
 
@@ -21,13 +21,13 @@
                     <div class="inner">
                         <h3>{{ $posts_total }}</h3>
 
-                        <p>Total Posts</p>
+                        <p>{{ __('dashboard.total_posts') }}</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-newspaper"></i>
                     </div>
                     <a href="{{ route('admin.posts.index') }}" class="small-box-footer">
-                        <span>More info</span>
+                        <span>{{ __('dashboard.more_info')}}</span>
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -38,13 +38,13 @@
                     <div class="inner">
                         <h3>{{ $pages_total }}</h3>
 
-                        <p>Total Pages</p>
+                        <p>{{ __('dashboard.total_pages') }}</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-edit"></i>
                     </div>
                     <a href="{{ route('admin.pages.index') }}" class="small-box-footer">
-                        <span>More info</span>
+                        <span>{{ __('dashboard.more_info') }}</span>
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -55,13 +55,13 @@
                     <div class="inner">
                         <h3>{{ $users_total }}</h3>
 
-                        <p>Total Users</p>
+                        <p>{{ __('dashboard.total_users') }}</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-users"></i>
                     </div>
                     <a href="{{ route('admin.users.index') }}" class="small-box-footer">
-                        <span>More info</span>
+                        <span>{{ __('dashboard.more_info')}}</span>
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -72,13 +72,13 @@
                     <div class="inner">
                         <h3>{{ $users_total }}</h3>
 
-                        <p>Total Views</p>
+                        <p>{{ __('dashboard.total_views') }}</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-eye"></i>
                     </div>
                     <a href="#" class="small-box-footer">
-                        <span>More info</span>
+                        <span>{{ __('dashboard.more_info') }}</span>
                         <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -88,10 +88,10 @@
             <table class="table table-dark">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Created at</th>
+                        <th scope="col">{{ __('dashboard.avatar') }}</th>
+                        <th scope="col">{{ __('dashboard.first_name') }}</th>
+                        <th scope="col">{{ __('dashboard.last_name') }}</th>
+                        <th scope="col">{{ __('dashboard.created_at') }}</th>
                     </tr>
                 </thead>
                 <tbody>

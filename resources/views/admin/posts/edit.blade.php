@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-    Edit Post
+    {{ __('posts.edit_post') }}
 @endsection
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Posts</a></li>
-        <li class="breadcrumb-item active">Edit</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">{{ __('posts.posts') }}</a></li>
+        <li class="breadcrumb-item active">{{ __('general.edit') }}</li>
     </ol>
 @endsection
 
@@ -16,7 +16,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Edit Post</h3>
+                <h3 class="card-title">{{ __('posts.edit_post') }}</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
@@ -25,30 +25,30 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="form-title">Title</label>
-                        <input type="text" name="title" class="form-control" id="form-title" placeholder="Enter title" value="{{ $post->title }}">
+                        <label for="form-title">{{ __('posts.title') }}</label>
+                        <input type="text" name="title" class="form-control" id="form-title" placeholder="{{ __('posts.enter_title') }}" value="{{ $post->title }}">
                     </div>
                     <div class="form-group">
-                        <label for="form-image">Image</label>
+                        <label for="form-image">{{ __('posts.image') }}</label>
                         @if ($post->image)
                             <img src="{{ $post->image_url }}" alt="" class="form-image">
                         @endif
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="form-image" name="image" accept="image/*">
-                                <label class="custom-file-label" for="form-image">Choose image</label>
+                                <label class="custom-file-label" for="form-image">{{ __('posts.choose_image') }}</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="form-content">Content</label>
-                        <textarea name="content" id="form-content" class="form-control" cols="30" rows="10" placeholder="Enter content">{{ $post->content }}</textarea>
+                        <label for="form-content">{{ __('posts.content') }}</label>
+                        <textarea name="content" id="form-content" class="form-control" cols="30" rows="10" placeholder="{{ __('posts.enter_content') }}">{{ $post->content }}</textarea>
                     </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <button type="submit" class="btn btn-primary">{{ __('general.edit') }}</button>
                 </div>
             </form>
         </div>

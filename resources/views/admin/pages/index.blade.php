@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-    Pages
+    {{ __('pages.pages') }}
 @endsection
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Admin</a></li>
-        <li class="breadcrumb-item active">Pages</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('pages.admin') }}</a></li>
+        <li class="breadcrumb-item active">{{ __('pages.pages') }}</li>
     </ol>
 @endsection
 
@@ -17,13 +17,13 @@
             <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus"></i>
                 <span>
-                    Add New Page
+                    {{ __('pages.add_new_page') }}
                 </span>
             </a>
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.pages.index') }}">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" name="keyword" placeholder="Search" value="{{ $keyword }}" aria-label="Search">
+                    <input class="form-control form-control-navbar" type="search" name="keyword" placeholder="{{ __('general.search') }}" value="{{ $keyword }}" aria-label="{{ __('general.search') }}">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search"></i>
@@ -37,9 +37,9 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Actions</th>
+                        <th>{{ __('pages.image') }}</th>
+                        <th>{{ __('pages.title') }}</th>
+                        <th>{{ __('general.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,7 +53,7 @@
                             <td class="actions-cell">
                                 <a href="{{ route('admin.pages.edit', ['id' => $page->id]) }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-wrench"></i>
-                                    Edit
+                                    {{ __('general.edit') }}
                                 </a>
 
                                 <form action="{{ route('admin.pages.delete', ['id' => $page->id]) }}" method="POST">
@@ -61,7 +61,7 @@
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" type="submit">
                                         <i class="fas fa-trash"></i>
-                                        Delete
+                                        {{ __('general.delete') }}
                                     </button>
                                 </form>
                             </td>
