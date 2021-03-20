@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('pages.admin') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
         <li class="breadcrumb-item active">{{ __('pages.pages') }}</li>
     </ol>
 @endsection

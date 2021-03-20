@@ -19,7 +19,7 @@
 
         <div class="card">
             <div class="card-body register-card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">{{ __('auth.register_new_membership') }}</p>
 
                 <form action="{{ route('register')}}" method="post">
                     @csrf
@@ -29,7 +29,7 @@
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="first_name" placeholder="First name">
+                        <input type="text" class="form-control" name="first_name" placeholder="{{ __('auth.first_name') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -42,7 +42,7 @@
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="last_name" placeholder="Last name">
+                        <input type="text" class="form-control" name="last_name" placeholder="{{ __('auth.last_name') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -55,7 +55,7 @@
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="email" class="form-control" name="email" placeholder="{{ __('auth.email') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -68,7 +68,7 @@
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" placeholder="{{ __('auth.password') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -81,7 +81,7 @@
                     @enderror
 
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password_confirmation" placeholder="Retype password">
+                        <input type="password" class="form-control" name="password_confirmation" placeholder="{{ __('auth.retype_password') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -91,12 +91,12 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block">{{ __('auth.register') }}</button>
                         </div>
                     </div>
 
                 </form>
-                <a href="{{ url('/login') }}" class="text-center">I already have a membership</a>
+                <a href="{{ url('/login') }}" class="text-center">{{ __('auth.i_have_a_membership') }}</a>
             </div>
         </div><!-- /.card -->
     </div>
