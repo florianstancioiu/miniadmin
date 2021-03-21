@@ -60,10 +60,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
         Route::post('/', [UserController::class, 'store'])->name('users.store');
         Route::put('/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::put('/{id}/update-password', [UserController::class, 'updatePassword'])->name('users.update-password');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.delete');
     });
-
-    Route::put('/users/{id}/update-password', [UserController::class, 'updatePassword'])->name('users.update-password');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');

@@ -32,7 +32,7 @@
                         @elseif($setting->type === 'textarea')
                              <div class="form-group">
                                 <label for="input-{{ $setting->key }}">{{ $setting->title }}</label>
-                                <textarea name="setting[{{ $setting->key }}]" id="input-{{ $setting->key }}" class="form-control" cols="30" rows="10" placeholder="{{ $setting->key }}">{{ $setting->value }}</textarea>
+                                <textarea name="setting[{{ $setting->key }}]" id="input-{{ $setting->key }}" class="form-control" cols="30" rows="5" placeholder="{{ $setting->key }}">{{ $setting->value }}</textarea>
                             </div>
                         @elseif($setting->type === 'image')
                             <div class="form-group">
