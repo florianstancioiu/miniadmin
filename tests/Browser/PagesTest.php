@@ -67,7 +67,6 @@ class PagesTest extends DuskTestCase
     /** @test */
     public function edit_works_as_expected()
     {
-        // TODO: Handle image
         $admin = User::find(1)->first();
         $new_page = Page::factory()->create();
 

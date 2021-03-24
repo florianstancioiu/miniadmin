@@ -23,7 +23,7 @@
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" name="keyword" value="{{ $keyword }}" placeholder="{{ __('general.search') }}" aria-label="{{ __('general.search') }}">
                     <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
+                        <button class="btn btn-navbar btn-search" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -49,7 +49,7 @@
                             </td>
                             <td>{{ $post->title }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
                                     <i class="fas fa-wrench"></i>
                                     {{ __('general.edit') }}
                                 </a>
@@ -57,7 +57,7 @@
                                 <form action="{{ route('admin.posts.delete', ['id' => $post->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit">
+                                    <button class="btn btn-danger btn-sm btn-delete" type="submit">
                                         <i class="fas fa-trash"></i>
                                         {{ __('general.delete') }}
                                     </button>

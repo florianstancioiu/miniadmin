@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{ __('users.edit_user') }}</button>
+                    <button type="submit" class="btn btn-primary btn-edit-user">{{ __('users.edit_user') }}</button>
                 </div>
             </form>
         </div>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{ __('users.edit_password') }}</button>
+                    <button type="submit" class="btn btn-primary btn-edit-password">{{ __('users.edit_password') }}</button>
                 </div>
             </form>
         </div>
