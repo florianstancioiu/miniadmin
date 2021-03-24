@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
 	        [
                 'title' => 'Site Title',
                 'key' => 'site-title',
-                'value' => 'MiniCMS',
+                'value' => 'MiniAdmin',
                 'type' => 'text',
                 'deletable' => 0,
                 'created_at' => now(),
@@ -27,7 +27,7 @@ class SettingSeeder extends Seeder
             [
                 'title' => 'Site Tagline',
                 'key' => 'site-tagline',
-                'value' => 'A simple Laravel based CMS',
+                'value' => 'A simple Laravel Admin',
                 'type' => 'textarea',
                 'deletable' => 0,
                 'created_at' => now(),

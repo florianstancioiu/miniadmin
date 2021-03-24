@@ -1,4 +1,4 @@
-# MiniCMS
+# MiniAdmin
 
 A Laravel based project by Florian Stancioiu
 
