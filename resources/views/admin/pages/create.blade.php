@@ -44,7 +44,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{ __('general.create') }}</button>
+                    <button type="submit" class="btn btn-primary btn-create">{{ __('general.create') }}</button>
                 </div>
             </form>
         </div>

@@ -48,7 +48,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{ __('general.edit') }}</button>
+                    <button type="submit" class="btn btn-primary btn-edit">{{ __('general.edit') }}</button>
                 </div>
             </form>
         </div>
