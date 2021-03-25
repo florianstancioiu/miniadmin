@@ -20,7 +20,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('admin.users.update', ['id'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{ route('admin.users.update', ['user'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -68,7 +68,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('admin.users.update-password', ['id'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{ route('admin.users.update-password', ['user'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">

@@ -78,7 +78,7 @@ class PagesTest extends DuskTestCase
                 ->assertSee($new_page->title)
                 ->assertSee($new_page->id)
                 ->click('table tr:first-child a.btn-edit')
-                ->assertRouteIs('admin.pages.edit', ['id' => $new_page->id])
+                ->assertRouteIs('admin.pages.edit', ['page' => $new_page->id])
                 ->assertSee(__('pages.edit_page'))
                 ->assertValue('#form-title', $new_page->title)
                 ->attach('image', storage_path('app/public/testing/test.jpg'))

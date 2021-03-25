@@ -49,12 +49,12 @@
                             </td>
                             <td>{{ $post->title }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.posts.edit', ['id' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
                                     <i class="fas fa-wrench"></i>
                                     {{ __('general.edit') }}
                                 </a>
 
-                                <form action="{{ route('admin.posts.delete', ['id' => $post->id]) }}" method="POST">
+                                <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm btn-delete" type="submit">

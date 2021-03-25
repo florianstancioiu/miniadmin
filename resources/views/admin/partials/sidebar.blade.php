@@ -10,7 +10,7 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <a class="image" href="{{ route('admin.users.edit', ['id' => auth()->id()]) }}">
+            <a class="image" href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}">
 
                 @if(auth()->user()->image)
                     <img src="{{ auth()->user()->image_url }}" class="img-circle elevation-2" alt="User Image">
@@ -19,7 +19,7 @@
                 @endif
             </a>
             <div class="info">
-                <a href="{{ route('admin.users.edit', ['id' => auth()->id()]) }}" class="d-block">{{ auth()->user()->full_name }}</a>
+                <a href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}" class="d-block">{{ auth()->user()->full_name }}</a>
             </div>
         </div>
 
