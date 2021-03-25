@@ -1,25 +1,25 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{ __('posts.posts') }}
+    {{ __('permissions.permissions') }}
 @endsection
 
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('posts.posts') }}</li>
+        <li class="breadcrumb-item active">{{ __('permissions.permissions') }}</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('admin.permissions.create') }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-plus"></i>
-                <span>{{ __('posts.add_new_post') }}</span>
+                <span>{{ __('permissions.add_new_permission') }}</span>
             </a>
 
-            <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.posts.index') }}">
+            <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.permissions.index') }}">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" name="keyword" value="{{ $keyword }}" placeholder="{{ __('general.search') }}" aria-label="{{ __('general.search') }}">
                     <div class="input-group-append">
@@ -35,26 +35,24 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>{{ __('posts.image') }}</th>
-                        <th>{{ __('posts.title') }}</th>
+                        <th>{{ __('permissions.title') }}</th>
+                        <th>{{ __('permissions.slug') }}</th>
                         <th>{{ __('general.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($posts as $post)
+                    @foreach($permissions as $permission)
                         <tr>
-                            <td>{{ $post->id }}</td>
-                            <td>
-                                <img src="{{ $post->image_url }}" class="pagination-img" alt="">
-                            </td>
-                            <td>{{ $post->title }}</td>
+                            <td>{{ $permission->id }}</td>
+                            <td>{{ $permission->title }}</td>
+                            <td>{{ $permission->slug }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                <a href="{{ route('admin.permissions.edit', ['permission' => $permission->id]) }}" class="btn btn-primary btn-sm btn-edit">
                                     <i class="fas fa-wrench"></i>
                                     {{ __('general.edit') }}
                                 </a>
 
-                                <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
+                                <form action="{{ route('admin.permissions.destroy', ['permission' => $permission->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm btn-delete" type="submit">
@@ -71,7 +69,7 @@
         <!-- /.card-body -->
 
         <div class="card-footer clearfix">
-            {{ $posts->links() }}
+            {{ $permissions->links() }}
         </div>
     </div>
     <!-- /.card -->

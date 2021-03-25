@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
             ->call(PageSeeder::class)
             ->call(PostSeeder::class)
             ->call(SettingSeeder::class)
-            ->call(CommentSeeder::class);
+            ->call(CommentSeeder::class)
+            ->call(PermissionSeeder::class)
+            ->call(RoleSeeder::class)
+            ->call(RolePermissionSeeder::class)
+            ->call(UserRoleSeeder::class)
+            ;
     }
 }

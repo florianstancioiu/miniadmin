@@ -3,72 +3,92 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\RoleStore;
+use App\Http\Requests\RoleUpdate;
+use App\Http\Requests\RoleDestroy;
+use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $keyword = $request->keyword ?? '';
+        $roles = Role::orderBy('id', 'DESC')
+            ->search($keyword)
+            ->paginate()
+            ->appends(request()->query());
+
+        return view('admin.roles.index', compact('roles', 'keyword'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(RoleStore $request)
     {
-        //
+        $role = new Role($request->validated());
+
+        try {
+            $role->save();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.roles.index')
+                ->withErrors([
+                    'An exception was raised while storing the role: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('message', 'The role record has been successfully stored');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
+    public function edit(int $id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        return view('admin.roles.edit', compact('role'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Role $role)
+    public function update(RoleUpdate $request, int $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        $role = $role->fill($request->validated());
+
+        try {
+            $role->save();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.roles.index')
+                ->withErrors([
+                    'An exception was raised while updating the role: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('message', 'The role record has been successfully updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Role $role)
+    public function destroy(RoleDestroy $request, int $id)
     {
-        //
+        try {
+            $role = Role::findOrFail($id);
+            $role->delete();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.roles.index')
+                ->withErrors([
+                    'An exception was raised while deleting the role: ' . $e->getMessage()
+                ]);
+        }
+
+        return redirect()
+            ->route('admin.roles.index')
+            ->with('message', 'The role record has been successfully deleted');
     }
 }
