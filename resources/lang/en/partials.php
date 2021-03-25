@@ -9,5 +9,10 @@ return [
     'pages' => 'Pages',
     'posts' => 'Posts',
     'users' => 'Users',
-    'settings' => 'Settings'
+    'settings' => 'Settings',
+    'media' => 'Media',
+    'roles' => 'Roles',
+    'permissions' => 'Permissions',
+    'categories' => 'Categories',
+    'tags' => 'Tags',
 ];

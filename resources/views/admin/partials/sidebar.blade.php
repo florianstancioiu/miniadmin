@@ -51,10 +51,50 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.categories.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/categories'))) active @endif">
+                        <i class="nav-icon fas fa-clone"></i>
+                        <p>
+                            {{ __('partials.categories') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.tags.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/tags'))) active @endif">
+                        <i class="nav-icon fas fa-tags"></i>
+                        <p>
+                            {{ __('partials.tags') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.media.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/media'))) active @endif">
+                        <i class="nav-icon fas fa-file-image"></i>
+                        <p>
+                            {{ __('partials.media') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.users.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/users'))) active @endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             {{ __('partials.users') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.roles.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/roles'))) active @endif">
+                        <i class="nav-icon fas fa-user-tag"></i>
+                        <p>
+                            {{ __('partials.roles') }}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.permissions.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/permissions'))) active @endif">
+                        <i class="nav-icon fas fa-check-square"></i>
+                        <p>
+                            {{ __('partials.permissions') }}
                         </p>
                     </a>
                 </li>
