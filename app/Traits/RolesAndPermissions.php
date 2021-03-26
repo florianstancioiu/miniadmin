@@ -42,4 +42,15 @@ trait RolesAndPermissions
 
         return $result->permissions_count === 1;
     }
+
+    public function hasRole(string $role)
+    {
+        $result = $this->withCount(['roles' => function ($query) use ($role) {
+                $query->where('roles.slug', $role);
+            }])
+            ->where('users.id', auth()->id())
+            ->first();
+
+        return $result->roles_count === 1;
+    }
 }
