@@ -16,12 +16,21 @@ class UserRoleSeeder extends Seeder
      */
     public function run()
     {
-        $admin_role = Role::where('slug', 'admin')->first();
+        // Connect admin to role
         $admin_user = User::where('email', 'admin@example.com')->first();
-
+        $admin_role = Role::where('slug', 'admin')->first();
         $user_role = new UserRole([
             'user_id' => $admin_user->id,
             'role_id' => $admin_role->id,
+        ]);
+        $user_role->save();
+
+        // Connect super user to role
+        $super_user = User::where('email', 'super@example.com')->first();
+        $super_role = Role::where('slug', 'super')->first();
+        $user_role = new UserRole([
+            'user_id' => $super_user->id,
+            'role_id' => $super_role->id,
         ]);
         $user_role->save();
     }

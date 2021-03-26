@@ -20,6 +20,10 @@ class RoleSeeder extends Seeder
                 'slug' => 'admin',
             ],
             [
+                'title' => 'Super',
+                'slug' => 'super',
+            ],
+            [
                 'title' => 'Guest',
                 'slug' => 'guest',
             ],

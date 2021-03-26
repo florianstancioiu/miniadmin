@@ -25,28 +25,33 @@ trait RolesAndPermissions
                 RolePermission::class
             ],
             [
-               'user_id', // Foreign key on the "user_role" table.
-               'role_id',    // Foreign key on the "role_permission" table.
-               'id'     // Foreign key on the "permissions" table.
+                'user_id',  // Foreign key on the "user_role" table.
+                'role_id',  // Foreign key on the "role_permission" table.
+                'id'        // Foreign key on the "permissions" table.
             ],
         );
     }
 
-    public function hasPermission(string $permission)
+    public function hasPermission(string $permission) : bool
     {
-        $result = $this->withCount(['permissions' => function ($query) use ($permission) {
-                $query->where('permissions.slug', $permission);
-            }])
+        $result = $this->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->join('role_permission', 'user_role.role_id', '=', 'role_permission.role_id')
+            ->join('permissions', 'role_permission.permission_id', '=', 'permissions.id')
+            ->where('permissions.slug', $permission)
             ->where('users.id', auth()->id())
-            ->first();
+            ->count();
 
-        return $result->permissions_count === 1;
+        return $result === 1;
     }
 
-    public function hasRole(string $role)
+    public function hasRole($role) : bool
     {
+        if (is_string($role)) {
+            $role = [ $role ];
+        }
+
         $result = $this->withCount(['roles' => function ($query) use ($role) {
-                $query->where('roles.slug', $role);
+                return $query->whereIn('roles.slug', $role);
             }])
             ->where('users.id', auth()->id())
             ->first();

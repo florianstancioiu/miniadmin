@@ -16,14 +16,55 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        $permissions = Permission::all();
+        // Add permissions for the admin role
+        $admin_permissions = Permission::all();
         $admin_role = Role::where('slug', 'admin')->first();
 
         $data = [];
-        foreach($permissions as $permission) {
+        foreach ($admin_permissions as $permission) {
             $data[] = [
                 'permission_id' => $permission->id,
                 'role_id' => $admin_role->id,
+            ];
+        }
+
+        RolePermission::insert($data);
+
+        // Add permissions for the super role
+        $super_permissions = Permission::whereIn('slug', [
+            'list-dashboard',
+            'list-posts',
+            'create-posts',
+            'store-posts',
+            'edit-posts',
+            'update-posts',
+            'destroy-posts',
+            'list-categories',
+            'create-categories',
+            'store-categories',
+            'edit-categories',
+            'update-categories',
+            'destroy-categories',
+            'list-tags',
+            'create-tags',
+            'store-tags',
+            'edit-tags',
+            'update-tags',
+            'destroy-tags',
+            'list-tags',
+            'create-media',
+            'store-media',
+            'edit-media',
+            'update-media',
+            'destroy-media',
+        ])->get();
+        $super_role = Role::where('slug', 'super')->first();
+
+        $data = [];
+        foreach ($super_permissions as $permission) {
+            $data[] = [
+                'permission_id' => $permission->id,
+                'role_id' => $super_role->id,
             ];
         }
 
