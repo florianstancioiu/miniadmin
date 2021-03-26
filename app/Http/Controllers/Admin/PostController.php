@@ -16,6 +16,8 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+        $this->can('list-posts');
+
         $keyword = $request->keyword ?? '';
         $posts = Post::orderBy('id', 'DESC')
             ->search($keyword)
@@ -27,11 +29,15 @@ class PostController extends Controller
 
     public function create()
     {
+        $this->can('create-posts');
+
         return view('admin.posts.create');
     }
 
     public function store(PostStore $request)
     {
+        $this->can('store-posts');
+
         $post = new Post($request->validated());
         $post->slug = Str::slug($request->title);
         $post->user_id = Auth::id();
@@ -58,6 +64,8 @@ class PostController extends Controller
 
     public function edit(int $id)
     {
+        $this->can('edit-posts');
+
         $post = Post::findOrFail($id);
 
         return view('admin.posts.edit', compact('post'));
@@ -65,6 +73,8 @@ class PostController extends Controller
 
     public function update(PostUpdate $request, int $id)
     {
+        $this->can('update-posts');
+
         $post = Post::findOrFail($id);
         $original_image = $post->image;
         $post = $post->fill($request->validated());
@@ -97,6 +107,8 @@ class PostController extends Controller
 
     public function destroy(PostDestroy $request, int $id)
     {
+        $this->can('destroy-posts');
+
         try {
             $post = Post::findOrFail($id);
             // delete existing image

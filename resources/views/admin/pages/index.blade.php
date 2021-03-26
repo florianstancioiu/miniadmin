@@ -14,12 +14,14 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary btn-add-new">
-                <i class="fas fa-plus"></i>
-                <span>
-                    {{ __('pages.add_new_page') }}
-                </span>
-            </a>
+            @can('create-pages')
+                <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary btn-add-new">
+                    <i class="fas fa-plus"></i>
+                    <span>
+                        {{ __('pages.add_new_page') }}
+                    </span>
+                </a>
+            @endcan
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.pages.index') }}">
                 <div class="input-group input-group-sm">
@@ -47,23 +49,29 @@
                         <tr>
                             <td>{{ $page->id }}</td>
                             <td>
-                                <img src="{{ $page->image_url }}" class="pagination-img" alt="">
+                                @if($page->image)
+                                    <img src="{{ $page->image_url }}" class="pagination-img" alt="">
+                                @endif
                             </td>
                             <td>{{ $page->title }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.pages.edit', ['page' => $page->id]) }}" class="btn btn-primary btn-sm btn-edit">
-                                    <i class="fas fa-wrench"></i>
-                                    {{ __('general.edit') }}
-                                </a>
+                                @can('edit-pages')
+                                    <a href="{{ route('admin.pages.edit', ['page' => $page->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                        <i class="fas fa-wrench"></i>
+                                        {{ __('general.edit') }}
+                                    </a>
+                                @endcan
 
-                                <form action="{{ route('admin.pages.destroy', ['page' => $page->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-delete" type="submit">
-                                        <i class="fas fa-trash"></i>
-                                        {{ __('general.delete') }}
-                                    </button>
-                                </form>
+                                @can('destroy-pages')
+                                    <form action="{{ route('admin.pages.destroy', ['page' => $page->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm btn-delete" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            {{ __('general.delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

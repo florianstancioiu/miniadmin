@@ -31,6 +31,14 @@
                         <label for="form-slug">{{ __('roles.slug') }}</label>
                         <input type="text" name="slug" class="form-control" id="form-slug" placeholder="{{ __('roles.enter_slug') }}">
                     </div>
+
+                    @foreach($permissions as $permission)
+                        <div class="form-group">
+                            <input type="checkbox" name="permission" id="form-permission-{{$permission->slug}}">
+                            <label for="form-permission-{{$permission->slug}}">{{ $permission->title }}</label>
+                        </div>
+                    @endforeach
+
                 </div>
                 <!-- /.card-body -->
 

@@ -14,10 +14,12 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-plus"></i>
-                <span>{{ __('roles.add_new_role') }}</span>
-            </a>
+            @can('create-roles')
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i>
+                    <span>{{ __('roles.add_new_role') }}</span>
+                </a>
+            @endcan
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.roles.index') }}">
                 <div class="input-group input-group-sm">
@@ -47,19 +49,23 @@
                             <td>{{ $role->title }}</td>
                             <td>{{ $role->slug }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.roles.edit', ['role' => $role->id]) }}" class="btn btn-primary btn-sm btn-edit">
-                                    <i class="fas fa-wrench"></i>
-                                    {{ __('general.edit') }}
-                                </a>
+                                @can('edit-roles')
+                                    <a href="{{ route('admin.roles.edit', ['role' => $role->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                        <i class="fas fa-wrench"></i>
+                                        {{ __('general.edit') }}
+                                    </a>
+                                @endcan
 
-                                <form action="{{ route('admin.roles.destroy', ['role' => $role->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-delete" type="submit">
-                                        <i class="fas fa-trash"></i>
-                                        {{ __('general.delete') }}
-                                    </button>
-                                </form>
+                                @can('destroy-roles')
+                                    <form action="{{ route('admin.roles.destroy', ['role' => $role->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm btn-delete" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            {{ __('general.delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

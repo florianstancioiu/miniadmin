@@ -13,6 +13,8 @@ class PermissionController extends Controller
 {
     public function index(Request $request)
     {
+        $this->can('list-permissions');
+
         $keyword = $request->keyword ?? '';
         $permissions = Permission::orderBy('id', 'DESC')
             ->search($keyword)
@@ -24,11 +26,15 @@ class PermissionController extends Controller
 
     public function create()
     {
+        $this->can('create-permissions');
+
         return view('admin.permissions.create');
     }
 
     public function store(PermissionStore $request)
     {
+        $this->can('store-permissions');
+
         $permission = new Permission($request->validated());
 
         try {
@@ -48,6 +54,8 @@ class PermissionController extends Controller
 
     public function edit(int $id)
     {
+        $this->can('edit-permissions');
+
         $permission = Permission::findOrFail($id);
 
         return view('admin.permissions.edit', compact('permission'));
@@ -55,6 +63,8 @@ class PermissionController extends Controller
 
     public function update(PermissionUpdate $request, int $id)
     {
+        $this->can('update-permissions');
+
         $permission = Permission::findOrFail($id);
         $permission = $permission->fill($request->validated());
 
@@ -75,6 +85,8 @@ class PermissionController extends Controller
 
     public function destroy(PermissionDestroy $request, int $id)
     {
+        $this->can('destroy-permissions');
+
         try {
             $permission = Permission::findOrFail($id);
             $permission->delete();

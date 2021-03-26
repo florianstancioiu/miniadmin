@@ -182,6 +182,11 @@ class PermissionSeeder extends Seeder
                 'group' => 'users',
             ],
             [
+                'title' => 'Update Password Users',
+                'slug' => 'update-password-users',
+                'group' => 'users',
+            ],
+            [
                 'title' => 'Destroy Users',
                 'slug' => 'destroy-users',
                 'group' => 'users',

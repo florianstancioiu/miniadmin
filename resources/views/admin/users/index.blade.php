@@ -14,10 +14,12 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-plus"></i>
-                <span>{{ __('users.add_new_user') }}</span>
-            </a>
+            @can('create-users')
+                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i>
+                    <span>{{ __('users.add_new_user') }}</span>
+                </a>
+            @endcan
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.users.index') }}">
                 <div class="input-group input-group-sm">
@@ -51,19 +53,23 @@
                             </td>
                             <td>{{ $user->full_name }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-sm btn-edit">
-                                    <i class="fas fa-wrench"></i>
-                                    {{ __('general.edit') }}
-                                </a>
+                                @can('edit-users')
+                                    <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                        <i class="fas fa-wrench"></i>
+                                        {{ __('general.edit') }}
+                                    </a>
+                                @endcan
 
-                                <form action="{{ route('admin.users.destroy', ['user' => $user->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-delete" type="submit">
-                                        <i class="fas fa-trash"></i>
-                                        {{ __('general.delete') }}
-                                    </button>
-                                </form>
+                                @can('destroy-users')
+                                    <form action="{{ route('admin.users.destroy', ['user' => $user->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm btn-delete" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            {{ __('general.delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

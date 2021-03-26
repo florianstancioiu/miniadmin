@@ -9,6 +9,9 @@ use App\Http\Requests\SettingStore;
 
 class SettingController extends Controller
 {
+    /**
+     * Fields that require storage saving
+     */
     const FILES_FIELDS = [
         'site-favicon',
         'site-logo',
@@ -16,26 +19,19 @@ class SettingController extends Controller
         'site-home-bg'
     ];
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        $this->can('list-settings');
+
         $settings = Setting::all();
 
         return view('admin.settings.index', compact('settings'));
     }
 
-   /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(SettingStore $request)
     {
+        $this->can('store-settings');
+
         $settings = $request->setting;
 
         foreach($settings as $key => $value) {
@@ -45,7 +41,7 @@ class SettingController extends Controller
             if (! $db_setting) {
                 continue;
             }
-            
+
             // store files in the storage dir
             if (in_array($key, self::FILES_FIELDS)) {
                 $value = $value->store('settings');
@@ -56,16 +52,5 @@ class SettingController extends Controller
         }
 
         return redirect()->route('admin.settings.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Setting $setting)
-    {
-        // TODO: Implement function
     }
 }

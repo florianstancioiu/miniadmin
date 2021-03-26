@@ -14,10 +14,12 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.permissions.create') }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-plus"></i>
-                <span>{{ __('permissions.add_new_permission') }}</span>
-            </a>
+            @can('create-permissions')
+                <a href="{{ route('admin.permissions.create') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i>
+                    <span>{{ __('permissions.add_new_permission') }}</span>
+                </a>
+            @endcan
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.permissions.index') }}">
                 <div class="input-group input-group-sm">
@@ -47,19 +49,23 @@
                             <td>{{ $permission->title }}</td>
                             <td>{{ $permission->slug }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.permissions.edit', ['permission' => $permission->id]) }}" class="btn btn-primary btn-sm btn-edit">
-                                    <i class="fas fa-wrench"></i>
-                                    {{ __('general.edit') }}
-                                </a>
+                                @can('edit-permissions')
+                                    <a href="{{ route('admin.permissions.edit', ['permission' => $permission->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                        <i class="fas fa-wrench"></i>
+                                        {{ __('general.edit') }}
+                                    </a>
+                                @endcan
 
-                                <form action="{{ route('admin.permissions.destroy', ['permission' => $permission->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-delete" type="submit">
-                                        <i class="fas fa-trash"></i>
-                                        {{ __('general.delete') }}
-                                    </button>
-                                </form>
+                                @can('destroy-permissions')
+                                    <form action="{{ route('admin.permissions.destroy', ['permission' => $permission->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm btn-delete" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            {{ __('general.delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

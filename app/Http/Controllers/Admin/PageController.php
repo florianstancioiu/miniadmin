@@ -16,6 +16,8 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
+        $this->can('list-pages');
+
         $keyword = $request->keyword ?? '';
         $pages = Page::orderBy('id', 'DESC')
             ->search($keyword)
@@ -27,11 +29,15 @@ class PageController extends Controller
 
     public function create()
     {
+        $this->can('create-pages');
+
         return view('admin.pages.create');
     }
 
     public function store(PageStore $request)
     {
+        $this->can('store-pages');
+
         $page = new Page($request->validated());
         $page->slug = Str::slug($request->title);
         $page->user_id = Auth::id();
@@ -58,6 +64,8 @@ class PageController extends Controller
 
     public function edit(int $id)
     {
+        $this->can('edit-pages');
+
         $page = Page::findOrFail($id);
 
         return view('admin.pages.edit', compact('page'));
@@ -65,6 +73,8 @@ class PageController extends Controller
 
     public function update(PageUpdate $request, int $id)
     {
+        $this->can('update-pages');
+
         $page = Page::findOrFail($id);
         $original_image = $page->image;
         $page = $page->fill($request->validated());
@@ -97,6 +107,8 @@ class PageController extends Controller
 
     public function destroy(PageDestroy $request, int $id)
     {
+        $this->can('destroy-pages');
+
         try {
             $page = Page::findOrFail($id);
             // delete existing image

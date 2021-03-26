@@ -16,6 +16,8 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $this->can('list-users');
+
         $keyword = $request->keyword ?? '';
         $users = User::orderBy('id', 'DESC')
             ->search($keyword)
@@ -27,11 +29,15 @@ class UserController extends Controller
 
     public function create()
     {
+        $this->can('create-users');
+
         return view('admin.users.create');
     }
 
     public function store(UserStore $request)
     {
+        $this->can('store-users');
+
         $user = new User($request->validated());
         $user->password = Hash::make($request->password);
 
@@ -57,6 +63,8 @@ class UserController extends Controller
 
     public function edit(int $id)
     {
+        $this->can('edit-users');
+
         $user = User::findOrFail($id);
 
         return view('admin.users.edit', compact('user'));
@@ -64,6 +72,8 @@ class UserController extends Controller
 
     public function update(UserUpdate $request, int $id)
     {
+        $this->can('update-users');
+
         $user = User::findOrFail($id);
         $original_image = $user->image;
         $user = $user->fill($request->validated());
@@ -95,6 +105,8 @@ class UserController extends Controller
 
     public function updatePassword(UserUpdatePassword $request, int $id)
     {
+        $this->can('update-password-users');
+
         $user = User::findOrFail($id);
         $original_password = $user->password;
 
@@ -121,6 +133,8 @@ class UserController extends Controller
 
     public function destroy(UserDestroy $request, int $id)
     {
+        $this->can('destroy-users');
+
         try {
             $user = User::findOrFail($id);
             // delete existing image

@@ -14,10 +14,12 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
-                <i class="fas fa-plus"></i>
-                <span>{{ __('posts.add_new_post') }}</span>
-            </a>
+            @can('create-posts')
+                <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i>
+                    <span>{{ __('posts.add_new_post') }}</span>
+                </a>
+            @endcan
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.posts.index') }}">
                 <div class="input-group input-group-sm">
@@ -45,23 +47,29 @@
                         <tr>
                             <td>{{ $post->id }}</td>
                             <td>
-                                <img src="{{ $post->image_url }}" class="pagination-img" alt="">
+                                @if($post->image)
+                                    <img src="{{ $post->image_url }}" class="pagination-img" alt="">
+                                @endif
                             </td>
                             <td>{{ $post->title }}</td>
                             <td class="actions-cell">
-                                <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
-                                    <i class="fas fa-wrench"></i>
-                                    {{ __('general.edit') }}
-                                </a>
+                                @can('edit-posts')
+                                    <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
+                                        <i class="fas fa-wrench"></i>
+                                        {{ __('general.edit') }}
+                                    </a>
+                                @endcan
 
-                                <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm btn-delete" type="submit">
-                                        <i class="fas fa-trash"></i>
-                                        {{ __('general.delete') }}
-                                    </button>
-                                </form>
+                                @can('destroy-posts')
+                                    <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm btn-delete" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            {{ __('general.delete') }}
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
