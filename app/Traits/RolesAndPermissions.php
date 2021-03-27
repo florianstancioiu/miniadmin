@@ -58,4 +58,9 @@ trait RolesAndPermissions
 
         return $result->roles_count === 1;
     }
+
+    public function canUser(string $permission) : bool
+    {
+        return $this->hasPermission($permission) || $this->hasRole('admin');
+    }
 }
