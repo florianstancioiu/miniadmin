@@ -51,7 +51,7 @@ class RolePermissionSeeder extends Seeder
             'edit-tags',
             'update-tags',
             'destroy-tags',
-            'list-tags',
+            'list-media',
             'create-media',
             'store-media',
             'edit-media',

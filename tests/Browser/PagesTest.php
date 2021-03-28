@@ -8,6 +8,9 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\Page;
 use App\Models\User;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\RolePermission;
 
 class PagesTest extends DuskTestCase
 {
@@ -21,9 +24,9 @@ class PagesTest extends DuskTestCase
     {
         parent::setUp();
 
-        $this->admin_user = User::find(1)->first();
-        $this->super_user = User::find(2)->first();
-        $this->guest_user = User::find(3)->first();
+        $this->admin_user = User::where('email', 'admin@example.com')->first();
+        $this->super_user = User::where('email', 'super@example.com')->first();
+        $this->guest_user = User::where('email', 'guest@example.com')->first();
     }
 
 
@@ -141,5 +144,101 @@ class PagesTest extends DuskTestCase
         // delete existing image
         Storage::delete($latest_page->image);
         $latest_page->delete();
+    }
+
+    /** @test */
+    public function admin_sees_protected_buttons()
+    {
+        $admin_user = $this->admin_user;
+
+        $this->browse(function (Browser $browser) use ($admin_user) {
+            $browser
+                ->loginAs($admin_user)
+                ->visit(route('admin.pages.index'))
+                ->assertSee(__('partials.pages'))
+                ->assertSee(__('pages.add_new_page'))
+                ->assertSee(__('general.edit'))
+                ->assertSee(__('general.delete'))
+                ;
+        });
+    }
+
+    /** @test */
+    public function guest_user_is_not_allowed_in_index_route()
+    {
+        $guest_user = $this->guest_user;
+
+        $this->browse(function (Browser $browser) use ($guest_user) {
+            $browser
+                ->loginAs($guest_user)
+                ->visit(route('admin.pages.index'))
+                ->assertSee('401')
+                ;
+        });
+    }
+
+    /** @test */
+    public function guest_user_is_not_allowed_in_create_route()
+    {
+        $guest_user = $this->guest_user;
+
+        $this->browse(function (Browser $browser) use ($guest_user) {
+            $browser
+                ->loginAs($guest_user)
+                ->visit(route('admin.pages.create'))
+                ->assertSee('401')
+                ;
+        });
+    }
+
+    /** @test */
+    public function guest_user_is_not_allowed_in_edit_route()
+    {
+        $guest_user = $this->guest_user;
+
+        $this->browse(function (Browser $browser) use ($guest_user) {
+            $browser
+                ->loginAs($guest_user)
+                ->visit(route('admin.pages.edit', ['page' => 1]))
+                ->assertSee('401')
+                ;
+        });
+    }
+
+    /** @test */
+    public function super_user_doesnt_sees_protected_buttons()
+    {
+        $super_user = $this->super_user;
+
+        // Add list-pages permissions for the super role
+        $new_permissions = [
+            'list-pages',
+        ];
+        $super_permissions = Permission::whereIn('slug', $new_permissions)->get();
+        $super_role = Role::where('slug', 'super')->first();
+        $role_permission_data = [];
+        foreach ($super_permissions as $permission) {
+            $role_permission_data[] = [
+                'permission_id' => $permission->id,
+                'role_id' => $super_role->id,
+            ];
+        }
+        RolePermission::insert($role_permission_data);
+
+        $this->browse(function (Browser $browser) use ($super_user) {
+            $browser
+                ->loginAs($super_user)
+                ->visit(route('admin.pages.index'))
+                ->assertSee(__('partials.pages'))
+                ->assertDontSee(__('pages.add_new_page'))
+                ->assertDontSee(__('general.edit'))
+                ->assertDontSee(__('general.delete'))
+                ;
+        });
+
+        RolePermission::where([
+            'role_id' => $super_role->id,
+            'permission_id' => Permission::where('slug', 'list-pages')->first()->id
+        ])->delete();
     }
 }

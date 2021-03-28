@@ -43,20 +43,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Prevent multiple queries from piling up -->
+                    @php $can_edit_roles = auth()->user()->canUser('edit-roles') @endphp
+                    @php $can_destroy_roles = auth()->user()->canUser('destroy-roles') @endphp
                     @foreach($roles as $role)
                         <tr>
                             <td>{{ $role->id }}</td>
                             <td>{{ $role->title }}</td>
                             <td>{{ $role->slug }}</td>
                             <td class="actions-cell">
-                                @can('edit-roles')
+                                @if($can_edit_roles)
                                     <a href="{{ route('admin.roles.edit', ['role' => $role->id]) }}" class="btn btn-primary btn-sm btn-edit">
                                         <i class="fas fa-wrench"></i>
                                         {{ __('general.edit') }}
                                     </a>
-                                @endcan
+                                @endif
 
-                                @can('destroy-roles')
+                                @if($can_destroy_roles)
                                     <form action="{{ route('admin.roles.destroy', ['role' => $role->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -65,7 +68,7 @@
                                             {{ __('general.delete') }}
                                         </button>
                                     </form>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

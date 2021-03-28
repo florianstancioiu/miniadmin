@@ -11,5 +11,6 @@ return [
     'avatar' => 'Avatar',
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
+    'email' => 'Email',
     'created_at' => 'Created At',
 ];

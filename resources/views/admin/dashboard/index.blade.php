@@ -91,6 +91,7 @@
                         <th scope="col">{{ __('dashboard.avatar') }}</th>
                         <th scope="col">{{ __('dashboard.first_name') }}</th>
                         <th scope="col">{{ __('dashboard.last_name') }}</th>
+                        <th scope="col">{{ __('dashboard.email') }}</th>
                         <th scope="col">{{ __('dashboard.created_at') }}</th>
                     </tr>
                 </thead>
@@ -104,6 +105,7 @@
                             </th>
                             <td>{{ $user->first_name }}</td>
                             <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->format('d/m/Y') }}</td>
                         </tr>
                     @endforeach

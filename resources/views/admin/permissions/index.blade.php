@@ -43,20 +43,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Prevent multiple queries from piling up -->
+                    @php $can_edit_permissions = auth()->user()->canUser('edit-permissions') @endphp
+                    @php $can_destroy_permissions = auth()->user()->canUser('destroy-permissions') @endphp
                     @foreach($permissions as $permission)
                         <tr>
                             <td>{{ $permission->id }}</td>
                             <td>{{ $permission->title }}</td>
                             <td>{{ $permission->slug }}</td>
                             <td class="actions-cell">
-                                @can('edit-permissions')
+                                @if($can_edit_permissions)
                                     <a href="{{ route('admin.permissions.edit', ['permission' => $permission->id]) }}" class="btn btn-primary btn-sm btn-edit">
                                         <i class="fas fa-wrench"></i>
                                         {{ __('general.edit') }}
                                     </a>
-                                @endcan
+                                @endif
 
-                                @can('destroy-permissions')
+                                @if($can_destroy_permissions)
                                     <form action="{{ route('admin.permissions.destroy', ['permission' => $permission->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -65,7 +68,7 @@
                                             {{ __('general.delete') }}
                                         </button>
                                     </form>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

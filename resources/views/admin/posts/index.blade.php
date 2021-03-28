@@ -43,6 +43,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Prevent multiple queries from piling up -->
+                    @php $can_edit_posts = auth()->user()->canUser('edit-posts') @endphp
+                    @php $can_destroy_posts = auth()->user()->canUser('destroy-posts') @endphp
                     @foreach($posts as $post)
                         <tr>
                             <td>{{ $post->id }}</td>
@@ -53,14 +56,14 @@
                             </td>
                             <td>{{ $post->title }}</td>
                             <td class="actions-cell">
-                                @can('edit-posts')
+                                @if($can_edit_posts)
                                     <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-primary btn-sm btn-edit">
                                         <i class="fas fa-wrench"></i>
                                         {{ __('general.edit') }}
                                     </a>
-                                @endcan
+                                @endif
 
-                                @can('destroy-posts')
+                                @if($can_destroy_posts)
                                     <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -69,7 +72,7 @@
                                             {{ __('general.delete') }}
                                         </button>
                                     </form>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach
