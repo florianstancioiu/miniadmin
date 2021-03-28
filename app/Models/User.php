@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Traits\RolesAndPermissions;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'role_id',
         'password',
     ];
 
@@ -49,6 +51,11 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;
+    }
+
+    public function getRoleAttribute()
+    {
+        return Role::where('id', $this->role_id)->first()->title;
     }
 
     public function getImageUrlAttribute()

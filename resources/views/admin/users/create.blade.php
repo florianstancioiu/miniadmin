@@ -50,6 +50,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="form-role">{{ __('users.role') }}</label>
+                        <select id="form-role" class="form-control" name="role_id">
+                            <option value="" selected disabled>{{ __('users.select_role') }}</option>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="form-password">{{ __('users.password') }}</label>
                         <input type="password" name="password" class="form-control" id="form-password" placeholder="{{ __('users.enter_password') }}">
                     </div>

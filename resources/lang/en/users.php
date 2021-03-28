@@ -23,4 +23,6 @@ return [
     'enter_confirm_new_password' => 'Enter Confirm New Password',
     'add_new_user' => 'Add New User',
     'full_name' => 'Full Name',
+    'role' => 'Role',
+    'select_role' => 'Select Role',
 ];

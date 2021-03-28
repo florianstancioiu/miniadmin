@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
@@ -41,7 +42,9 @@ class UserController extends Controller
     {
         $this->can('create-users');
 
-        return view('admin.users.create');
+        $roles = Role::all();
+
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(UserStore $request)
@@ -76,8 +79,9 @@ class UserController extends Controller
         $this->can('edit-users');
 
         $user = User::findOrFail($id);
+        $roles = Role::all();
 
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(UserUpdate $request, int $id)

@@ -14,14 +14,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this
+            ->call(RoleSeeder::class)
             ->call(UserSeeder::class)
             ->call(CategorySeeder::class)
             ->call(PageSeeder::class)
             ->call(PostSeeder::class)
             ->call(SettingSeeder::class)
-            ->call(CommentSeeder::class)
             ->call(PermissionSeeder::class)
-            ->call(RoleSeeder::class)
             ->call(RolePermissionSeeder::class)
             ->call(UserRoleSeeder::class)
             ;

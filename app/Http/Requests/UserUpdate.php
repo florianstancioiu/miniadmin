@@ -28,7 +28,8 @@ class UserUpdate extends FormRequest
             'image' => 'file|image',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'role_id' => 'required|numeric|exists:roles,id',
         ];
     }
 }

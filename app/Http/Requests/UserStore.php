@@ -28,7 +28,8 @@ class UserStore extends FormRequest
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email',
-            'password' => 'required|min:6|string|confirmed'
+            'password' => 'required|min:6|string|confirmed',
+            'role_id' => 'required|numeric|exists:roles,id',
         ];
     }
 }
