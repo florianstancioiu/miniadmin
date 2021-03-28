@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">
             @can('create-roles')
-                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
                     <span>{{ __('roles.add_new_role') }}</span>
                 </a>

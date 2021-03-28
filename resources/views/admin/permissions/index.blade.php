@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">
             @can('create-permissions')
-                <a href="{{ route('admin.permissions.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.permissions.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
                     <span>{{ __('permissions.add_new_permission') }}</span>
                 </a>

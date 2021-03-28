@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">
             @can('create-users')
-                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
                     <span>{{ __('users.add_new_user') }}</span>
                 </a>
