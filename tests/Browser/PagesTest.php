@@ -7,30 +7,13 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\Page;
-use App\Models\User;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RolePermission;
 
 class PagesTest extends DuskTestCase
 {
-    protected $admin_user;
-
-    protected $super_user;
-
-    protected $guest_user;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->admin_user = User::where('email', 'admin@example.com')->first();
-        $this->super_user = User::where('email', 'super@example.com')->first();
-        $this->guest_user = User::where('email', 'guest@example.com')->first();
-    }
-
-
-        /** @test */
+    /** @test */
     public function see_pages_in_index()
     {
         $admin_user = $this->admin_user;

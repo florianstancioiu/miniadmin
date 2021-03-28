@@ -39,6 +39,7 @@
                         <th style="width: 10px">#</th>
                         <th>{{ __('users.image') }}</th>
                         <th>{{ __('users.full_name') }}</th>
+                        <th>{{ __('users.email') }}</th>
                         <th>{{ __('general.actions') }}</th>
                     </tr>
                 </thead>
@@ -52,6 +53,7 @@
                                 @endif
                             </td>
                             <td>{{ $user->full_name }}</td>
+                            <td>{{ $user->email }}</td>
                             <td class="actions-cell">
                                 @if($can_edit_users)
                                     <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-sm btn-edit">

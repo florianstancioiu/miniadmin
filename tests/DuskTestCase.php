@@ -6,10 +6,26 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use App\Models\User;
 
 abstract class DuskTestCase extends BaseTestCase
 {
     use CreatesApplication;
+
+    protected $admin_user;
+
+    protected $super_user;
+
+    protected $guest_user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->admin_user = User::where('email', 'admin@example.com')->first();
+        $this->super_user = User::where('email', 'super@example.com')->first();
+        $this->guest_user = User::where('email', 'guest@example.com')->first();
+    }
 
     /**
      * Prepare for Dusk test execution.

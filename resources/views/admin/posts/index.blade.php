@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header">
             @can('create-posts')
-                <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary">
+                <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
                     <span>{{ __('posts.add_new_post') }}</span>
                 </a>
