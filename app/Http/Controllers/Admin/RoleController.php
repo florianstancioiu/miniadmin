@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Role;
 use App\Models\Permission;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleStore;
 use App\Http\Requests\RoleUpdate;
@@ -21,7 +22,16 @@ class RoleController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-        return view('admin.roles.index', compact('roles', 'keyword'));
+        $auth_user = Auth::user();
+        $can_edit_roles = $auth_user->canUser('edit-roles');
+        $can_destroy_roles = $auth_user->canUser('destroy-roles');
+
+        return view('admin.roles.index', compact(
+            'roles',
+            'keyword',
+            'can_edit_roles',
+            'can_destroy_roles',
+        ));
     }
 
     public function create()

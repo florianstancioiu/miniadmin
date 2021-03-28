@@ -43,9 +43,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Prevent multiple queries from piling up -->
-                    @php $can_edit_permissions = auth()->user()->canUser('edit-permissions') @endphp
-                    @php $can_destroy_permissions = auth()->user()->canUser('destroy-permissions') @endphp
                     @foreach($permissions as $permission)
                         <tr>
                             <td>{{ $permission->id }}</td>

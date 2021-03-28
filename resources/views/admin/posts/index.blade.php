@@ -43,9 +43,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Prevent multiple queries from piling up -->
-                    @php $can_edit_posts = auth()->user()->canUser('edit-posts') @endphp
-                    @php $can_destroy_posts = auth()->user()->canUser('destroy-posts') @endphp
                     @foreach($posts as $post)
                         <tr>
                             <td>{{ $post->id }}</td>

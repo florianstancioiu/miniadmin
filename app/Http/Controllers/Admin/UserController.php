@@ -10,6 +10,7 @@ use App\Http\Requests\UserUpdatePassword;
 use App\Http\Requests\UserDestroy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -24,7 +25,16 @@ class UserController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-        return view('admin.users.index', compact('users', 'keyword'));
+        $auth_user = Auth::user();
+        $can_edit_users = $auth_user->canUser('edit-users');
+        $can_destroy_users = $auth_user->canUser('destroy-users');
+
+        return view('admin.users.index', compact(
+            'users',
+            'keyword',
+            'can_edit_users',
+            'can_destroy_users',
+        ));
     }
 
     public function create()
@@ -82,14 +92,10 @@ class UserController extends Controller
             if ($request->hasFile('image')) {
                 // delete existing image
                 Storage::delete($original_image);
-
                 // store the new one
                 $user->image = $request->image->store('users');
             }
-
-
             $user->save();
-
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.users.index')

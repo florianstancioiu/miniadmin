@@ -45,10 +45,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Prevent multiple queries from piling up -->
-                    @php $can_edit_pages = auth()->user()->canUser('edit-pages') @endphp
-                    @php $can_destroy_pages = auth()->user()->canUser('destroy-pages') @endphp
-
                     @foreach($pages as $page)
                         <tr>
                             <td>{{ $page->id }}</td>

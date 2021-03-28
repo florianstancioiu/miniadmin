@@ -43,9 +43,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Prevent multiple queries from piling up -->
-                    @php $can_edit_roles = auth()->user()->canUser('edit-roles') @endphp
-                    @php $can_destroy_roles = auth()->user()->canUser('destroy-roles') @endphp
                     @foreach($roles as $role)
                         <tr>
                             <td>{{ $role->id }}</td>

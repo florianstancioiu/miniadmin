@@ -24,7 +24,16 @@ class PageController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-        return view('admin.pages.index', compact('pages', 'keyword'));
+        $auth_user = Auth::user();
+        $can_edit_pages = $auth_user->canUser('edit-pages');
+        $can_destroy_pages = $auth_user->canUser('destroy-pages');
+
+        return view('admin.pages.index', compact(
+            'pages',
+            'keyword',
+            'can_edit_pages',
+            'can_destroy_pages',
+        ));
     }
 
     public function create()

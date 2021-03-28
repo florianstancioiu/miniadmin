@@ -24,7 +24,16 @@ class PostController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-        return view('admin.posts.index', compact('posts', 'keyword'));
+        $auth_user = Auth::user();
+        $can_edit_posts = $auth_user->canUser('edit-posts');
+        $can_destroy_posts = $auth_user->canUser('destroy-posts');
+
+        return view('admin.posts.index', compact(
+            'posts',
+            'keyword',
+            'can_edit_posts',
+            'can_destroy_posts',
+        ));
     }
 
     public function create()

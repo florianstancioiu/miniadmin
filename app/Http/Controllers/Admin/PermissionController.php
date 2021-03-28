@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PermissionStore;
 use App\Http\Requests\PermissionUpdate;
 use App\Http\Requests\PermissionDestroy;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class PermissionController extends Controller
@@ -21,7 +22,16 @@ class PermissionController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-        return view('admin.permissions.index', compact('permissions', 'keyword'));
+        $auth_user = Auth::user();
+        $can_edit_permissions = $auth_user->canUser('edit-permissions');
+        $can_destroy_permissions = $auth_user->canUser('destroy-permissions');
+
+        return view('admin.permissions.index', compact(
+            'permissions',
+            'keyword',
+            'can_edit_permissions',
+            'can_destroy_permissions',
+        ));
     }
 
     public function create()
