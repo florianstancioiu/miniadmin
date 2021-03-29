@@ -15,7 +15,7 @@ class Controller extends BaseController
     {
         $user = auth()->user();
 
-        if (! $user->hasPermission($permission)) {
+        if (! $user->hasPermission($permission) && ! $user->hasRole('admin')) {
             return abort(401);
         };
     }

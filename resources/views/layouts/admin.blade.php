@@ -14,8 +14,6 @@
 
             @include('admin/partials/navbar')
 
-            @include('admin/partials/sidebar')
-
             <div class="content-wrapper">
                 @include('admin/partials/sidebar')
 

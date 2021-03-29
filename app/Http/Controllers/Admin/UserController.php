@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
@@ -22,6 +23,7 @@ class UserController extends Controller
 
         $keyword = $request->keyword ?? '';
         $users = User::orderBy('id', 'DESC')
+            ->with('roles')
             ->search($keyword)
             ->paginate()
             ->appends(request()->query());
@@ -60,7 +62,7 @@ class UserController extends Controller
             }
 
             $user->save();
-
+            $user->roles()->attach($request->role_id);
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.users.index')
@@ -100,6 +102,9 @@ class UserController extends Controller
                 $user->image = $request->image->store('users');
             }
             $user->save();
+
+            $user->roles()->detach();
+            $user->roles()->attach($request->role_id);
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.users.index')

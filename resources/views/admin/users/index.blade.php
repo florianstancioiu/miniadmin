@@ -55,7 +55,11 @@
                             </td>
                             <td>{{ $user->full_name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->role }}</td>
+                            <td>
+                                @foreach($user->roles as $role)
+                                    {{ $role->title }}
+                                @endforeach
+                            </td>
                             <td class="actions-cell">
                                 @if($can_edit_users)
                                     <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn btn-primary btn-sm btn-edit">

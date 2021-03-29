@@ -19,19 +19,18 @@ class UserRoleSeeder extends Seeder
         // Connect admin to role
         $admin_user = User::where('email', 'admin@example.com')->first();
         $admin_role = Role::where('slug', 'admin')->first();
-        $user_role = new UserRole([
-            'user_id' => $admin_user->id,
-            'role_id' => $admin_role->id,
-        ]);
-        $user_role->save();
+        $admin_user->roles()->attach($admin_role->id);
 
         // Connect super user to role
         $super_user = User::where('email', 'super@example.com')->first();
         $super_role = Role::where('slug', 'super')->first();
-        $user_role = new UserRole([
-            'user_id' => $super_user->id,
-            'role_id' => $super_role->id,
-        ]);
-        $user_role->save();
+        $super_user->roles()->attach($super_role->id);
+
+        // Connect guest users to role
+        $guest_users = User::where('id', '>', '2')->get();
+        $guest_role = Role::where('slug', 'guest')->first();
+        foreach($guest_users as $user) {
+            $user->roles()->attach($guest_role->id);
+        }
     }
 }

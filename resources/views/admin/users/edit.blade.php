@@ -60,7 +60,7 @@
                         <select id="form-role" class="form-control" name="role_id">
                             <option value="" disabled>{{ __('users.select_role') }}</option>
                             @foreach($roles as $role)
-                                <option value="{{ $role->id }}" @if($role->id === $user->role_id) selected @endif>{{ $role->title }}</option>
+                                <option value="{{ $role->id }}" @if($user->hasRole($role->slug)) selected @endif>{{ $role->title }}</option>
                             @endforeach
                         </select>
                     </div>

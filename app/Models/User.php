@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Traits\RolesAndPermissions;
 use App\Models\Role;
+use App\Models\UserRole;
 
 class User extends Authenticatable
 {
@@ -25,7 +26,6 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
-        'role_id',
         'password',
     ];
 
@@ -53,9 +53,12 @@ class User extends Authenticatable
         return $this->first_name . " " . $this->last_name;
     }
 
-    public function getRoleAttribute()
+    public function getRolesAttribute()
     {
-        return Role::where('id', $this->role_id)->first()->title;
+        return UserRole::where('user_id', $this->id)
+            ->join('roles', 'user_role.role_id', '=', 'roles.id')
+            ->select('roles.title')
+            ->get();
     }
 
     public function getImageUrlAttribute()

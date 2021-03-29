@@ -38,10 +38,10 @@ trait RolesAndPermissions
             ->join('role_permission', 'user_role.role_id', '=', 'role_permission.role_id')
             ->join('permissions', 'role_permission.permission_id', '=', 'permissions.id')
             ->where('permissions.slug', $permission)
-            ->where('users.id', auth()->id())
+            ->where('users.id', $this->id)
             ->count();
 
-        return $result === 1;
+        return $result >= 1;
     }
 
     public function hasRole($role) : bool
@@ -53,10 +53,10 @@ trait RolesAndPermissions
         $result = $this->withCount(['roles' => function ($query) use ($role) {
                 return $query->whereIn('roles.slug', $role);
             }])
-            ->where('users.id', auth()->id())
+            ->where('users.id', $this->id)
             ->first();
 
-        return $result->roles_count === 1;
+        return $result->roles_count >= 1;
     }
 
     public function canUser(string $permission) : bool
