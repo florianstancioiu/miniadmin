@@ -26,7 +26,6 @@ class RegistrationTest extends DuskTestCase
         });
 
         $user = User::orderBy('id', 'DESC')->first();
-        $user->roles()->detach();
         $user->delete();
     }
 

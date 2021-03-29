@@ -20,8 +20,19 @@ class CreateRolePermissionTable extends Migration
 
             $table->primary(['role_id', 'permission_id']);
 
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('permission_id')->references('id')->on('permissions');
+            $table
+                ->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table
+                ->foreign('permission_id')
+                ->references('id')
+                ->on('permissions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
