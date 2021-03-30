@@ -53,13 +53,13 @@ class RoleController extends Controller
             return redirect()
                 ->route('admin.roles.index')
                 ->withErrors([
-                    'An exception was raised while storing the role: ' . $e->getMessage()
+                    __('roles.store_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.roles.index')
-            ->with('message', 'The role record has been successfully stored');
+            ->with('message', __('roles.store_success'));
     }
 
     public function edit(int $id)
@@ -92,13 +92,13 @@ class RoleController extends Controller
             return redirect()
                 ->route('admin.roles.index')
                 ->withErrors([
-                    'An exception was raised while updating the role: ' . $e->getMessage()
+                    __('roles.update_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.roles.index')
-            ->with('message', 'The role record has been successfully updated');
+            ->with('message', __('roles.store_success'));
     }
 
     public function destroy(RoleDestroy $request, int $id)
@@ -110,12 +110,12 @@ class RoleController extends Controller
             return redirect()
                 ->route('admin.roles.index')
                 ->withErrors([
-                    'An exception was raised while deleting the role: ' . $e->getMessage()
+                    __('roles.destroy_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.roles.index')
-            ->with('message', 'The role record has been successfully deleted');
+            ->with('message', __('roles.destroy_success'));
     }
 }

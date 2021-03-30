@@ -43,12 +43,12 @@ class SettingController extends Controller
             return redirect()
                 ->route('admin.settings.index')
                 ->withErrors([
-                    'An exception was raised while updating the settings: ' . $e->getMessage()
+                    __('settings.store_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.settings.index')
-            ->with('message', 'The settings were successfully updated');
+            ->with('message', __('settings.store_success'));
     }
 }

@@ -67,13 +67,13 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while storing the user: ' . $e->getMessage()
+                    __('users.store_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.users.index')
-            ->with('message', 'The user record has been successfully stored');
+            ->with('message', __('users.store_success'));
     }
 
     public function edit(int $id)
@@ -109,13 +109,13 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while updating the user: ' . $e->getMessage()
+                    __('users.update_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.users.index')
-            ->with('message', 'The user record has been successfully updated');
+            ->with('message', __('users.update_success'));
     }
 
     public function updatePassword(UserUpdatePassword $request, int $id)
@@ -137,13 +137,13 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while changing the password: ' . $e->getMessage()
+                    __('users.update_password_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.users.index')
-            ->with('message', 'The user password has been successfully updated');
+            ->with('message', __('users.update_password_success'));
     }
 
     public function destroy(UserDestroy $request, int $id)
@@ -160,12 +160,12 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    'An exception was raised while deleting the user: ' . $e->getMessage()
+                    __('users.destroy_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
         ->route('admin.users.index')
-        ->with('message', 'The user record has been successfully deleted');
+        ->with('message', __('users.destroy_success'));
     }
 }

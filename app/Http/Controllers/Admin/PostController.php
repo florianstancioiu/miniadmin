@@ -62,13 +62,13 @@ class PostController extends Controller
             return redirect()
                 ->route('admin.posts.index')
                 ->withErrors([
-                    'An exception was raised while storing the post: ' . $e->getMessage()
+                    __('posts.store_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.posts.index')
-            ->with('message', 'The post record has been successfully stored');
+            ->with('message', __('posts.store_success'));
     }
 
     public function edit(int $id)
@@ -93,25 +93,22 @@ class PostController extends Controller
             if ($request->hasFile('image')) {
                 // delete existing image
                 Storage::delete($original_image);
-
                 // store the new one
                 $post->image = $request->image->store('posts');
             }
 
-
             $post->save();
-
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.posts.index')
                 ->withErrors([
-                    'An exception was raised while updating the post: ' . $e->getMessage()
+                    __('posts.update_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.posts.index')
-            ->with('message', 'The post record has been successfully updated');
+            ->with('message', __('posts.update_success'));
     }
 
     public function destroy(PostDestroy $request, int $id)
@@ -128,12 +125,12 @@ class PostController extends Controller
             return redirect()
                 ->route('admin.posts.index')
                 ->withErrors([
-                    'An exception was raised while deleting the post: ' . $e->getMessage()
+                    __('posts.destroy_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
         ->route('admin.posts.index')
-        ->with('message', 'The post record has been successfully deleted');
+        ->with('message', __('posts.destroy_success'));
     }
 }

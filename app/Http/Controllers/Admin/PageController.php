@@ -62,13 +62,13 @@ class PageController extends Controller
             return redirect()
                 ->route('admin.pages.index')
                 ->withErrors([
-                    'An exception was raised while storing the page: ' . $e->getMessage()
+                    __('pages.store_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.pages.index')
-            ->with('message', 'The page record has been successfully stored');
+            ->with('message', __('pages.store_success'));
     }
 
     public function edit(int $id)
@@ -105,13 +105,13 @@ class PageController extends Controller
             return redirect()
                 ->route('admin.pages.index')
                 ->withErrors([
-                    'An exception was raised while updating the page: ' . $e->getMessage()
+                    __('pages.update_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.pages.index')
-            ->with('message', 'The page record has been successfully updated');
+            ->with('message', __('pages.update_success'));
     }
 
     public function destroy(PageDestroy $request, int $id)
@@ -128,12 +128,12 @@ class PageController extends Controller
             return redirect()
                 ->route('admin.pages.index')
                 ->withErrors([
-                    'An exception was raised while deleting the page: ' . $e->getMessage()
+                    __('pages.destroy_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.pages.index')
-            ->with('message', 'The page record has been successfully deleted');
+            ->with('message', __('pages.destroy_success'));
     }
 }

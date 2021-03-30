@@ -25,4 +25,12 @@ return [
     'full_name' => 'Full Name',
     'role' => 'Role',
     'select_role' => 'Select Role',
+    'store_failure' => 'An exception was raised while storing the user: ',
+    'store_success' => 'The user record has been successfully stored',
+    'update_failure' => 'An exception was raised while updating the user: ',
+    'update_success' => 'The user record has been successfully updated',
+    'update_password_failure' => 'An exception was raised while changing the password: ',
+    'update_password_success' => 'The user password has been successfully updated',
+    'destroy_failure' => 'An exception was raised while deleting the user: ',
+    'destroy_success' => 'The user record has been successfully deleted',
 ];

@@ -53,13 +53,13 @@ class PermissionController extends Controller
             return redirect()
                 ->route('admin.permissions.index')
                 ->withErrors([
-                    'An exception was raised while storing the permission: ' . $e->getMessage()
+                    __('permissions.store_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.permissions.index')
-            ->with('message', 'The permission record has been successfully stored');
+            ->with('message', __('permissions.store_success'));
     }
 
     public function edit(int $id)
@@ -84,13 +84,13 @@ class PermissionController extends Controller
             return redirect()
                 ->route('admin.permissions.index')
                 ->withErrors([
-                    'An exception was raised while updating the permission: ' . $e->getMessage()
+                    __('permissions.update_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.permissions.index')
-            ->with('message', 'The permission record has been successfully updated');
+            ->with('message', __('permissions.update_success'));
     }
 
     public function destroy(PermissionDestroy $request, int $id)
@@ -104,12 +104,12 @@ class PermissionController extends Controller
             return redirect()
                 ->route('admin.permissions.index')
                 ->withErrors([
-                    'An exception was raised while deleting the permission: ' . $e->getMessage()
+                    __('permissions.destroy_failure') . $e->getMessage()
                 ]);
         }
 
         return redirect()
             ->route('admin.permissions.index')
-            ->with('message', 'The permission record has been successfully deleted');
+            ->with('message', __('permissions.destroy_success'));
     }
 }
