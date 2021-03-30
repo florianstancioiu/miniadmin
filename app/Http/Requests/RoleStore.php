@@ -26,6 +26,8 @@ class RoleStore extends FormRequest
         return [
             'title' => 'required|string',
             'slug' => 'required|string|unique:roles,slug',
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id',
         ];
     }
 }

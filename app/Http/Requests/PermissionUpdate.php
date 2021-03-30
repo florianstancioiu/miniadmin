@@ -26,6 +26,7 @@ class PermissionUpdate extends FormRequest
         return [
             'title' => 'required|string',
             'slug' => 'required|string',
+            'group' => 'required|string',
         ];
     }
 }

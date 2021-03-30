@@ -26,6 +26,7 @@ class PermissionStore extends FormRequest
         return [
             'title' => 'required|string',
             'slug' => 'required|string|unique:permissions,slug',
+            'group' => 'required|string',
         ];
     }
 }

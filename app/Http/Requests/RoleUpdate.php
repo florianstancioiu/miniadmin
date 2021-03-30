@@ -26,6 +26,8 @@ class RoleUpdate extends FormRequest
         return [
             'title' => 'required|string',
             'slug' => 'required|string',
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id',
         ];
     }
 }

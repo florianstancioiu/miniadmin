@@ -47,6 +47,8 @@ class RoleController extends Controller
 
         try {
             $role->save();
+
+            $role->permissions()->attach($request->permissions);
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.roles.index')
@@ -63,8 +65,17 @@ class RoleController extends Controller
     public function edit(int $id)
     {
         $role = Role::findOrFail($id);
+        $permissions = Permission::all();
+        $selected_permissions = $role->permissions()->get();
+        $selected_permissions = $selected_permissions->map(function ($item) {
+            return $item->id;
+        })->toArray();
 
-        return view('admin.roles.edit', compact('role'));
+        return view('admin.roles.edit', compact(
+            'role',
+            'permissions',
+            'selected_permissions'
+        ));
     }
 
     public function update(RoleUpdate $request, int $id)
@@ -74,6 +85,9 @@ class RoleController extends Controller
 
         try {
             $role->save();
+
+            $role->permissions()->detach();
+            $role->permissions()->attach($request->permissions);
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.roles.index')
