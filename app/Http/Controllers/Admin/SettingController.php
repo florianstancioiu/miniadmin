@@ -9,16 +9,6 @@ use App\Http\Requests\SettingStore;
 
 class SettingController extends Controller
 {
-    /**
-     * Fields that require storage saving
-     */
-    const FILES_FIELDS = [
-        'site-favicon',
-        'site-logo',
-        'site-user-logo',
-        'site-home-bg'
-    ];
-
     public function index()
     {
         $this->can('list-settings');
@@ -32,25 +22,33 @@ class SettingController extends Controller
     {
         $this->can('store-settings');
 
-        $settings = $request->setting;
+        try {
+            foreach ($request->settings as $key => $value) {
+                $db_setting = Setting::where('key', $key)->first();
 
-        foreach($settings as $key => $value) {
-            $db_setting = Setting::where('key', $key)->first();
+                // don't store anything if we cant find the setting in the db
+                if (! $db_setting) {
+                    continue;
+                }
 
-            // don't store anything if we cant find the setting in the db
-            if (! $db_setting) {
-                continue;
+                // store images
+                if ($db_setting->type === 'image') {
+                    $value = $value->store('settings');
+                }
+
+                $db_setting->value = $value;
+                $db_setting->save();
             }
-
-            // store files in the storage dir
-            if (in_array($key, self::FILES_FIELDS)) {
-                $value = $value->store('settings');
-            }
-
-            $db_setting->value = $value;
-            $db_setting->save();
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.settings.index')
+                ->withErrors([
+                    'An exception was raised while updating the settings: ' . $e->getMessage()
+                ]);
         }
 
-        return redirect()->route('admin.settings.index');
+        return redirect()
+            ->route('admin.settings.index')
+            ->with('message', 'The settings were successfully updated');
     }
 }

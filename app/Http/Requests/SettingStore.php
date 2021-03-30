@@ -24,8 +24,8 @@ class SettingStore extends FormRequest
     public function rules()
     {
         return [
-            'setting' => 'array'
-            //|string|image|mimes:ico'
+            'settings' => 'array',
+            // 'settings.*' => 'image|string|mimes:ico',
         ];
     }
 }

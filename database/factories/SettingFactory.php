@@ -1,0 +1,41 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Setting;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
+class SettingFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Setting::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $allowed_types = [
+            'text',
+            'textarea',
+            'image',
+        ];
+        $type = $allowed_types[rand(0, sizeof($allowed_types) - 1)];
+        $title = $this->faker->unique()->sentence();
+        $key = Str::slug($title);
+
+        return [
+            'title' => $title,
+            'key' => $key,
+            'value' => '',
+            'type' => $type,
+        ];
+    }
+}

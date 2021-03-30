@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
 use App\Models\Permission;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Requests\RoleStore;
 use App\Http\Requests\RoleUpdate;
 use App\Http\Requests\RoleDestroy;
