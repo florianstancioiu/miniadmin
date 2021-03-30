@@ -6,26 +6,25 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\User;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\RolePermission;
 
-class UsersTest extends DuskTestCase
+class PermissionsTest extends DuskTestCase
 {
     /** @test */
-    public function see_users_in_index()
+    public function see_permissions_in_index()
     {
         $admin_user = $this->admin_user;
-        $last_user = User::orderBy('id', 'DESC')->limit(1)->first();
+        $last_permission = Permission::orderBy('id', 'DESC')->limit(1)->first();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $last_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $last_permission) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('users.add_new_user'))
-                ->assertSee($last_user->full_name)
-                ->assertSee($last_user->id)
+                ->visit(route('admin.permissions.index'))
+                ->assertSee(__('permissions.add_new_permission'))
+                ->assertSee($last_permission->title)
+                ->assertSee($last_permission->id)
                 ;
         });
     }
@@ -34,16 +33,16 @@ class UsersTest extends DuskTestCase
     public function search_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $last_user = User::orderBy('id', 'DESC')->limit(1)->first();
+        $last_permission = Permission::orderBy('id', 'DESC')->limit(1)->first();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $last_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $last_permission) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.permissions.index'))
                 ->assertAttribute('input[name="keyword"]', 'placeholder', __('general.search'))
-                ->type('keyword', $last_user->first_name)
+                ->type('keyword', $last_permission->title)
                 ->click('button.btn-search[type="submit"')
-                ->assertSee($last_user->first_name)
+                ->assertSee($last_permission->title)
                 ;
         });
     }
@@ -52,18 +51,18 @@ class UsersTest extends DuskTestCase
     public function delete_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $new_user = User::factory()->create();
+        $new_permission = Permission::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $new_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $new_permission) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.permissions.index'))
                 ->assertSee(__('general.delete'))
-                ->assertSee($new_user->first_name)
-                ->assertSee($new_user->id)
+                ->assertSee($new_permission->title)
+                ->assertSee($new_permission->id)
                 ->click('table tr:first-child button.btn-delete')
                 ->assertSee(__('partials.success'))
-                ->assertDontSee($new_user->first_name)
+                ->assertDontSee($new_permission->id)
                 ;
         });
     }
@@ -72,66 +71,56 @@ class UsersTest extends DuskTestCase
     public function edit_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $new_user = User::factory()->create();
+        $new_permission = Permission::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $new_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $new_permission) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.permissions.index'))
                 ->assertSee(__('general.edit'))
-                ->assertSee($new_user->first_name)
-                ->assertSee($new_user->last_name)
+                ->assertSee($new_permission->title)
+                ->assertSee($new_permission->id)
                 ->click('table tr:first-child a.btn-edit')
-                ->assertRouteIs('admin.users.edit', ['user' => $new_user->id])
-                ->assertSee(__('users.edit_user'))
-                ->attach('image', storage_path('app/public/testing/test.jpg'))
-                ->type('first_name', $new_user->first_name)
-                ->type('last_name', $new_user->last_name)
-                ->type('email', $new_user->email)
-                ->select('role_id', 1)
-                ->click('button.btn-edit-user')
-                ->assertRouteIs('admin.users.index')
+                ->assertRouteIs('admin.permissions.edit', ['permission' => $new_permission->id])
+                ->assertSee(__('permissions.edit_permission'))
+                ->type('title', $new_permission->title . ' edited')
+                ->type('slug', $new_permission->slug . '_edited')
+                ->type('group', $new_permission->group . '_edited')
+                ->click('button.btn-edit')
+                ->assertRouteIs('admin.permissions.index')
                 ->assertSee(__('partials.success'))
                 ;
         });
 
-        $latest_user = User::orderBy('id', 'DESC')->limit(1)->first();
-        // delete existing image
-        Storage::delete($latest_user->image);
-        $new_user->delete();
+        $latest_permission = Permission::orderBy('id', 'DESC')->limit(1)->first();
+        $latest_permission->delete();
     }
 
     /** @test */
     public function create_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $unsaved_user = User::factory()->make();
+        $unsaved_permission = Permission::factory()->make();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $unsaved_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $unsaved_permission) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.permissions.index'))
                 ->assertSee(__('general.edit'))
                 ->click('a.btn-add-new')
-                ->assertRouteIs('admin.users.create')
-                ->assertSee(__('users.create_user'))
-                ->attach('image', storage_path('app/public/testing/test.jpg'))
-                ->type('first_name', $unsaved_user->first_name)
-                ->type('last_name', $unsaved_user->last_name)
-                ->type('email', $unsaved_user->email)
-                ->select('role_id', 1)
-                ->type('password', 'password')
-                ->type('password_confirmation', 'password')
+                ->assertRouteIs('admin.permissions.create')
+                ->assertSee(__('permissions.create_permission'))
+                ->type('title', $unsaved_permission->title)
+                ->type('slug', $unsaved_permission->slug)
+                ->type('group', $unsaved_permission->group)
                 ->click('button.btn-create')
-                ->assertRouteIs('admin.users.index')
+                ->assertRouteIs('admin.permissions.index')
                 ->assertSee(__('partials.success'))
                 ;
         });
 
-        $latest_user = User::orderBy('id', 'DESC')->limit(1)->first();
-        // delete existing image
-        Storage::delete($latest_user->image);
-        $latest_user->delete();
+        $latest_permission = Permission::orderBy('id', 'DESC')->limit(1)->first();
+        $latest_permission->delete();
     }
 
     /** @test */
@@ -142,9 +131,9 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($admin_user) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('partials.users'))
-                ->assertSee(__('users.add_new_user'))
+                ->visit(route('admin.permissions.index'))
+                ->assertSee(__('partials.permissions'))
+                ->assertSee(__('permissions.add_new_permission'))
                 ->assertSee(__('general.edit'))
                 ->assertSee(__('general.delete'))
                 ;
@@ -159,7 +148,7 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($guest_user) {
             $browser
                 ->loginAs($guest_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.permissions.index'))
                 ->assertSee('401')
                 ;
         });
@@ -173,7 +162,7 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($guest_user) {
             $browser
                 ->loginAs($guest_user)
-                ->visit(route('admin.users.create'))
+                ->visit(route('admin.permissions.create'))
                 ->assertSee('401')
                 ;
         });
@@ -187,7 +176,7 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($guest_user) {
             $browser
                 ->loginAs($guest_user)
-                ->visit(route('admin.users.edit', ['user' => 1]))
+                ->visit(route('admin.permissions.edit', ['permission' => 1]))
                 ->assertSee('401')
                 ;
         });
@@ -198,25 +187,26 @@ class UsersTest extends DuskTestCase
     {
         $super_user = $this->super_user;
 
-        // Add list-users permissions for the super role
         $permissions_to_toggle = [
-            'list-users',
+            'create-permissions',
+            'edit-permissions',
+            'update-permissions',
+            'destroy-permissions'
         ];
-
-        $this->addSuperUserPermissions($permissions_to_toggle);
+        $this->removeSuperUserPermissions($permissions_to_toggle);
 
         $this->browse(function (Browser $browser) use ($super_user) {
             $browser
-                ->loginAs($super_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('partials.users'))
-                ->assertDontSee(__('users.add_new_user'))
-                ->assertDontSee(__('general.edit'))
-                ->assertDontSee(__('general.delete'))
-                ;
+            ->loginAs($super_user)
+            ->visit(route('admin.permissions.index'))
+            ->assertSee(__('partials.permissions'))
+            ->assertDontSee(__('permissions.add_new_permission'))
+            ->assertDontSeeIn('td.actions-cell', __('general.edit'))
+            ->assertDontSeeIn('td.actions-cell', __('general.delete'))
+            ;
         });
 
-        $this->removeSuperUserPermissions($permissions_to_toggle);
+        $this->addSuperUserPermissions($permissions_to_toggle);
     }
 
     private function removeSuperUserPermissions(array $permissions)

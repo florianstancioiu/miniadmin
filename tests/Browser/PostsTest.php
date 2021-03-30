@@ -62,6 +62,7 @@ class PostsTest extends DuskTestCase
                 ->assertSee($new_post->title)
                 ->assertSee($new_post->id)
                 ->click('table tr:first-child button.btn-delete')
+                ->assertSee(__('partials.success'))
                 ->assertDontSee($new_post->id)
                 ;
         });
