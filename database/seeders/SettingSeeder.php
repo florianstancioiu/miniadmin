@@ -69,33 +69,6 @@ class SettingSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            [
-                'title' => 'Facebook Link',
-                'key' => 'facebook-link',
-                'value' => '',
-                'type' => 'text',
-                'deletable' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'title' => 'Twitter Link',
-                'key' => 'twitter-link',
-                'value' => '',
-                'type' => 'text',
-                'deletable' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'title' => 'Github Link',
-                'key' => 'github-link',
-                'value' => '',
-                'type' => 'text',
-                'deletable' => 0,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
 	    ];
 
         Setting::insert($settings);

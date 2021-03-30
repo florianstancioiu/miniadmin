@@ -6,26 +6,25 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\User;
-use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Permission;
 use App\Models\RolePermission;
 
-class UsersTest extends DuskTestCase
+class RolesTest extends DuskTestCase
 {
     /** @test */
-    public function see_users_in_index()
+    public function see_roles_in_index()
     {
         $admin_user = $this->admin_user;
-        $last_user = User::orderBy('id', 'DESC')->limit(1)->first();
+        $last_role = Role::orderBy('id', 'DESC')->limit(1)->first();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $last_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $last_role) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('users.add_new_user'))
-                ->assertSee($last_user->full_name)
-                ->assertSee($last_user->id)
+                ->visit(route('admin.roles.index'))
+                ->assertSee(__('roles.add_new_role'))
+                ->assertSee($last_role->title)
+                ->assertSee($last_role->id)
                 ;
         });
     }
@@ -34,16 +33,16 @@ class UsersTest extends DuskTestCase
     public function search_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $last_user = User::orderBy('id', 'DESC')->limit(1)->first();
+        $last_role = Role::orderBy('id', 'DESC')->limit(1)->first();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $last_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $last_role) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.roles.index'))
                 ->assertAttribute('input[name="keyword"]', 'placeholder', __('general.search'))
-                ->type('keyword', $last_user->first_name)
+                ->type('keyword', $last_role->title)
                 ->click('button.btn-search[type="submit"')
-                ->assertSee($last_user->first_name)
+                ->assertSee($last_role->title)
                 ;
         });
     }
@@ -52,17 +51,17 @@ class UsersTest extends DuskTestCase
     public function delete_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $new_user = User::factory()->create();
+        $new_role = Role::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $new_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $new_role) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.roles.index'))
                 ->assertSee(__('general.delete'))
-                ->assertSee($new_user->first_name)
-                ->assertSee($new_user->id)
+                ->assertSee($new_role->title)
+                ->assertSee($new_role->id)
                 ->click('table tr:first-child button.btn-delete')
-                ->assertDontSee($new_user->first_name)
+                ->assertDontSee($new_role->id)
                 ;
         });
     }
@@ -71,66 +70,56 @@ class UsersTest extends DuskTestCase
     public function edit_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $new_user = User::factory()->create();
+        $new_role = Role::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $new_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $new_role) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.roles.index'))
                 ->assertSee(__('general.edit'))
-                ->assertSee($new_user->first_name)
-                ->assertSee($new_user->last_name)
+                ->assertSee($new_role->title)
+                ->assertSee($new_role->id)
                 ->click('table tr:first-child a.btn-edit')
-                ->assertRouteIs('admin.users.edit', ['user' => $new_user->id])
-                ->assertSee(__('users.edit_user'))
-                ->attach('image', storage_path('app/public/testing/test.jpg'))
-                ->type('first_name', $new_user->first_name)
-                ->type('last_name', $new_user->last_name)
-                ->type('email', $new_user->email)
-                ->select('role_id', 1)
-                ->click('button.btn-edit-user')
-                ->assertRouteIs('admin.users.index')
+                ->assertRouteIs('admin.roles.edit', ['role' => $new_role->id])
+                ->assertSee(__('roles.edit_role'))
+                ->type('title', $new_role->title . ' edited')
+                ->type('slug', $new_role->slug . '_edited')
+                ->check('input[type="checkbox"]')
+                ->click('button.btn-edit')
+                ->assertRouteIs('admin.roles.index')
                 ->assertSee(__('partials.success'))
                 ;
         });
 
-        $latest_user = User::orderBy('id', 'DESC')->limit(1)->first();
-        // delete existing image
-        Storage::delete($latest_user->image);
-        $new_user->delete();
+        $latest_role = Role::orderBy('id', 'DESC')->limit(1)->first();
+        $latest_role->delete();
     }
 
     /** @test */
     public function create_works_as_expected()
     {
         $admin_user = $this->admin_user;
-        $unsaved_user = User::factory()->make();
+        $unsaved_role = Role::factory()->make();
 
-        $this->browse(function (Browser $browser) use ($admin_user, $unsaved_user) {
+        $this->browse(function (Browser $browser) use ($admin_user, $unsaved_role) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.roles.index'))
                 ->assertSee(__('general.edit'))
                 ->click('a.btn-add-new')
-                ->assertRouteIs('admin.users.create')
-                ->assertSee(__('users.create_user'))
-                ->attach('image', storage_path('app/public/testing/test.jpg'))
-                ->type('first_name', $unsaved_user->first_name)
-                ->type('last_name', $unsaved_user->last_name)
-                ->type('email', $unsaved_user->email)
-                ->select('role_id', 1)
-                ->type('password', 'password')
-                ->type('password_confirmation', 'password')
+                ->assertRouteIs('admin.roles.create')
+                ->assertSee(__('roles.create_role'))
+                ->type('title', $unsaved_role->title)
+                ->type('slug', $unsaved_role->slug)
+                ->check('input[type="checkbox"]')
                 ->click('button.btn-create')
-                ->assertRouteIs('admin.users.index')
+                ->assertRouteIs('admin.roles.index')
                 ->assertSee(__('partials.success'))
                 ;
         });
 
-        $latest_user = User::orderBy('id', 'DESC')->limit(1)->first();
-        // delete existing image
-        Storage::delete($latest_user->image);
-        $latest_user->delete();
+        $latest_role = Role::orderBy('id', 'DESC')->limit(1)->first();
+        $latest_role->delete();
     }
 
     /** @test */
@@ -141,9 +130,9 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($admin_user) {
             $browser
                 ->loginAs($admin_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('partials.users'))
-                ->assertSee(__('users.add_new_user'))
+                ->visit(route('admin.roles.index'))
+                ->assertSee(__('partials.roles'))
+                ->assertSee(__('roles.add_new_role'))
                 ->assertSee(__('general.edit'))
                 ->assertSee(__('general.delete'))
                 ;
@@ -158,7 +147,7 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($guest_user) {
             $browser
                 ->loginAs($guest_user)
-                ->visit(route('admin.users.index'))
+                ->visit(route('admin.roles.index'))
                 ->assertSee('401')
                 ;
         });
@@ -172,7 +161,7 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($guest_user) {
             $browser
                 ->loginAs($guest_user)
-                ->visit(route('admin.users.create'))
+                ->visit(route('admin.roles.create'))
                 ->assertSee('401')
                 ;
         });
@@ -186,7 +175,7 @@ class UsersTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($guest_user) {
             $browser
                 ->loginAs($guest_user)
-                ->visit(route('admin.users.edit', ['user' => 1]))
+                ->visit(route('admin.roles.edit', ['role' => 1]))
                 ->assertSee('401')
                 ;
         });
@@ -197,25 +186,26 @@ class UsersTest extends DuskTestCase
     {
         $super_user = $this->super_user;
 
-        // Add list-users permissions for the super role
         $permissions_to_toggle = [
-            'list-users',
+            'create-roles',
+            'edit-roles',
+            'update-roles',
+            'destroy-roles'
         ];
-
-        $this->addSuperUserPermissions($permissions_to_toggle);
+        $this->removeSuperUserPermissions($permissions_to_toggle);
 
         $this->browse(function (Browser $browser) use ($super_user) {
             $browser
                 ->loginAs($super_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('partials.users'))
-                ->assertDontSee(__('users.add_new_user'))
+                ->visit(route('admin.roles.index'))
+                ->assertSee(__('partials.roles'))
+                ->assertDontSee(__('roles.add_new_role'))
                 ->assertDontSee(__('general.edit'))
                 ->assertDontSee(__('general.delete'))
                 ;
         });
 
-        $this->removeSuperUserPermissions($permissions_to_toggle);
+        $this->addSuperUserPermissions($permissions_to_toggle);
     }
 
     private function removeSuperUserPermissions(array $permissions)

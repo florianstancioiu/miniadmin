@@ -2,20 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class PostFactory extends Factory
+class RoleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Post::class;
+    protected $model = Role::class;
 
     /**
      * Define the model's default state.
@@ -29,10 +28,7 @@ class PostFactory extends Factory
 
         return [
             'title' => $title,
-            'slug' => $slug,
-            'content' => $this->faker->paragraph(10),
-            'user_id' => User::inRandomOrder()->first()->id,
-            'category_id' => Category::inRandomOrder()->first()->id,
+            'slug' => $slug
         ];
     }
 }
