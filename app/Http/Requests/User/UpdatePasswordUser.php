@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleDestroy extends FormRequest
+class UpdatePasswordUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class RoleDestroy extends FormRequest
     public function rules()
     {
         return [
-            'role' => 'integer|exists:roles,id'
+            'id' => 'required|numeric|exists:users,id',
+            'password' => 'nullable|min:6|string|confirmed'
         ];
     }
 }

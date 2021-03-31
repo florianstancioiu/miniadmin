@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Page;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostDestroy extends FormRequest
+class DestroyPage extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class PostDestroy extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'integer|exists:pages,id'
+            'page' => 'required|integer|exists:pages,id'
         ];
     }
 }

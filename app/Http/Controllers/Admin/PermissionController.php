@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Permission;
 use Illuminate\Http\Request;
-use App\Http\Requests\PermissionStore;
-use App\Http\Requests\PermissionUpdate;
-use App\Http\Requests\PermissionDestroy;
+use App\Http\Requests\Permission\StorePermission;
+use App\Http\Requests\Permission\UpdatePermission;
+use App\Http\Requests\Permission\DestroyPermission;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -41,7 +41,7 @@ class PermissionController extends Controller
         return view('admin.permissions.create');
     }
 
-    public function store(PermissionStore $request)
+    public function store(StorePermission $request)
     {
         $this->can('store-permissions');
 
@@ -71,7 +71,7 @@ class PermissionController extends Controller
         return view('admin.permissions.edit', compact('permission'));
     }
 
-    public function update(PermissionUpdate $request, int $id)
+    public function update(UpdatePermission $request, int $id)
     {
         $this->can('update-permissions');
 
@@ -93,7 +93,7 @@ class PermissionController extends Controller
             ->with('message', __('permissions.update_success'));
     }
 
-    public function destroy(PermissionDestroy $request, int $id)
+    public function destroy(DestroyPermission $request, int $id)
     {
         $this->can('destroy-permissions');
 

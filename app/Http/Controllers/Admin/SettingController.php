@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SettingStore;
+use App\Http\Requests\Setting\StoreSetting;
 
 class SettingController extends Controller
 {
@@ -18,7 +18,7 @@ class SettingController extends Controller
         return view('admin.settings.index', compact('settings'));
     }
 
-    public function store(SettingStore $request)
+    public function store(StoreSetting $request)
     {
         $this->can('store-settings');
 

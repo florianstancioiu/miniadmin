@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionDestroy extends FormRequest
+class StoreSetting extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class PermissionDestroy extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'integer|exists:permissions,id'
+            'settings' => 'array',
+            // 'settings.*' => 'image|string|mimes:ico',
         ];
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Page;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PageStore;
-use App\Http\Requests\PageUpdate;
-use App\Http\Requests\PageDestroy;
+use App\Http\Requests\Page\StorePage;
+use App\Http\Requests\Page\UpdatePage;
+use App\Http\Requests\Page\DestroyPage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -43,7 +43,7 @@ class PageController extends Controller
         return view('admin.pages.create');
     }
 
-    public function store(PageStore $request)
+    public function store(StorePage $request)
     {
         $this->can('store-pages');
 
@@ -80,7 +80,7 @@ class PageController extends Controller
         return view('admin.pages.edit', compact('page'));
     }
 
-    public function update(PageUpdate $request, int $id)
+    public function update(UpdatePage $request, int $id)
     {
         $this->can('update-pages');
 
@@ -114,7 +114,7 @@ class PageController extends Controller
             ->with('message', __('pages.update_success'));
     }
 
-    public function destroy(PageDestroy $request, int $id)
+    public function destroy(DestroyPage $request, int $id)
     {
         $this->can('destroy-pages');
 

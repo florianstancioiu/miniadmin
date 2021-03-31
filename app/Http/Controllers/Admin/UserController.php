@@ -6,10 +6,10 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\UserRole;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserStore;
-use App\Http\Requests\UserUpdate;
-use App\Http\Requests\UserUpdatePassword;
-use App\Http\Requests\UserDestroy;
+use App\Http\Requests\User\StoreUser;
+use App\Http\Requests\User\UpdateUser;
+use App\Http\Requests\User\UpdatePasswordUser;
+use App\Http\Requests\User\DestroyUser;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +49,7 @@ class UserController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
-    public function store(UserStore $request)
+    public function store(StoreUser $request)
     {
         $this->can('store-users');
 
@@ -86,7 +86,7 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
-    public function update(UserUpdate $request, int $id)
+    public function update(UpdateUser $request, int $id)
     {
         $this->can('update-users');
 
@@ -118,7 +118,7 @@ class UserController extends Controller
             ->with('message', __('users.update_success'));
     }
 
-    public function updatePassword(UserUpdatePassword $request, int $id)
+    public function updatePassword(UpdatePasswordUser $request, int $id)
     {
         $this->can('update-password-users');
 
@@ -146,7 +146,7 @@ class UserController extends Controller
             ->with('message', __('users.update_password_success'));
     }
 
-    public function destroy(UserDestroy $request, int $id)
+    public function destroy(DestroyUser $request, int $id)
     {
         $this->can('destroy-users');
 

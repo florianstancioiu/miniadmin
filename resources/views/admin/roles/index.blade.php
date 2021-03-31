@@ -60,6 +60,7 @@
                                     <form action="{{ route('admin.roles.destroy', ['role' => $role->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        <input type="hidden" name="role" value="{{ $role->id }}">
                                         <button class="btn btn-danger btn-sm btn-delete" type="submit">
                                             <i class="fas fa-trash"></i>
                                             {{ __('general.delete') }}

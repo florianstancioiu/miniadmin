@@ -64,6 +64,7 @@
                                     <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        <input type="hidden" name="post" value="{{ $post->id }}">
                                         <button class="btn btn-danger btn-sm btn-delete" type="submit">
                                             <i class="fas fa-trash"></i>
                                             {{ __('general.delete') }}

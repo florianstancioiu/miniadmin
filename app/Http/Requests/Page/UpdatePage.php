@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Page;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionStore extends FormRequest
+class UpdatePage extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class PermissionStore extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string',
-            'slug' => 'required|string|unique:permissions,slug',
-            'group' => 'required|string',
+            'id' => 'integer|exists:pages,id',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'file|image|nullable'
         ];
     }
 }

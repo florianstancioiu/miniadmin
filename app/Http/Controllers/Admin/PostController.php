@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostStore;
-use App\Http\Requests\PostUpdate;
-use App\Http\Requests\PostDestroy;
+use App\Http\Requests\Post\StorePost;
+use App\Http\Requests\Post\UpdatePost;
+use App\Http\Requests\Post\DestroyPost;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -43,7 +43,7 @@ class PostController extends Controller
         return view('admin.posts.create');
     }
 
-    public function store(PostStore $request)
+    public function store(StorePost $request)
     {
         $this->can('store-posts');
 
@@ -80,7 +80,7 @@ class PostController extends Controller
         return view('admin.posts.edit', compact('post'));
     }
 
-    public function update(PostUpdate $request, int $id)
+    public function update(UpdatePost $request, int $id)
     {
         $this->can('update-posts');
 
@@ -111,7 +111,7 @@ class PostController extends Controller
             ->with('message', __('posts.update_success'));
     }
 
-    public function destroy(PostDestroy $request, int $id)
+    public function destroy(DestroyPost $request, int $id)
     {
         $this->can('destroy-posts');
 

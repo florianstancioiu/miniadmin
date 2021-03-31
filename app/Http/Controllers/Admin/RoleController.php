@@ -7,9 +7,9 @@ use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\RoleStore;
-use App\Http\Requests\RoleUpdate;
-use App\Http\Requests\RoleDestroy;
+use App\Http\Requests\Role\StoreRole;
+use App\Http\Requests\Role\UpdateRole;
+use App\Http\Requests\Role\DestroyRole;
 use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
@@ -41,7 +41,7 @@ class RoleController extends Controller
         return view('admin.roles.create', compact('permissions'));
     }
 
-    public function store(RoleStore $request)
+    public function store(StoreRole $request)
     {
         $role = new Role($request->validated());
 
@@ -78,7 +78,7 @@ class RoleController extends Controller
         ));
     }
 
-    public function update(RoleUpdate $request, int $id)
+    public function update(UpdateRole $request, int $id)
     {
         $role = Role::findOrFail($id);
         $role = $role->fill($request->validated());
@@ -101,7 +101,7 @@ class RoleController extends Controller
             ->with('message', __('roles.store_success'));
     }
 
-    public function destroy(RoleDestroy $request, int $id)
+    public function destroy(DestroyRole $request, int $id)
     {
         try {
             $role = Role::findOrFail($id);
