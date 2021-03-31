@@ -56,6 +56,7 @@
                         </a>
                     </li>
                 @endcan
+                {{--
                 @can('list-categories')
                     <li class="nav-item">
                         <a href="{{ route('admin.categories.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/categories'))) active @endif">
@@ -86,6 +87,7 @@
                         </a>
                     </li>
                 @endcan
+                --}}
                 @can('list-users')
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/users'))) active @endif">
