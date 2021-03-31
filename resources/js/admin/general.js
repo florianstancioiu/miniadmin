@@ -1,13 +1,19 @@
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import SimpleMDE from 'simplemde/dist/simplemde.min';
 
 export default class General {
 
     constructor() {
         this.bindEvents();
+        this.initMdEditor();
     }
 
     bindEvents() {
         $("body").on('click', '.btn-delete', this, this.onDestroyRecordClick);
+    }
+
+    initMdEditor() {
+        new SimpleMDE({ element: $(".simplemde")[0] });
     }
 
     onDestroyRecordClick(event) {

@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="form-content">{{ __('pages.content') }}</label>
-                        <textarea name="content" id="form-content" class="form-control" cols="30" rows="10" placeholder="Enter content"></textarea>
+                        <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="Enter content"># Header</textarea>
                     </div>
                 </div>
                 <!-- /.card-body -->

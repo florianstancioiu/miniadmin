@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="form-content">{{ __('posts.content') }}</label>
-                        <textarea name="content" id="form-content" class="form-control" cols="30" rows="10" placeholder="{{ __('posts.enter_content') }}">{{ $post->content }}</textarea>
+                        <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="{{ __('posts.enter_content') }}">{{ $post->content }}</textarea>
                     </div>
                 </div>
                 <!-- /.card-body -->

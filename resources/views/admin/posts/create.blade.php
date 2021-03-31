@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="form-content">{{ __('posts.content') }}</label>
-                        <textarea name="content" id="form-content" class="form-control" cols="30" rows="10" placeholder="{{ __('posts.enter_content') }}"></textarea>
+                        <textarea name="content" id="form-content" class="form-control" cols="30" rows="10" placeholder="{{ __('posts.enter_content') }}"># Header</textarea>
                     </div>
                 </div>
                 <!-- /.card-body -->
