@@ -61,6 +61,7 @@ class PermissionsTest extends DuskTestCase
                 ->assertSee($new_permission->title)
                 ->assertSee($new_permission->id)
                 ->click('table tr:first-child button.btn-delete')
+                ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
                 ->assertDontSee($new_permission->id)
                 ;

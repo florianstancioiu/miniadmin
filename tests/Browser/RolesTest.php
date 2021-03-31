@@ -61,6 +61,7 @@ class RolesTest extends DuskTestCase
                 ->assertSee($new_role->title)
                 ->assertSee($new_role->id)
                 ->click('table tr:first-child button.btn-delete')
+                ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
                 ->assertDontSee($new_role->id)
                 ;

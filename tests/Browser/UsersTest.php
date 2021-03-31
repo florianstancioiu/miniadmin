@@ -62,6 +62,7 @@ class UsersTest extends DuskTestCase
                 ->assertSee($new_user->first_name)
                 ->assertSee($new_user->id)
                 ->click('table tr:first-child button.btn-delete')
+                ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
                 ->assertDontSee($new_user->first_name)
                 ;
