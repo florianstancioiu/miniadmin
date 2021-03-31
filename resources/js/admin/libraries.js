@@ -5,15 +5,6 @@ require('jquery-ui-dist/jquery-ui.min');
 $.widget.bridge('uibutton', $.ui.button);
 
 require('bootstrap/dist/js/bootstrap.bundle.min');
-//require('chart.js/dist/Chart.bundle.min');
-//require('sparklines/source/sparkline');
-//require('jqvmap-novulnerability/dist/jquery.vmap.min');
 require('jquery-knob-chif/dist/jquery.knob.min');
-// require('moment/min/moment-with-locales.min');
-// require('daterangepicker/daterangepicker');
-// require('tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min');
-// require('summernote/dist/summernote');
 require('overlayscrollbars/js/OverlayScrollbars.min');
 require('./adminlte');
-// require('./adminlte/pages/dashboard');
-// require('./adminlte/demo');
