@@ -6,6 +6,7 @@
         <title>@yield('title') | {{ setting('site-title') }}</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ asset('storage/' . setting('site-favicon')) }}" type="image/x-icon">
 
         @include('admin/partials/styles')
     </head>
