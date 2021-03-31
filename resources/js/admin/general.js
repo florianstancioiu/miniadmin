@@ -13,7 +13,9 @@ export default class General {
     }
 
     initMdEditor() {
-        new SimpleMDE({ element: $(".simplemde")[0] });
+        if ($(".simplemde").length >= 1) {
+            new SimpleMDE({ element: $(".simplemde")[0] });
+        }
     }
 
     onDestroyRecordClick(event) {

@@ -16,3 +16,4 @@ mix
     .js('resources/js/client.js', 'public/js')
     .sass('resources/sass/client.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css');
+    //.sourceMaps();
