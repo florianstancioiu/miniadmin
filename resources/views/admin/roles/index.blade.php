@@ -4,20 +4,13 @@
     {{ __('roles.roles') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('roles.roles') }}</li>
-    </ol>
-@endsection
-
 @section('content')
     <div class="card">
         <div class="card-header">
             @can('create-roles')
                 <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
-                    <span>{{ __('roles.add_new_role') }}</span>
+                    <span>{{ __('general.add_new') }}</span>
                 </a>
             @endcan
 
@@ -36,7 +29,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 10px">#</th>
                         <th>{{ __('roles.title') }}</th>
                         <th>{{ __('roles.slug') }}</th>
                         <th>{{ __('general.actions') }}</th>
@@ -45,7 +37,6 @@
                 <tbody>
                     @foreach($roles as $role)
                         <tr>
-                            <td>{{ $role->id }}</td>
                             <td>{{ $role->title }}</td>
                             <td>{{ $role->slug }}</td>
                             <td class="actions-cell">
@@ -73,11 +64,8 @@
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
-
         <div class="card-footer clearfix">
             {{ $roles->links() }}
         </div>
     </div>
-    <!-- /.card -->
 @endsection

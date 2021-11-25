@@ -4,22 +4,9 @@
     {{ __('users.create_user') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">{{ __('users.users') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('general.create') }}</li>
-    </ol>
-@endsection
-
 @section('content')
-    <div class="col-md-12">
-    <!-- general form elements -->
+    <div class="col-md-10 col-lg-8 offset-lg-2">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">{{ __('users.create_user') }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form role="form" action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
@@ -68,6 +55,8 @@
                         <label for="form-confirm-password">{{ __('users.confirm_password') }}</label>
                         <input type="password" name="password_confirmation" class="form-control" id="form-confirm-password" placeholder="{{ __('users.enter_confirm_password') }}">
                     </div>
+
+                </div>
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary btn-create">{{ __('general.create') }}</button>

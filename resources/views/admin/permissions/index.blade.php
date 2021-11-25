@@ -4,20 +4,13 @@
     {{ __('permissions.permissions') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('permissions.permissions') }}</li>
-    </ol>
-@endsection
-
 @section('content')
     <div class="card">
         <div class="card-header">
             @can('create-permissions')
                 <a href="{{ route('admin.permissions.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
-                    <span>{{ __('permissions.add_new_permission') }}</span>
+                    <span>{{ __('general.add_new') }}</span>
                 </a>
             @endcan
 
@@ -73,11 +66,8 @@
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
-
         <div class="card-footer clearfix">
             {{ $permissions->links() }}
         </div>
     </div>
-    <!-- /.card -->
 @endsection

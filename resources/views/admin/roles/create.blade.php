@@ -4,22 +4,9 @@
     {{ __('roles.create_role') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">{{ __('roles.roles') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('general.create') }}</li>
-    </ol>
-@endsection
-
 @section('content')
-    <div class="col-md-12">
-    <!-- general form elements -->
+    <div class="col-md-10 col-lg-8 offset-lg-2">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">{{ __('roles.create_role') }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form role="form" action="{{ route('admin.roles.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
@@ -38,10 +25,7 @@
                             <label for="form-permission-{{$permission->slug}}">{{ $permission->title }}</label>
                         </div>
                     @endforeach
-
                 </div>
-                <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary btn-create">{{ __('general.create') }}</button>
                 </div>

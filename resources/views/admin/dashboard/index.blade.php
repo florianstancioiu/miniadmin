@@ -4,18 +4,9 @@
     Dashboard
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="#">{{ __('dashboard.home') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('dashboard.dashboard') }}</li>
-    </ol>
-@endsection
-
 @section('content')
     <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
         <div class="row">
-
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -89,8 +80,7 @@
                 <thead>
                     <tr>
                         <th scope="col">{{ __('dashboard.avatar') }}</th>
-                        <th scope="col">{{ __('dashboard.first_name') }}</th>
-                        <th scope="col">{{ __('dashboard.last_name') }}</th>
+                        <th scope="col">{{ __('dashboard.name') }}</th>
                         <th scope="col">{{ __('dashboard.email') }}</th>
                         <th scope="col">{{ __('dashboard.created_at') }}</th>
                     </tr>
@@ -103,10 +93,9 @@
                                     <img class="dashboard-user-img" src="{{ $user->image_url }}" alt="">
                                 @endif
                             </th>
-                            <td>{{ $user->first_name }}</td>
-                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $user->created_at->toFormattedDateString() }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -114,5 +103,5 @@
             </div>
 
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 @endsection

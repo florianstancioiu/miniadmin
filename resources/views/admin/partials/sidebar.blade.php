@@ -1,14 +1,10 @@
-<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
         <img src="{{ asset('storage/' . setting('site-logo')) }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">{{ setting('site-title') }}</span>
     </a>
 
-    <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <a class="image" href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}">
 
@@ -22,8 +18,6 @@
                 <a href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}" class="d-block">{{ auth()->user()->full_name }}</a>
             </div>
         </div>
-
-        <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @can('list-dashboard')
@@ -130,7 +124,5 @@
                 @endcan
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>

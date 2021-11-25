@@ -4,22 +4,13 @@
     {{ __('users.users') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('users.users') }}</li>
-    </ol>
-@endsection
-
 @section('content')
     <div class="card">
         <div class="card-header">
-            @can('create-users')
-                <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary btn-add-new">
-                    <i class="fas fa-plus"></i>
-                    <span>{{ __('users.add_new_user') }}</span>
-                </a>
-            @endcan
+            <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary btn-add-new">
+                <i class="fas fa-plus"></i>
+                <span>{{ __('general.add_new') }}</span>
+            </a>
 
             <form class="form-inline admin-search-form" method="GET" action="{{ route('admin.users.index') }}">
                 <div class="input-group input-group-sm">
@@ -36,7 +27,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 10px">#</th>
                         <th>{{ __('users.image') }}</th>
                         <th>{{ __('users.full_name') }}</th>
                         <th>{{ __('users.email') }}</th>
@@ -47,7 +37,6 @@
                 <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
                             <td>
                                 @if ($user->image)
                                     <img src="{{ $user->image_url }}" class="pagination-img" alt="">
@@ -85,11 +74,8 @@
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
-
         <div class="card-footer clearfix">
             {{ $users->links() }}
         </div>
     </div>
-    <!-- /.card -->
 @endsection

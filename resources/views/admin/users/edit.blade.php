@@ -4,22 +4,9 @@
     {{ __('users.edit_user') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">{{ __('users.users') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('general.edit') }}</li>
-    </ol>
-@endsection
-
 @section('content')
-    <div class="col-md-12">
-    <!-- general form elements -->
+    <div class="col-md-10 col-lg-8 offset-lg-2">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">{{ __('users.edit_user') }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form role="form" action="{{ route('admin.users.update', ['user'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -76,8 +63,6 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('users.edit_password') }}</h3>
             </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form role="form" action="{{ route('admin.users.update-password', ['user'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

@@ -4,20 +4,13 @@
     {{ __('posts.posts') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('posts.posts') }}</li>
-    </ol>
-@endsection
-
 @section('content')
     <div class="card">
         <div class="card-header">
             @can('create-posts')
                 <a href="{{ route('admin.posts.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
-                    <span>{{ __('posts.add_new_post') }}</span>
+                    <span>{{ __('general.add_new') }}</span>
                 </a>
             @endcan
 
@@ -36,7 +29,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 10px">#</th>
                         <th>{{ __('posts.image') }}</th>
                         <th>{{ __('posts.title') }}</th>
                         <th>{{ __('general.actions') }}</th>
@@ -45,7 +37,6 @@
                 <tbody>
                     @foreach($posts as $post)
                         <tr>
-                            <td>{{ $post->id }}</td>
                             <td>
                                 @if($post->image)
                                     <img src="{{ $post->image_url }}" class="pagination-img" alt="">
@@ -77,11 +68,8 @@
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
-
         <div class="card-footer clearfix">
             {{ $posts->links() }}
         </div>
     </div>
-    <!-- /.card -->
 @endsection

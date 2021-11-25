@@ -10,4 +10,5 @@ return [
     'settings' => 'Settings',
     'save' => 'Save',
     'update' => 'Update',
+    'add_new' => 'Add New',
 ];

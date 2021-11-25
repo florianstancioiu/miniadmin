@@ -4,13 +4,6 @@
     {{ __('pages.pages') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('pages.pages') }}</li>
-    </ol>
-@endsection
-
 @section('content')
     <div class="card">
         <div class="card-header">
@@ -18,7 +11,7 @@
                 <a href="{{ route('admin.pages.create') }}" class="btn btn-sm btn-primary btn-add-new">
                     <i class="fas fa-plus"></i>
                     <span>
-                        {{ __('pages.add_new_page') }}
+                        {{ __('general.add_new') }}
                     </span>
                 </a>
             @endcan
@@ -38,7 +31,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 10px">#</th>
                         <th>{{ __('pages.image') }}</th>
                         <th>{{ __('pages.title') }}</th>
                         <th>{{ __('general.actions') }}</th>
@@ -47,7 +39,6 @@
                 <tbody>
                     @foreach($pages as $page)
                         <tr>
-                            <td>{{ $page->id }}</td>
                             <td>
                                 @if($page->image)
                                     <img src="{{ $page->image_url }}" class="pagination-img" alt="">
@@ -79,11 +70,8 @@
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
-
         <div class="card-footer clearfix">
             {{ $pages->links() }}
         </div>
     </div>
-    <!-- /.card -->
 @endsection

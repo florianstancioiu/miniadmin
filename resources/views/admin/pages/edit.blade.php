@@ -4,22 +4,9 @@
     {{ __('pages.edit_page') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.pages.index') }}">{{ __('pages.pages') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('general.edit') }}</li>
-    </ol>
-@endsection
-
 @section('content')
-    <div class="col-md-12">
-        <!-- general form elements -->
+    <div class="col-md-10 col-lg-8 offset-lg-2">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">{{ __('pages.edit_page') }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form role="form" action="{{ route('admin.pages.update', [ 'page' => $page->id ]) }}" method="POST" enctype="multipart/form-data">
                 @method("PUT")
                 @csrf
@@ -45,8 +32,6 @@
                         <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="{{ __('pages.enter_content') }}">{{ $page->content }}</textarea>
                     </div>
                 </div>
-                <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary btn-edit">{{ __('general.edit') }}</button>
                 </div>

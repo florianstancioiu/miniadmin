@@ -4,22 +4,9 @@
     {{ __('general.settings') }}
 @endsection
 
-@section('breadcrumbs')
-    <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('general.admin') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('general.settings') }}</li>
-    </ol>
-@endsection
-
 @section('content')
-    <div class="col-md-12">
-    <!-- general form elements -->
+    <div class="col-md-10 col-lg-8 offset-lg-2">
         <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">{{ __('general.settings') }}</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form role="form" action="{{ route('admin.settings.index') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
@@ -50,8 +37,6 @@
                         @endif
                     @endforeach
                 </div>
-                <!-- /.card-body -->
-
                 @can('store-settings')
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-save">{{ __('general.save') }}</button>
