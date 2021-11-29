@@ -14,7 +14,7 @@
                 @endif
             </a>
             <div class="info">
-                <a href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}" class="d-block">{{ auth()->user()->full_name }}</a>
+                <a href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}" class="d-block">{{ auth()->user()->getFullName() }}</a>
             </div>
         </div>
         <nav class="mt-2">

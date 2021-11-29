@@ -61,7 +61,7 @@ class PagePolicy
      */
     public function delete(User $user, Page $page)
     {
-        if ($user->can('delete any page')) {
+        if ($user->can('delete any pages')) {
             return true;
         }
 

@@ -15,4 +15,5 @@ return [
     'author' => 'Author',
     'image' => 'Image',
     'slug' => 'Slug',
+    'content' => 'Content',
 ];

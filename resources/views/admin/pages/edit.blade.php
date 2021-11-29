@@ -12,11 +12,11 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="form-title">{{ __('pages.title') }}</label>
+                        <label for="form-title">{{ __('general.title') }}</label>
                         <input type="text" name="title" class="form-control" id="form-title" placeholder="{{ __('pages.enter_title') }}" value="{{ $page->title }}">
                     </div>
                     <div class="form-group">
-                        <label for="form-image">{{ __('pages.image') }}</label>
+                        <label for="form-image">{{ __('general.image') }}</label>
                         @if ($page->image)
                             <img src="{{ $page->image_url }}" alt="" class="form-image">
                         @endif
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="form-content">{{ __('pages.content') }}</label>
+                        <label for="form-content">{{ __('general.content') }}</label>
                         <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="{{ __('pages.enter_content') }}">{{ $page->content }}</textarea>
                     </div>
                 </div>

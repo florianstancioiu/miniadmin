@@ -14,11 +14,17 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    /**
+     * Authorize the Page policy
+     */
     public function __construct()
     {
         $this->authorizeResource(Page::class, 'page');
     }
 
+    /**
+     * Retrieve the index items
+     */
     public function index(Request $request)
     {
         $auth_user = Auth::user();
@@ -44,11 +50,17 @@ class PageController extends Controller
         ));
     }
 
+    /**
+     * Return the create view
+     */
     public function create()
     {
         return view('admin.pages.create');
     }
 
+    /**
+     * Implement the store functionality
+     */
     public function store(StorePage $request)
     {
         $page = new Page($request->validated());
@@ -74,11 +86,17 @@ class PageController extends Controller
             ->with('message', __('pages.store_success'));
     }
 
+    /**
+     * Return the edit view
+     */
     public function edit(Page $page)
     {
         return view('admin.pages.edit', compact('page'));
     }
 
+    /**
+     * Implement the update functionality
+     */
     public function update(UpdatePage $request, int $id)
     {
         $page = Page::findOrFail($id);
@@ -109,10 +127,12 @@ class PageController extends Controller
             ->with('message', __('pages.update_success'));
     }
 
-    public function destroy(DestroyPage $request, int $id)
+    /**
+     * Implement the delete functionality
+     */
+    public function destroy(DestroyPage $request, Page $page)
     {
         try {
-            $page = Page::findOrFail($id);
             // delete existing image
             Storage::delete($page->image);
             // delete record
