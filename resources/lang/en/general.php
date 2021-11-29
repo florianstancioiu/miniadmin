@@ -11,4 +11,8 @@ return [
     'save' => 'Save',
     'update' => 'Update',
     'add_new' => 'Add New',
+    'title' => 'Title',
+    'author' => 'Author',
+    'image' => 'Image',
+    'slug' => 'Slug',
 ];

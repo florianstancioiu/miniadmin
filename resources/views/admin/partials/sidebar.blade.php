@@ -7,7 +7,6 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <a class="image" href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}">
-
                 @if(auth()->user()->image)
                     <img src="{{ auth()->user()->image_url }}" class="img-circle elevation-2" alt="User Image">
                 @else
@@ -20,7 +19,7 @@
         </div>
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @can('list-dashboard')
+                @can('view dashboard')
                     <li class="nav-item">
                         <a href="{{ route('admin.dashboard') }}" class="nav-link @if(request()->routeIs('admin.dashboard')) active @endif">
                             <i class="nav-icon fas fa-th"></i>
@@ -30,7 +29,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('list-pages')
+                @can('view pages')
                     <li class="nav-item">
                         <a href="{{ route('admin.pages.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/pages')) active @endif">
                             <i class="nav-icon fas fa-edit"></i>
@@ -40,7 +39,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('list-posts')
+                @can('view posts')
                     <li class="nav-item">
                         <a href="{{ route('admin.posts.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/posts'))) active @endif">
                             <i class="nav-icon fas fa-newspaper"></i>
@@ -82,7 +81,7 @@
                     </li>
                 @endcan
                 --}}
-                @can('list-users')
+                @can('view users')
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/users'))) active @endif">
                             <i class="nav-icon fas fa-users"></i>
@@ -92,7 +91,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('list-roles')
+                @can('view roles')
                     <li class="nav-item">
                         <a href="{{ route('admin.roles.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/roles'))) active @endif">
                             <i class="nav-icon fas fa-user-tag"></i>
@@ -102,7 +101,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('list-permissions')
+                @can('view permissions')
                     <li class="nav-item">
                         <a href="{{ route('admin.permissions.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/permissions'))) active @endif">
                             <i class="nav-icon fas fa-check-square"></i>
@@ -112,7 +111,7 @@
                         </a>
                     </li>
                 @endcan
-                @can('list-settings')
+                @can('view settings')
                     <li class="nav-item">
                         <a href="{{ route('admin.settings.index') }}" class="nav-link @if(request()->routeIs('admin.settings.index')) active @endif">
                             <i class="nav-icon fas fa-cog"></i>

@@ -98,7 +98,7 @@
                 </form>
                 <a href="{{ url('/login') }}" class="text-center">{{ __('auth.i_have_a_membership') }}</a>
             </div>
-        </div><!-- /.card -->
+        </div>
     </div>
 
     <script src="{{ asset('js/admin.js') }}"></script>

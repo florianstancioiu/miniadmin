@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-10 col-lg-8 offset-lg-2">
+    <div class="col-md-10 col-lg-8">
         <div class="card card-primary">
             <form role="form" action="{{ route('admin.pages.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label for="form-content">{{ __('pages.content') }}</label>
-                        <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="Enter content"># Header</textarea>
+                        <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="Enter content"></textarea>
                     </div>
                 </div>
                 <div class="card-footer">

@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
+                <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $pages_total }}</h3>
 
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-warning">
+                <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $users_total }}</h3>
 
@@ -59,7 +59,7 @@
             </div>
 
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
+                <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $users_total }}</h3>
 
