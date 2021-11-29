@@ -38,7 +38,7 @@ Route::prefix('/posts')->group(function () {
     Route::get('/{slug}', [ClientPostController::class, 'show'])->name('client.posts.show');
 });
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('pages', PageController::class)->except('show');
     Route::resource('posts', PostController::class)->except('show');
