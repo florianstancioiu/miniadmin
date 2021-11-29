@@ -14,39 +14,43 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Page::class, 'page');
+    }
+
     public function index(Request $request)
     {
-        $this->can('list-pages');
-
+        $auth_user = Auth::user();
         $keyword = $request->keyword ?? '';
         $pages = Page::orderBy('id', 'DESC')
             ->search($keyword)
+            ->with(['user'])
             ->paginate()
             ->appends(request()->query());
 
-        $auth_user = Auth::user();
-        $can_edit_pages = $auth_user->canUser('edit-pages');
-        $can_destroy_pages = $auth_user->canUser('destroy-pages');
+            if ($auth_user->hasRole('guest')) {
+                $pages = Page::orderBy('id', 'DESC')
+                ->where('user_id', $auth_user->id)
+                ->search($keyword)
+                ->with(['user'])
+                ->paginate()
+                ->appends(request()->query());
+        }
 
         return view('admin.pages.index', compact(
             'pages',
             'keyword',
-            'can_edit_pages',
-            'can_destroy_pages',
         ));
     }
 
     public function create()
     {
-        $this->can('create-pages');
-
         return view('admin.pages.create');
     }
 
     public function store(StorePage $request)
     {
-        $this->can('store-pages');
-
         $page = new Page($request->validated());
         $page->slug = Str::slug($request->title);
         $page->user_id = Auth::id();
@@ -57,7 +61,6 @@ class PageController extends Controller
             }
 
             $page->save();
-
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.pages.index')
@@ -71,19 +74,13 @@ class PageController extends Controller
             ->with('message', __('pages.store_success'));
     }
 
-    public function edit(int $id)
+    public function edit(Page $page)
     {
-        $this->can('edit-pages');
-
-        $page = Page::findOrFail($id);
-
         return view('admin.pages.edit', compact('page'));
     }
 
     public function update(UpdatePage $request, int $id)
     {
-        $this->can('update-pages');
-
         $page = Page::findOrFail($id);
         $original_image = $page->image;
         $page = $page->fill($request->validated());
@@ -98,9 +95,7 @@ class PageController extends Controller
                 $page->image = $request->image->store('pages');
             }
 
-
             $page->save();
-
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.pages.index')
@@ -116,8 +111,6 @@ class PageController extends Controller
 
     public function destroy(DestroyPage $request, int $id)
     {
-        $this->can('destroy-pages');
-
         try {
             $page = Page::findOrFail($id);
             // delete existing image

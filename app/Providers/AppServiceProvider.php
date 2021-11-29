@@ -26,9 +26,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-
-        Blade::if('can', function ($value) {
-            return auth()->user()->hasPermission($value) || auth()->user()->hasRole('admin');
-        });
     }
 }
