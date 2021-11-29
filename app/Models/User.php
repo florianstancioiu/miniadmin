@@ -6,15 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\RolesAndPermissions;
-use App\Models\Role;
-use App\Models\UserRole;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory,
         Notifiable,
-        RolesAndPermissions;
+        HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -48,17 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getFullNameAttribute()
+    public function getFullName()
     {
         return $this->first_name . " " . $this->last_name;
-    }
-
-    public function getRolesAttribute()
-    {
-        return UserRole::where('user_id', $this->id)
-            ->join('roles', 'user_role.role_id', '=', 'roles.id')
-            ->select('roles.title')
-            ->get();
     }
 
     public function getImageUrlAttribute()
