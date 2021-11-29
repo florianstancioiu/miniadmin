@@ -4835,10 +4835,6 @@ input[type="button"].btn-block {
   border-bottom: 0 solid rgba(0, 0, 0, 0.125);
 }
 
-.card-header:first-child {
-  border-radius: calc(0.25rem - 0) calc(0.25rem - 0) 0 0;
-}
-
 .card-header + .list-group .list-group-item:first-child {
   border-top: 0;
 }
@@ -4847,10 +4843,6 @@ input[type="button"].btn-block {
   padding: 0.75rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
   border-top: 0 solid rgba(0, 0, 0, 0.125);
-}
-
-.card-footer:last-child {
-  border-radius: 0 0 calc(0.25rem - 0) calc(0.25rem - 0);
 }
 
 .card-header-tabs {
@@ -4880,18 +4872,6 @@ input[type="button"].btn-block {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 100%;
-}
-
-.card-img,
-.card-img-top {
-  border-top-left-radius: calc(0.25rem - 0);
-  border-top-right-radius: calc(0.25rem - 0);
-}
-
-.card-img,
-.card-img-bottom {
-  border-bottom-right-radius: calc(0.25rem - 0);
-  border-bottom-left-radius: calc(0.25rem - 0);
 }
 
 .card-deck .card {
