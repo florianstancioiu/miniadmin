@@ -16,6 +16,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "spatie/laravel-permission": "^5.4",
         "staudenmeir/eloquent-has-many-deep": "^1.13"
     },
     "require-dev": {
