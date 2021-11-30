@@ -97,9 +97,8 @@ class PageController extends Controller
     /**
      * Implement the update functionality
      */
-    public function update(UpdatePage $request, int $id)
+    public function update(UpdatePage $request, Page $page)
     {
-        $page = Page::findOrFail($id);
         $original_image = $page->image;
         $page = $page->fill($request->validated());
         $page->slug = Str::slug($request->title);

@@ -13,6 +13,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    border: 1px solid #ccc;
 }
 
 .form-image {
@@ -42,6 +43,7 @@
     border-radius: 50%;
     background-size: cover;
     background-position: center;
+    border: 1px solid #ccc;
 }
 
 .editor-toolbar.fullscreen, .CodeMirror-fullscreen {

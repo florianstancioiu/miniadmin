@@ -14,39 +14,46 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    /**
+     * Authorize the Post policy
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
+
+    /**
+     * Retrieve the index items
+     */
     public function index(Request $request)
     {
-        $this->can('list-posts');
-
+        $auth_user = Auth::user();
         $keyword = $request->keyword ?? '';
         $posts = Post::orderBy('id', 'DESC')
             ->search($keyword)
+            ->with(['user'])
             ->paginate()
             ->appends(request()->query());
-
-        $auth_user = Auth::user();
-        $can_edit_posts = $auth_user->canUser('edit-posts');
-        $can_destroy_posts = $auth_user->canUser('destroy-posts');
 
         return view('admin.posts.index', compact(
             'posts',
             'keyword',
-            'can_edit_posts',
-            'can_destroy_posts',
         ));
     }
 
+    /**
+     * Return the create view
+     */
     public function create()
     {
-        $this->can('create-posts');
-
         return view('admin.posts.create');
     }
 
+    /**
+     * Implement the store functionality
+     */
     public function store(StorePost $request)
     {
-        $this->can('store-posts');
-
         $post = new Post($request->validated());
         $post->slug = Str::slug($request->title);
         $post->user_id = Auth::id();
@@ -57,7 +64,6 @@ class PostController extends Controller
             }
 
             $post->save();
-
         } catch (\Exception $e) {
             return redirect()
                 ->route('admin.posts.index')
@@ -71,20 +77,19 @@ class PostController extends Controller
             ->with('message', __('posts.store_success'));
     }
 
-    public function edit(int $id)
+    /**
+     * Return the edit view
+     */
+    public function edit(Post $post)
     {
-        $this->can('edit-posts');
-
-        $post = Post::findOrFail($id);
-
         return view('admin.posts.edit', compact('post'));
     }
 
-    public function update(UpdatePost $request, int $id)
+    /**
+     * Implement the update functionality
+     */
+    public function update(UpdatePost $request, Post $post)
     {
-        $this->can('update-posts');
-
-        $post = Post::findOrFail($id);
         $original_image = $post->image;
         $post = $post->fill($request->validated());
         $post->slug = Str::slug($request->title);
@@ -111,12 +116,12 @@ class PostController extends Controller
             ->with('message', __('posts.update_success'));
     }
 
-    public function destroy(DestroyPost $request, int $id)
+    /**
+     * Implement the delete functionality
+     */
+    public function destroy(DestroyPost $request, Post $post)
     {
-        $this->can('destroy-posts');
-
         try {
-            $post = Post::findOrFail($id);
             // delete existing image
             Storage::delete($post->image);
             // delete record
@@ -130,7 +135,7 @@ class PostController extends Controller
         }
 
         return redirect()
-        ->route('admin.posts.index')
-        ->with('message', __('posts.destroy_success'));
+            ->route('admin.posts.index')
+            ->with('message', __('posts.destroy_success'));
     }
 }

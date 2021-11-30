@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-10 col-lg-8 offset-lg-2">
+    <div class="col-md-10 col-lg-8">
         <div class="card card-primary">
             <form role="form" action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
