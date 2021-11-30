@@ -31198,3 +31198,11 @@ a.text-muted:hover {
 [class*="accent-"] a.btn-dark {
   color: #ffffff;
 }
+
+.card-header:first-child {
+  border-radius: 2px 2px 0 0;
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 2px 2px;
+}

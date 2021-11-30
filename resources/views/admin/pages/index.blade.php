@@ -34,6 +34,7 @@
                         <th>{{ __('general.image') }}</th>
                         <th>{{ __('general.title') }}</th>
                         <th>{{ __('general.author') }}</th>
+                        <th>{{ __('general.created_at') }}</th>
                         <th>{{ __('general.actions') }}</th>
                     </tr>
                 </thead>
@@ -49,6 +50,7 @@
                             </td>
                             <td>{{ $page->title }}</td>
                             <td>{{ $page->user->getFullName() }}</td>
+                            <td>{{ $page->created_at->toFormattedDateString() }}</td>
                             <td class="actions-cell">
                                 @can('update', $page)
                                     <a href="{{ route('admin.pages.edit', ['page' => $page->id]) }}" class="btn btn-primary btn-sm btn-edit" title="{{ __('general.edit') }}">

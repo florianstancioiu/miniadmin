@@ -91,6 +91,8 @@
                             <th scope="row">
                                 @if ($user->image)
                                     <img class="dashboard-user-img" src="{{ $user->image_url }}" alt="">
+                                @else
+                                    <img class="dashboard-user-img" src="{{ url('img/no-image.png') }}" alt="">
                                 @endif
                             </th>
                             <td>{{ $user->first_name }} {{ $user->last_name }}</td>

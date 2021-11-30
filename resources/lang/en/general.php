@@ -16,4 +16,5 @@ return [
     'image' => 'Image',
     'slug' => 'Slug',
     'content' => 'Content',
+    'created_at' => 'Created At',
 ];

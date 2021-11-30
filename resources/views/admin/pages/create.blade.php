@@ -11,11 +11,11 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="form-title">{{ __('pages.title') }}</label>
+                        <label for="form-title">{{ __('general.title') }}</label>
                         <input type="text" name="title" class="form-control" id="form-title" placeholder="Enter title">
                     </div>
                     <div class="form-group">
-                        <label for="form-image">{{ __('pages.image') }}</label>
+                        <label for="form-image">{{ __('general.image') }}</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="form-image" accept="image/*">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="form-content">{{ __('pages.content') }}</label>
+                        <label for="form-content">{{ __('general.content') }}</label>
                         <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="Enter content"></textarea>
                     </div>
                 </div>

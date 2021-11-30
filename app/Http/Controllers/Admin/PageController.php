@@ -35,13 +35,13 @@ class PageController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-            if ($auth_user->hasRole('guest')) {
-                $pages = Page::orderBy('id', 'DESC')
-                ->where('user_id', $auth_user->id)
-                ->search($keyword)
-                ->with(['user'])
-                ->paginate()
-                ->appends(request()->query());
+        if ($auth_user->hasRole('guest')) {
+            $pages = Page::orderBy('id', 'DESC')
+            ->where('user_id', $auth_user->id)
+            ->search($keyword)
+            ->with(['user'])
+            ->paginate()
+            ->appends(request()->query());
         }
 
         return view('admin.pages.index', compact(
