@@ -16,3 +16,11 @@ __The project is in its early stages, expect errors and missing features.__
 * Run the migrations using `php artisan migrate:fresh --seed`
 * Install the frontend libraries using `npm install`
 * Compile the frontend assets using `npm run dev`
+
+# Users
+
+| Name | Role | Email | Password |
+| ---- | ---- | ----- | -------- |
+| Guest User | guest | guest@example.com | password |
+| Admin User | admin | admin@example.com | password |
+| Super User | super_admin | super@example.com | password |

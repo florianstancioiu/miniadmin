@@ -11,8 +11,6 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $this->can('list-settings');
-
         $settings = Setting::all();
 
         return view('admin.settings.index', compact('settings'));
@@ -20,8 +18,6 @@ class SettingController extends Controller
 
     public function store(StoreSetting $request)
     {
-        $this->can('store-settings');
-
         try {
             foreach ($request->settings as $key => $value) {
                 $db_setting = Setting::where('key', $key)->first();

@@ -91,6 +91,7 @@
                         </a>
                     </li>
                 @endcan
+                {{--
                 @can('view roles')
                     <li class="nav-item">
                         <a href="{{ route('admin.roles.index') }}" class="nav-link @if(Str::startsWith(request()->path(), 'admin/roles'))) active @endif">
@@ -111,6 +112,7 @@
                         </a>
                     </li>
                 @endcan
+                --}}
                 @can('view settings')
                     <li class="nav-item">
                         <a href="{{ route('admin.settings.index') }}" class="nav-link @if(request()->routeIs('admin.settings.index')) active @endif">
