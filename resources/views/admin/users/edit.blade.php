@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-10 col-lg-8 offset-lg-2">
+    <div class="col-md-10 col-lg-8">
         <div class="card card-primary">
             <form role="form" action="{{ route('admin.users.update', ['user'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -47,7 +47,7 @@
                         <select id="form-role" class="form-control" name="role_id">
                             <option value="" disabled>{{ __('users.select_role') }}</option>
                             @foreach($roles as $role)
-                                <option value="{{ $role->id }}" @if($user->hasRole($role->slug)) selected @endif>{{ $role->title }}</option>
+                                <option value="{{ $role->id }}" @if($user->hasRole($role->name)) selected @endif>{{ $role->name }}</option>
                             @endforeach
                         </select>
                     </div>

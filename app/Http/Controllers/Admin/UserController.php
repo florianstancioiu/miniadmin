@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Models\Role;
-use App\Models\UserRole;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUser;
 use App\Http\Requests\User\UpdateUser;
@@ -19,8 +18,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $this->can('list-users');
-
+        $auth_user = Auth::user();
         $keyword = $request->keyword ?? '';
         $users = User::orderBy('id', 'DESC')
             ->with('roles')
@@ -28,22 +26,14 @@ class UserController extends Controller
             ->paginate()
             ->appends(request()->query());
 
-        $auth_user = Auth::user();
-        $can_edit_users = $auth_user->canUser('edit-users');
-        $can_destroy_users = $auth_user->canUser('destroy-users');
-
         return view('admin.users.index', compact(
             'users',
             'keyword',
-            'can_edit_users',
-            'can_destroy_users',
         ));
     }
 
     public function create()
     {
-        $this->can('create-users');
-
         $roles = Role::all();
 
         return view('admin.users.create', compact('roles'));
@@ -51,8 +41,6 @@ class UserController extends Controller
 
     public function store(StoreUser $request)
     {
-        $this->can('store-users');
-
         $user = new User($request->validated());
         $user->password = Hash::make($request->password);
 
@@ -76,21 +64,15 @@ class UserController extends Controller
             ->with('message', __('users.store_success'));
     }
 
-    public function edit(int $id)
+    public function edit(User $user)
     {
-        $this->can('edit-users');
-
-        $user = User::findOrFail($id);
         $roles = Role::all();
 
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
-    public function update(UpdateUser $request, int $id)
+    public function update(UpdateUser $request, User $user)
     {
-        $this->can('update-users');
-
-        $user = User::findOrFail($id);
         $original_image = $user->image;
         $user = $user->fill($request->validated());
 
@@ -120,8 +102,6 @@ class UserController extends Controller
 
     public function updatePassword(UpdatePasswordUser $request, int $id)
     {
-        $this->can('update-password-users');
-
         $user = User::findOrFail($id);
         $original_password = $user->password;
 
@@ -146,12 +126,9 @@ class UserController extends Controller
             ->with('message', __('users.update_password_success'));
     }
 
-    public function destroy(DestroyUser $request, int $id)
+    public function destroy(DestroyUser $request, User $user)
     {
-        $this->can('destroy-users');
-
         try {
-            $user = User::findOrFail($id);
             // delete existing image
             Storage::delete($user->image);
             // delete record
@@ -165,7 +142,7 @@ class UserController extends Controller
         }
 
         return redirect()
-        ->route('admin.users.index')
-        ->with('message', __('users.destroy_success'));
+            ->route('admin.users.index')
+            ->with('message', __('users.destroy_success'));
     }
 }

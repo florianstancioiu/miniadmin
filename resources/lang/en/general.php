@@ -17,4 +17,7 @@ return [
     'slug' => 'Slug',
     'content' => 'Content',
     'created_at' => 'Created At',
+    'email' => 'Email',
+    'full_name' => 'Full Name',
+    'role' => 'Role',
 ];
