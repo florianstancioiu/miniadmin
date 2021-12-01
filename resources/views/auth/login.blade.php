@@ -64,10 +64,11 @@
                         </div>
                     </div>
                 </form>
-
+                <!--
                 <p class="mb-1">
                     <a href="{{ route('password.request') }}">{{ __('auth.i_forgot_my_password') }}</a>
                 </p>
+                -->
             </div>
         </div>
     </div>
