@@ -58,7 +58,7 @@ class UserRolePermissionSeeder extends Seeder
         'delete any permissions',
 
         'view settings',
-        'update settings',
+        'create settings',
 
         'edit profile',
         'update profile',

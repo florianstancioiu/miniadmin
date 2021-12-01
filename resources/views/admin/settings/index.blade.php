@@ -37,7 +37,7 @@
                         @endif
                     @endforeach
                 </div>
-                @can('store-settings')
+                @can('create settings')
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary btn-save">{{ __('general.save') }}</button>
                     </div>

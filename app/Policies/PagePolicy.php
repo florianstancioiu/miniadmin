@@ -22,7 +22,7 @@ class PagePolicy
     }
 
     /**
-     * Determine whether the user can create pages (create route).
+     * Determine whether the user can create pages (create and store routes).
      *
      * @param  \App\Models\User  $user
      * @return mixed

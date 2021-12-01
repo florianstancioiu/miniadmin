@@ -22,7 +22,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can create posts (create route).
+     * Determine whether the user can create posts (create and store routes).
      *
      * @param  \App\Models\User  $user
      * @return mixed

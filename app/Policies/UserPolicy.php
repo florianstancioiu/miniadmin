@@ -21,7 +21,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can create users (create route).
+     * Determine whether the user can create users (create and store routes).
      *
      * @param  \App\Models\User  $user
      * @return mixed
