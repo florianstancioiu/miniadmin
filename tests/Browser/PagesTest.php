@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\Page;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\RolePermission;
 
 class PagesTest extends DuskTestCase
 {
@@ -23,9 +20,8 @@ class PagesTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.pages.index'))
-                ->assertSee(__('pages.add_new_page'))
+                ->assertSee(__('general.add_new'))
                 ->assertSee($last_page->title)
-                ->assertSee($last_page->id)
                 ;
         });
     }
@@ -58,13 +54,12 @@ class PagesTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.pages.index'))
-                ->assertSee(__('general.delete'))
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
                 ->assertSee($new_page->title)
-                ->assertSee($new_page->id)
                 ->click('table tr:first-child button.btn-delete')
                 ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
-                ->assertDontSee($new_page->id)
+                ->assertDontSee($new_page->title)
                 ;
         });
     }
@@ -79,9 +74,8 @@ class PagesTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.pages.index'))
-                ->assertSee(__('general.edit'))
+                ->assertAttribute('.btn-edit', 'title', __('general.edit'))
                 ->assertSee($new_page->title)
-                ->assertSee($new_page->id)
                 ->click('table tr:first-child a.btn-edit')
                 ->assertRouteIs('admin.pages.edit', ['page' => $new_page->id])
                 ->assertSee(__('pages.edit_page'))
@@ -111,11 +105,14 @@ class PagesTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.pages.index'))
-                ->assertSee(__('general.edit'))
                 ->click('a.btn-add-new')
                 ->assertRouteIs('admin.pages.create')
                 ->assertSee(__('pages.create_page'))
-                ->type('title', $unsaved_page->title)
+                ->type('title', $unsaved_page->title);
+
+            $browser->script('window.SimpleMDEInstance.value("testing")');
+
+            $browser
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
                 ->click('button.btn-create')
                 ->assertRouteIs('admin.pages.index')
@@ -139,89 +136,10 @@ class PagesTest extends DuskTestCase
                 ->loginAs($admin_user)
                 ->visit(route('admin.pages.index'))
                 ->assertSee(__('partials.pages'))
-                ->assertSee(__('pages.add_new_page'))
-                ->assertSee(__('general.edit'))
-                ->assertSee(__('general.delete'))
+                ->assertSee(__('general.add_new'))
+                ->assertAttribute('.btn-edit', 'title', __('general.edit'))
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
                 ;
         });
-    }
-
-    /** @test */
-    public function guest_user_is_not_allowed_in_index_route()
-    {
-        $guest_user = $this->guest_user;
-
-        $this->browse(function (Browser $browser) use ($guest_user) {
-            $browser
-                ->loginAs($guest_user)
-                ->visit(route('admin.pages.index'))
-                ->assertSee('401')
-                ;
-        });
-    }
-
-    /** @test */
-    public function guest_user_is_not_allowed_in_create_route()
-    {
-        $guest_user = $this->guest_user;
-
-        $this->browse(function (Browser $browser) use ($guest_user) {
-            $browser
-                ->loginAs($guest_user)
-                ->visit(route('admin.pages.create'))
-                ->assertSee('401')
-                ;
-        });
-    }
-
-    /** @test */
-    public function guest_user_is_not_allowed_in_edit_route()
-    {
-        $guest_user = $this->guest_user;
-
-        $this->browse(function (Browser $browser) use ($guest_user) {
-            $browser
-                ->loginAs($guest_user)
-                ->visit(route('admin.pages.edit', ['page' => 1]))
-                ->assertSee('401')
-                ;
-        });
-    }
-
-    /** @test */
-    public function super_user_doesnt_sees_protected_buttons()
-    {
-        $super_user = $this->super_user;
-
-        // Add list-pages permissions for the super role
-        $new_permissions = [
-            'list-pages',
-        ];
-        $super_permissions = Permission::whereIn('slug', $new_permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            $role_permission_data[] = [
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ];
-        }
-        RolePermission::insert($role_permission_data);
-
-        $this->browse(function (Browser $browser) use ($super_user) {
-            $browser
-                ->loginAs($super_user)
-                ->visit(route('admin.pages.index'))
-                ->assertSee(__('partials.pages'))
-                ->assertDontSee(__('pages.add_new_page'))
-                ->assertDontSee(__('general.edit'))
-                ->assertDontSee(__('general.delete'))
-                ;
-        });
-
-        RolePermission::where([
-            'role_id' => $super_role->id,
-            'permission_id' => Permission::where('slug', 'list-pages')->first()->id
-        ])->delete();
     }
 }

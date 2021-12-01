@@ -14,7 +14,7 @@ export default class General {
 
     initMdEditor() {
         if ($(".simplemde").length >= 1) {
-            new SimpleMDE({ element: $(".simplemde")[0] });
+            window.SimpleMDEInstance = new SimpleMDE({ element: $(".simplemde")[0] });
         }
     }
 
