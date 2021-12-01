@@ -23,9 +23,8 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.users.index'))
-                ->assertSee(__('users.add_new_user'))
-                ->assertSee($last_user->full_name)
-                ->assertSee($last_user->id)
+                ->assertSee(__('general.add_new'))
+                ->assertSee($last_user->getFullName())
                 ;
         });
     }
@@ -58,9 +57,8 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.users.index'))
-                ->assertSee(__('general.delete'))
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
                 ->assertSee($new_user->first_name)
-                ->assertSee($new_user->id)
                 ->click('table tr:first-child button.btn-delete')
                 ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
@@ -79,7 +77,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.users.index'))
-                ->assertSee(__('general.edit'))
+                ->assertAttribute('.btn-edit', 'title', __('general.edit'))
                 ->assertSee($new_user->first_name)
                 ->assertSee($new_user->last_name)
                 ->click('table tr:first-child a.btn-edit')
@@ -112,7 +110,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.users.index'))
-                ->assertSee(__('general.edit'))
+                ->assertSee(__('general.add_new'))
                 ->click('a.btn-add-new')
                 ->assertRouteIs('admin.users.create')
                 ->assertSee(__('users.create_user'))
@@ -145,9 +143,9 @@ class UsersTest extends DuskTestCase
                 ->loginAs($admin_user)
                 ->visit(route('admin.users.index'))
                 ->assertSee(__('partials.users'))
-                ->assertSee(__('users.add_new_user'))
-                ->assertSee(__('general.edit'))
-                ->assertSee(__('general.delete'))
+                ->assertSee(__('general.add_new'))
+                ->assertAttribute('.btn-edit', 'title', __('general.edit'))
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
                 ;
         });
     }
@@ -161,7 +159,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.users.index'))
-                ->assertSee('401')
+                ->assertSee('403')
                 ;
         });
     }
@@ -175,7 +173,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.users.create'))
-                ->assertSee('401')
+                ->assertSee('403')
                 ;
         });
     }
@@ -189,62 +187,8 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.users.edit', ['user' => 1]))
-                ->assertSee('401')
+                ->assertSee('403')
                 ;
         });
-    }
-
-    /** @test */
-    public function super_user_doesnt_sees_protected_buttons()
-    {
-        $super_user = $this->super_user;
-
-        // Add list-users permissions for the super role
-        $permissions_to_toggle = [
-            'list-users',
-        ];
-
-        $this->addSuperUserPermissions($permissions_to_toggle);
-
-        $this->browse(function (Browser $browser) use ($super_user) {
-            $browser
-                ->loginAs($super_user)
-                ->visit(route('admin.users.index'))
-                ->assertSee(__('partials.users'))
-                ->assertDontSee(__('users.add_new_user'))
-                ->assertDontSee(__('general.edit'))
-                ->assertDontSee(__('general.delete'))
-                ;
-        });
-
-        $this->removeSuperUserPermissions($permissions_to_toggle);
-    }
-
-    private function removeSuperUserPermissions(array $permissions)
-    {
-        $super_permissions = Permission::whereIn('slug', $permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
-
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            RolePermission::where([
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ])->delete();
-        }
-    }
-
-    private function addSuperUserPermissions(array $permissions)
-    {
-        $super_permissions = Permission::whereIn('slug', $permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
-
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            RolePermission::insert([
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ]);
-        }
     }
 }

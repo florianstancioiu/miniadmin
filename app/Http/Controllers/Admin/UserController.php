@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
+
     public function index(Request $request)
     {
         $auth_user = Auth::user();
@@ -100,9 +105,8 @@ class UserController extends Controller
             ->with('message', __('users.update_success'));
     }
 
-    public function updatePassword(UpdatePasswordUser $request, int $id)
+    public function updatePassword(UpdatePasswordUser $request, User $user)
     {
-        $user = User::findOrFail($id);
         $original_password = $user->password;
 
         if (strlen($request->password) >= 6) {

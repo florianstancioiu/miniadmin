@@ -45,8 +45,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('tags', TagController::class)->except('show');
     Route::resource('users', UserController::class)->except('show');
-    Route::resource('roles', RoleController::class)->except('show');
-    Route::resource('permissions', PermissionController::class)->except('show');
     Route::resource('media', MediaController::class)->only(['index', 'store']);
     Route::resource('settings', SettingController::class)->only(['index', 'store']);
     Route::put('/{user}/update-password', [UserController::class, 'updatePassword'])->name('users.update-password');

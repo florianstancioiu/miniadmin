@@ -9,6 +9,11 @@ use App\Http\Requests\Setting\StoreSetting;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Setting::class, 'setting');
+    }
+
     public function index()
     {
         $settings = Setting::all();

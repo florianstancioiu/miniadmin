@@ -52,6 +52,26 @@ class UserPolicy
     }
 
     /**
+     * Determine whether the user can update password.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $affected_user
+     * @return bool
+     */
+    public function updatePassword(User $user, User $affected_user)
+    {
+        if ($user->can('update any users')) {
+            return true;
+        }
+
+        if ($user->can('update own users')) {
+            return (bool) $user->id == $affected_user->user_id;
+        }
+
+        return false;
+    }
+
+    /**
      * Determine whether the user can delete the user (delete route).
      *
      * @param  \App\Models\User  $user
