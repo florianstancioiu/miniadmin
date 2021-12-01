@@ -14,6 +14,8 @@ export default class General {
 
     initMdEditor() {
         if ($(".simplemde").length >= 1) {
+            // create a global instance so that I can access it inside the browser tests
+            // to set values when creating posts or pages
             window.SimpleMDEInstance = new SimpleMDE({ element: $(".simplemde")[0] });
         }
     }

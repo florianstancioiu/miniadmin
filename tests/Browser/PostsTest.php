@@ -23,9 +23,8 @@ class PostsTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.posts.index'))
-                ->assertSee(__('posts.add_new_post'))
+                ->assertSee(__('general.add_new'))
                 ->assertSee($last_post->title)
-                ->assertSee($last_post->id)
                 ;
         });
     }
@@ -58,13 +57,12 @@ class PostsTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.posts.index'))
-                ->assertSee(__('general.delete'))
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
                 ->assertSee($new_post->title)
-                ->assertSee($new_post->id)
                 ->click('table tr:first-child button.btn-delete')
                 ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
-                ->assertDontSee($new_post->id)
+                ->assertDontSee($new_post->title)
                 ;
         });
     }
@@ -79,9 +77,8 @@ class PostsTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.posts.index'))
-                ->assertSee(__('general.edit'))
+                ->assertAttribute('.btn-edit', 'title', __('general.edit'))
                 ->assertSee($new_post->title)
-                ->assertSee($new_post->id)
                 ->click('table tr:first-child a.btn-edit')
                 ->assertRouteIs('admin.posts.edit', ['post' => $new_post->id])
                 ->assertSee(__('posts.edit_post'))
@@ -111,11 +108,14 @@ class PostsTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.posts.index'))
-                ->assertSee(__('general.edit'))
                 ->click('a.btn-add-new')
                 ->assertRouteIs('admin.posts.create')
                 ->assertSee(__('posts.create_post'))
-                ->type('title', $unsaved_post->title)
+                ->type('title', $unsaved_post->title);
+
+            $browser->script('window.SimpleMDEInstance.value("testing")');
+
+            $browser
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
                 ->click('button.btn-create')
                 ->assertRouteIs('admin.posts.index')
@@ -139,107 +139,10 @@ class PostsTest extends DuskTestCase
                 ->loginAs($admin_user)
                 ->visit(route('admin.posts.index'))
                 ->assertSee(__('partials.posts'))
-                ->assertSee(__('posts.add_new_post'))
-                ->assertSee(__('general.edit'))
-                ->assertSee(__('general.delete'))
+                ->assertSee(__('general.add_new'))
+                ->assertAttribute('.btn-edit', 'title', __('general.edit'))
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
                 ;
         });
-    }
-
-    /** @test */
-    public function guest_user_is_not_allowed_in_index_route()
-    {
-        $guest_user = $this->guest_user;
-
-        $this->browse(function (Browser $browser) use ($guest_user) {
-            $browser
-                ->loginAs($guest_user)
-                ->visit(route('admin.posts.index'))
-                ->assertSee('401')
-                ;
-        });
-    }
-
-    /** @test */
-    public function guest_user_is_not_allowed_in_create_route()
-    {
-        $guest_user = $this->guest_user;
-
-        $this->browse(function (Browser $browser) use ($guest_user) {
-            $browser
-                ->loginAs($guest_user)
-                ->visit(route('admin.posts.create'))
-                ->assertSee('401')
-                ;
-        });
-    }
-
-    /** @test */
-    public function guest_user_is_not_allowed_in_edit_route()
-    {
-        $guest_user = $this->guest_user;
-
-        $this->browse(function (Browser $browser) use ($guest_user) {
-            $browser
-                ->loginAs($guest_user)
-                ->visit(route('admin.posts.edit', ['post' => 1]))
-                ->assertSee('401')
-                ;
-        });
-    }
-
-    /** @test */
-    public function super_user_doesnt_sees_protected_buttons()
-    {
-        $super_user = $this->super_user;
-
-        $permissions_to_toggle = [
-            'create-posts',
-            'edit-posts',
-            'update-posts',
-            'destroy-posts'
-        ];
-        $this->removeSuperUserPermissions($permissions_to_toggle);
-
-        $this->browse(function (Browser $browser) use ($super_user) {
-            $browser
-                ->loginAs($super_user)
-                ->visit(route('admin.posts.index'))
-                ->assertSee(__('partials.posts'))
-                ->assertDontSee(__('posts.add_new_post'))
-                ->assertDontSee(__('general.edit'))
-                ->assertDontSee(__('general.delete'))
-                ;
-        });
-
-        $this->addSuperUserPermissions($permissions_to_toggle);
-    }
-
-    private function removeSuperUserPermissions(array $permissions)
-    {
-        $super_permissions = Permission::whereIn('slug', $permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
-
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            RolePermission::where([
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ])->delete();
-        }
-    }
-
-    private function addSuperUserPermissions(array $permissions)
-    {
-        $super_permissions = Permission::whereIn('slug', $permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
-
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            RolePermission::insert([
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ]);
-        }
     }
 }
