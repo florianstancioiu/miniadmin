@@ -49,47 +49,26 @@ class SettingsTest extends DuskTestCase
     {
         $super_user = $this->super_user;
 
-        $permissions_to_toggle = [
-            'list-settings'
-        ];
-        $this->addSuperUserPermissions($permissions_to_toggle);
-
         $this->browse(function (Browser $browser) use ($super_user) {
             $browser
                 ->loginAs($super_user)
-                ->visit(route('admin.roles.index'))
+                ->visit(route('admin.settings.index'))
                 ->assertSeeIn('ul.nav', __('partials.settings'))
                 ;
         });
-
-        $this->removeSuperUserPermissions($permissions_to_toggle);
     }
 
-    private function removeSuperUserPermissions(array $permissions)
+    /** @test */
+    public function guest_user_doesnt_sees_menu_entry()
     {
-        $super_permissions = Permission::whereIn('slug', $permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
+        $guest_user = $this->guest_user;
 
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            RolePermission::where([
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ])->delete();
-        }
-    }
-
-    private function addSuperUserPermissions(array $permissions)
-    {
-        $super_permissions = Permission::whereIn('slug', $permissions)->get();
-        $super_role = Role::where('slug', 'super')->first();
-
-        $role_permission_data = [];
-        foreach ($super_permissions as $permission) {
-            RolePermission::insert([
-                'permission_id' => $permission->id,
-                'role_id' => $super_role->id,
-            ]);
-        }
+        $this->browse(function (Browser $browser) use ($guest_user) {
+            $browser
+                ->loginAs($guest_user)
+                ->visit(route('admin.settings.index'))
+                ->assertSee('403')
+                ;
+        });
     }
 }

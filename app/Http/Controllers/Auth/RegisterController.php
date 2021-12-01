@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -74,8 +73,7 @@ class RegisterController extends Controller
         ]);
 
         // make the registered user a guest
-        $guest_role = Role::where('slug', 'guest')->first();
-        $user->roles()->attach($guest_role->id);
+        $user->assignRole('guest');
 
         return $user;
     }
