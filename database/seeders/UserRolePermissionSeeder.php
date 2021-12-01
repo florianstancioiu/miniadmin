@@ -111,11 +111,11 @@ class UserRolePermissionSeeder extends Seeder
         $guest->givePermissionTo([
             'view dashboard',
 
-            'view pages',
-            'create pages',
-            'edit own pages',
-            'update own pages',
-            'delete own pages',
+            'view posts',
+            'create posts',
+            'edit own posts',
+            'update own posts',
+            'delete own posts',
 
             'edit profile',
             'update profile',

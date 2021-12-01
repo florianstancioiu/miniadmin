@@ -35,6 +35,15 @@ class PostController extends Controller
             ->paginate()
             ->appends(request()->query());
 
+        if ($auth_user->hasRole('guest')) {
+            $posts = Post::orderBy('id', 'DESC')
+                ->where('user_id', $auth_user->id)
+                ->search($keyword)
+                ->with(['user'])
+                ->paginate()
+                ->appends(request()->query());
+        }
+
         return view('admin.posts.index', compact(
             'posts',
             'keyword',

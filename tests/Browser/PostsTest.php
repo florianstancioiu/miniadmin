@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Models\Post;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\RolePermission;
 
 class PostsTest extends DuskTestCase
 {

@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this
             ->call(UserRolePermissionSeeder::class)
-            ->call(CategorySeeder::class)
             ->call(PageSeeder::class)
             ->call(PostSeeder::class)
             ->call(SettingSeeder::class)
