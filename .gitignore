@@ -6,6 +6,7 @@
 /storage/*.key
 /vendor
 _ide_helper.php
+.phpstorm.meta.php
 .env
 .env.backup
 composer.lock
