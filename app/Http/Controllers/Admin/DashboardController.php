@@ -11,8 +11,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //$this->can('list-dashboard');
-
         $pages_total = Page::count();
         $posts_total = Post::count();
         $users_total = User::count();
