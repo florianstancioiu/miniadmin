@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-edit-user">{{ __('users.edit_user') }}</button>
+                    <button type="submit" class="btn btn-primary btn-edit-user">{{ __('users.edit_profile') }}</button>
                 </div>
             </form>
         </div>

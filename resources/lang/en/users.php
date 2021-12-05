@@ -36,4 +36,5 @@ return [
     'profile' => 'Profile',
     'old_password' => 'Old Password',
     'enter_old_password' => 'Enter Old Password',
+    'edit_profile' => 'Edit Profile',
 ];
