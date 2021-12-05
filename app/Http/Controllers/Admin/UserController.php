@@ -16,11 +16,17 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    /**
+     * Authorize the User policy.
+     */
     public function __construct()
     {
         $this->authorizeResource(User::class, 'user');
     }
 
+    /**
+     * Retrieve the index items.
+     */
     public function index(Request $request)
     {
         $auth_user = Auth::user();
@@ -37,6 +43,9 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Return the create view.
+     */
     public function create()
     {
         $roles = Role::all();
@@ -44,6 +53,9 @@ class UserController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
+    /**
+     * Implement the store functionality.
+     */
     public function store(StoreUser $request)
     {
         $user = new User($request->validated());
@@ -69,6 +81,9 @@ class UserController extends Controller
             ->with('message', __('users.store_success'));
     }
 
+    /**
+     * Return the edit view.
+     */
     public function edit(User $user)
     {
         $roles = Role::all();
@@ -76,6 +91,9 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
+    /**
+     * Implement the update functionality.
+     */
     public function update(UpdateUser $request, User $user)
     {
         $original_image = $user->image;
@@ -105,11 +123,16 @@ class UserController extends Controller
             ->with('message', __('users.update_success'));
     }
 
+    /**
+     * Implement the update password functionality.
+     */
     public function updatePassword(UpdatePasswordUser $request, User $user)
     {
+        $this->authorize(User::class, 'updatePassword');
+
         $original_password = $user->password;
 
-        if (strlen($request->password) >= 6) {
+        if (strlen(trim($request->password)) >= 6) {
             $user->password = Hash::make($request->password);
         } else {
             $user->password = $original_password;
@@ -130,6 +153,9 @@ class UserController extends Controller
             ->with('message', __('users.update_password_success'));
     }
 
+    /**
+     * Implement the delete functionality.
+     */
     public function destroy(DestroyUser $request, User $user)
     {
         try {
