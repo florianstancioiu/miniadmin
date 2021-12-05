@@ -33,4 +33,7 @@ return [
     'update_password_success' => 'The user password has been successfully updated',
     'destroy_failure' => 'An exception was raised while deleting the user: ',
     'destroy_success' => 'The user record has been successfully deleted',
+    'profile' => 'Profile',
+    'old_password' => 'Old Password',
+    'enter_old_password' => 'Enter Old Password',
 ];

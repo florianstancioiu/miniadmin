@@ -6,7 +6,7 @@
 
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <a class="image" href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}">
+            <a class="image" href="{{ route('admin.users.profile') }}">
                 @if(auth()->user()->image)
                     <img src="{{ auth()->user()->image_url }}" class="img-circle elevation-2" alt="User Image">
                 @else
@@ -14,7 +14,7 @@
                 @endif
             </a>
             <div class="info">
-                <a href="{{ route('admin.users.edit', ['user' => auth()->id()]) }}" class="d-block">{{ auth()->user()->getFullName() }}</a>
+                <a href="{{ route('admin.users.profile') }}" class="d-block">{{ auth()->user()->getFullName() }}</a>
             </div>
         </div>
         <nav class="mt-2">

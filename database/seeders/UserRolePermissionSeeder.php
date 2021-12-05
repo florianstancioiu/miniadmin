@@ -60,8 +60,9 @@ class UserRolePermissionSeeder extends Seeder
         'view settings',
         'create settings',
 
-        'edit profile',
+        'view profile',
         'update profile',
+        'password-update profile',
     ];
 
     /**
@@ -117,8 +118,9 @@ class UserRolePermissionSeeder extends Seeder
             'update own posts',
             'delete own posts',
 
-            'edit profile',
+            'view profile',
             'update profile',
+            'password-update profile',
         ]);
     }
 }
