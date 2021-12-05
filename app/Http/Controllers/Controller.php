@@ -17,6 +17,6 @@ class Controller extends BaseController
 
         if (! $user->hasPermission($permission) && ! $user->hasRole('admin')) {
             return abort(401);
-        };
+        }
     }
 }

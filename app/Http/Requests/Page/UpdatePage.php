@@ -27,7 +27,7 @@ class UpdatePage extends FormRequest
             'id' => 'integer|exists:pages,id',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'file|image|nullable'
+            'image' => 'file|image|nullable',
         ];
     }
 }

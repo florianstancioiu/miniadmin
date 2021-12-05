@@ -25,7 +25,7 @@ class UpdatePasswordUser extends FormRequest
     {
         return [
             'id' => 'required|numeric|exists:users,id',
-            'password' => 'nullable|min:6|string|confirmed'
+            'password' => 'nullable|min:6|string|confirmed',
         ];
     }
 }

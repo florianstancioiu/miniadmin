@@ -24,7 +24,7 @@ class DestroyPage extends FormRequest
     public function rules()
     {
         return [
-            'page' => 'required|integer|exists:pages,id'
+            'page' => 'required|integer|exists:pages,id',
         ];
     }
 }

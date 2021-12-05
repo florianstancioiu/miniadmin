@@ -2,11 +2,10 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\Setting;
 
 class SettingsTest extends DuskTestCase
 {
@@ -19,19 +18,17 @@ class SettingsTest extends DuskTestCase
         $textarea_setting = Setting::factory()->create(['type' => 'textarea']);
         $image_setting = Setting::factory()->create(['type' => 'image']);
 
-        $this->browse(function (Browser $browser)
-        use ( $admin_user, $text_setting, $textarea_setting, $image_setting ) {
+        $this->browse(function (Browser $browser) use ($admin_user, $text_setting, $textarea_setting) {
             $browser
                 ->loginAs($admin_user)
                 ->visit(route('admin.settings.index'))
                 ->assertSee(__('general.save'))
-                ->type('#input-' . $text_setting->key, $text_setting->value . '_edited')
-                ->type('#input-' . $textarea_setting->key, $textarea_setting->value . '_edited')
-                ->attach('#input-' . $textarea_setting->key, storage_path('app/public/testing/test.jpg'))
+                ->type('#input-'.$text_setting->key, $text_setting->value.'_edited')
+                ->type('#input-'.$textarea_setting->key, $textarea_setting->value.'_edited')
+                ->attach('#input-'.$textarea_setting->key, storage_path('app/public/testing/test.jpg'))
                 ->click('button.btn-save')
                 ->assertRouteIs('admin.settings.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $text_setting->delete();
@@ -50,8 +47,7 @@ class SettingsTest extends DuskTestCase
             $browser
                 ->loginAs($super_user)
                 ->visit(route('admin.settings.index'))
-                ->assertSeeIn('ul.nav', __('partials.settings'))
-                ;
+                ->assertSeeIn('ul.nav', __('partials.settings'));
         });
     }
 
@@ -64,8 +60,7 @@ class SettingsTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.settings.index'))
-                ->assertSee('403')
-                ;
+                ->assertSee('403');
         });
     }
 }

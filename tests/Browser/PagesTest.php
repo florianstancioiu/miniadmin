@@ -2,11 +2,10 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\Page;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\Page;
 
 class PagesTest extends DuskTestCase
 {
@@ -21,8 +20,7 @@ class PagesTest extends DuskTestCase
                 ->loginAs($admin_user)
                 ->visit(route('admin.pages.index'))
                 ->assertSee(__('general.add_new'))
-                ->assertSee($last_page->title)
-                ;
+                ->assertSee($last_page->title);
         });
     }
 
@@ -39,8 +37,7 @@ class PagesTest extends DuskTestCase
                 ->assertAttribute('input[name="keyword"]', 'placeholder', __('general.search'))
                 ->type('keyword', $last_page->title)
                 ->click('button.btn-search[type="submit"')
-                ->assertSee($last_page->title)
-                ;
+                ->assertSee($last_page->title);
         });
     }
 
@@ -59,8 +56,7 @@ class PagesTest extends DuskTestCase
                 ->click('table tr:first-child button.btn-delete')
                 ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
-                ->assertDontSee($new_page->title)
-                ;
+                ->assertDontSee($new_page->title);
         });
     }
 
@@ -82,11 +78,10 @@ class PagesTest extends DuskTestCase
                 ->assertValue('#form-title', $new_page->title)
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
                 ->assertValue('#form-content', $new_page->content)
-                ->type('title', $new_page->title . ' edited')
+                ->type('title', $new_page->title.' edited')
                 ->click('button.btn-edit')
                 ->assertRouteIs('admin.pages.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $latest_page = Page::orderBy('id', 'DESC')->limit(1)->first();
@@ -116,8 +111,7 @@ class PagesTest extends DuskTestCase
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
                 ->click('button.btn-create')
                 ->assertRouteIs('admin.pages.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $latest_page = Page::orderBy('id', 'DESC')->limit(1)->first();
@@ -138,8 +132,7 @@ class PagesTest extends DuskTestCase
                 ->assertSee(__('partials.pages'))
                 ->assertSee(__('general.add_new'))
                 ->assertAttribute('.btn-edit', 'title', __('general.edit'))
-                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
-                ;
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'));
         });
     }
 }

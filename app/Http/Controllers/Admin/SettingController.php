@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Setting;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\StoreSetting;
+use App\Models\Setting;
 
 class SettingController extends Controller
 {
@@ -44,7 +43,7 @@ class SettingController extends Controller
             return redirect()
                 ->route('admin.settings.index')
                 ->withErrors([
-                    __('settings.store_failure') . $e->getMessage()
+                    __('settings.store_failure').$e->getMessage(),
                 ]);
         }
 

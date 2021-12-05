@@ -24,7 +24,7 @@ class DestroyRole extends FormRequest
     public function rules()
     {
         return [
-            'role' => 'required|integer|exists:roles,id'
+            'role' => 'required|integer|exists:roles,id',
         ];
     }
 }

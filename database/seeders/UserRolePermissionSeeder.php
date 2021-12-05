@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -87,17 +87,17 @@ class UserRolePermissionSeeder extends Seeder
         $guest_user = User::factory(1)->create([
             'first_name' => 'Guest',
             'last_name' => 'User',
-            'email' => 'guest@example.com'
+            'email' => 'guest@example.com',
         ])->first();
         $admin_user = User::factory(1)->create([
             'first_name' => 'Admin',
             'last_name' => 'User',
-            'email' => 'admin@example.com'
+            'email' => 'admin@example.com',
         ])->first();
         $super_admin_user = User::factory(1)->create([
             'first_name' => 'Super',
             'last_name' => 'Admin',
-            'email' => 'super@example.com'
+            'email' => 'super@example.com',
         ])->first();
 
         // Assign Roles

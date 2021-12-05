@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 
 class Post extends Model
 {
@@ -15,7 +14,7 @@ class Post extends Model
         'slug',
         'image',
         'content',
-        'user_id'
+        'user_id',
     ];
 
     public function user()
@@ -25,13 +24,13 @@ class Post extends Model
 
     public function getImageUrlAttribute()
     {
-        return url('storage/'. $this->image);
+        return url('storage/'.$this->image);
     }
 
     public function scopeSearch($query, $keyword)
     {
         return $query
-            ->whereRaw('LOWER(`title`) LIKE ? ', ['%' . strtolower($keyword) .'%'])
-            ->orWhereRaw('LOWER(`content`) LIKE ? ', ['%' . strtolower($keyword) .'%']);
+            ->whereRaw('LOWER(`title`) LIKE ? ', ['%'.strtolower($keyword).'%'])
+            ->orWhereRaw('LOWER(`content`) LIKE ? ', ['%'.strtolower($keyword).'%']);
     }
 }

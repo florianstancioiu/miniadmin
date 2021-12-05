@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\DestroyPost;
 use App\Http\Requests\Post\StorePost;
 use App\Http\Requests\Post\UpdatePost;
-use App\Http\Requests\Post\DestroyPost;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     /**
-     * Authorize the Post policy
+     * Authorize the Post policy.
      */
     public function __construct()
     {
@@ -23,7 +23,7 @@ class PostController extends Controller
     }
 
     /**
-     * Retrieve the index items
+     * Retrieve the index items.
      */
     public function index(Request $request)
     {
@@ -51,7 +51,7 @@ class PostController extends Controller
     }
 
     /**
-     * Return the create view
+     * Return the create view.
      */
     public function create()
     {
@@ -59,7 +59,7 @@ class PostController extends Controller
     }
 
     /**
-     * Implement the store functionality
+     * Implement the store functionality.
      */
     public function store(StorePost $request)
     {
@@ -77,7 +77,7 @@ class PostController extends Controller
             return redirect()
                 ->route('admin.posts.index')
                 ->withErrors([
-                    __('posts.store_failure') . $e->getMessage()
+                    __('posts.store_failure').$e->getMessage(),
                 ]);
         }
 
@@ -87,7 +87,7 @@ class PostController extends Controller
     }
 
     /**
-     * Return the edit view
+     * Return the edit view.
      */
     public function edit(Post $post)
     {
@@ -95,7 +95,7 @@ class PostController extends Controller
     }
 
     /**
-     * Implement the update functionality
+     * Implement the update functionality.
      */
     public function update(UpdatePost $request, Post $post)
     {
@@ -116,7 +116,7 @@ class PostController extends Controller
             return redirect()
                 ->route('admin.posts.index')
                 ->withErrors([
-                    __('posts.update_failure') . $e->getMessage()
+                    __('posts.update_failure').$e->getMessage(),
                 ]);
         }
 
@@ -126,7 +126,7 @@ class PostController extends Controller
     }
 
     /**
-     * Implement the delete functionality
+     * Implement the delete functionality.
      */
     public function destroy(DestroyPost $request, Post $post)
     {
@@ -139,7 +139,7 @@ class PostController extends Controller
             return redirect()
                 ->route('admin.posts.index')
                 ->withErrors([
-                    __('posts.destroy_failure') . $e->getMessage()
+                    __('posts.destroy_failure').$e->getMessage(),
                 ]);
         }
 
