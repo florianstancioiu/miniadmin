@@ -51,7 +51,7 @@
                             <td>{{ $user->email }}</td>
                             <td>
                                 @foreach($user->roles as $role)
-                                    {{ $role->title }}
+                                    {{ $role->name }}
                                 @endforeach
                             </td>
                             <td>{{ $user->created_at->toFormattedDateString() }}</td>
