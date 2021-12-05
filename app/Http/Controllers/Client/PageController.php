@@ -8,13 +8,6 @@ use Parsedown;
 
 class PageController extends Controller
 {
-    public function index()
-    {
-        $pages = Page::orderBy('id', 'DESC')->paginate();
-
-        return view('client.pages.index', compact('pages'));
-    }
-
     public function show(string $slug)
     {
         $page = Page::where('slug', $slug)->first();
