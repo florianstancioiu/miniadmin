@@ -12,7 +12,7 @@
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
                         <h1>{{ $post->title }}</h1>
-                        <span class="meta">Posted by <a href="#">{{ $post->user->full_name }}</a> on {{ $post->created_at->format('d/m/Y') }}</span>
+                        <span class="meta">Posted by {{ $post->user->getFullName() }} on {{ $post->created_at->format('d/m/Y') }}</span>
                     </div>
                 </div>
             </div>
