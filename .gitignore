@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+_ide_helper.php
 .env
 .env.backup
 composer.lock
