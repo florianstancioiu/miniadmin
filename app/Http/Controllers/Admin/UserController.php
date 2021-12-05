@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\StoreUser;
-use App\Http\Requests\User\UpdateUser;
-use App\Http\Requests\User\UpdatePasswordUser;
 use App\Http\Requests\User\DestroyUser;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\StoreUser;
+use App\Http\Requests\User\UpdatePasswordUser;
+use App\Http\Requests\User\UpdateUser;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -60,7 +60,7 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    __('users.store_failure') . $e->getMessage()
+                    __('users.store_failure').$e->getMessage(),
                 ]);
         }
 
@@ -96,7 +96,7 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    __('users.update_failure') . $e->getMessage()
+                    __('users.update_failure').$e->getMessage(),
                 ]);
         }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    __('users.update_password_failure') . $e->getMessage()
+                    __('users.update_password_failure').$e->getMessage(),
                 ]);
         }
 
@@ -141,7 +141,7 @@ class UserController extends Controller
             return redirect()
                 ->route('admin.users.index')
                 ->withErrors([
-                    __('users.destroy_failure') . $e->getMessage()
+                    __('users.destroy_failure').$e->getMessage(),
                 ]);
         }
 

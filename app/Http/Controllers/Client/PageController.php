@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Models\Page;
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Parsedown;
 
 class PageController extends Controller

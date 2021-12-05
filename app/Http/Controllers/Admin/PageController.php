@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Page;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Page\DestroyPage;
 use App\Http\Requests\Page\StorePage;
 use App\Http\Requests\Page\UpdatePage;
-use App\Http\Requests\Page\DestroyPage;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
     /**
-     * Authorize the Page policy
+     * Authorize the Page policy.
      */
     public function __construct()
     {
@@ -23,7 +23,7 @@ class PageController extends Controller
     }
 
     /**
-     * Retrieve the index items
+     * Retrieve the index items.
      */
     public function index(Request $request)
     {
@@ -51,7 +51,7 @@ class PageController extends Controller
     }
 
     /**
-     * Return the create view
+     * Return the create view.
      */
     public function create()
     {
@@ -59,7 +59,7 @@ class PageController extends Controller
     }
 
     /**
-     * Implement the store functionality
+     * Implement the store functionality.
      */
     public function store(StorePage $request)
     {
@@ -77,7 +77,7 @@ class PageController extends Controller
             return redirect()
                 ->route('admin.pages.index')
                 ->withErrors([
-                    __('pages.store_failure') . $e->getMessage()
+                    __('pages.store_failure').$e->getMessage(),
                 ]);
         }
 
@@ -87,7 +87,7 @@ class PageController extends Controller
     }
 
     /**
-     * Return the edit view
+     * Return the edit view.
      */
     public function edit(Page $page)
     {
@@ -95,7 +95,7 @@ class PageController extends Controller
     }
 
     /**
-     * Implement the update functionality
+     * Implement the update functionality.
      */
     public function update(UpdatePage $request, Page $page)
     {
@@ -117,7 +117,7 @@ class PageController extends Controller
             return redirect()
                 ->route('admin.pages.index')
                 ->withErrors([
-                    __('pages.update_failure') . $e->getMessage()
+                    __('pages.update_failure').$e->getMessage(),
                 ]);
         }
 
@@ -127,7 +127,7 @@ class PageController extends Controller
     }
 
     /**
-     * Implement the delete functionality
+     * Implement the delete functionality.
      */
     public function destroy(DestroyPage $request, Page $page)
     {
@@ -140,7 +140,7 @@ class PageController extends Controller
             return redirect()
                 ->route('admin.pages.index')
                 ->withErrors([
-                    __('pages.destroy_failure') . $e->getMessage()
+                    __('pages.destroy_failure').$e->getMessage(),
                 ]);
         }
 

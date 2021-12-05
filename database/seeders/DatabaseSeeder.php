@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             ->call(UserRolePermissionSeeder::class)
             ->call(PageSeeder::class)
             ->call(PostSeeder::class)
-            ->call(SettingSeeder::class)
-            ;
+            ->call(SettingSeeder::class);
     }
 }

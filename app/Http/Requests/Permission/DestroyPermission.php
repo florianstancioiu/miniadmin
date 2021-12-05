@@ -24,7 +24,7 @@ class DestroyPermission extends FormRequest
     public function rules()
     {
         return [
-            'permission' => 'required|integer|exists:permissions,id'
+            'permission' => 'required|integer|exists:permissions,id',
         ];
     }
 }

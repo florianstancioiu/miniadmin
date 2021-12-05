@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Parsedown;
 
 class PostController extends Controller

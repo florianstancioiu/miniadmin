@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-
 
 class Page extends Model
 {
@@ -14,7 +12,7 @@ class Page extends Model
     protected $fillable = [
         'title',
         'image',
-        'content'
+        'content',
     ];
 
     public function user()
@@ -24,13 +22,13 @@ class Page extends Model
 
     public function getImageUrlAttribute()
     {
-        return url('storage/'. $this->image);
+        return url('storage/'.$this->image);
     }
 
     public function scopeSearch($query, $keyword)
     {
         return $query
-            ->whereRaw('LOWER(`title`) LIKE ? ', ['%' . strtolower($keyword) .'%'])
-            ->orWhereRaw('LOWER(`content`) LIKE ? ', ['%' . strtolower($keyword) .'%']);
+            ->whereRaw('LOWER(`title`) LIKE ? ', ['%'.strtolower($keyword).'%'])
+            ->orWhereRaw('LOWER(`content`) LIKE ? ', ['%'.strtolower($keyword).'%']);
     }
 }

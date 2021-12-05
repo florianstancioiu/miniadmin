@@ -2,11 +2,10 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\Post;
 
 class PostsTest extends DuskTestCase
 {
@@ -21,8 +20,7 @@ class PostsTest extends DuskTestCase
                 ->loginAs($admin_user)
                 ->visit(route('admin.posts.index'))
                 ->assertSee(__('general.add_new'))
-                ->assertSee($last_post->title)
-                ;
+                ->assertSee($last_post->title);
         });
     }
 
@@ -39,8 +37,7 @@ class PostsTest extends DuskTestCase
                 ->assertAttribute('input[name="keyword"]', 'placeholder', __('general.search'))
                 ->type('keyword', $last_post->title)
                 ->click('button.btn-search[type="submit"')
-                ->assertSee($last_post->title)
-                ;
+                ->assertSee($last_post->title);
         });
     }
 
@@ -59,8 +56,7 @@ class PostsTest extends DuskTestCase
                 ->click('table tr:first-child button.btn-delete')
                 ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
-                ->assertDontSee($new_post->title)
-                ;
+                ->assertDontSee($new_post->title);
         });
     }
 
@@ -82,11 +78,10 @@ class PostsTest extends DuskTestCase
                 ->assertValue('#form-title', $new_post->title)
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
                 ->assertValue('#form-content', $new_post->content)
-                ->type('title', $new_post->title . ' edited')
+                ->type('title', $new_post->title.' edited')
                 ->click('button.btn-edit')
                 ->assertRouteIs('admin.posts.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $latest_post = Post::orderBy('id', 'DESC')->limit(1)->first();
@@ -116,8 +111,7 @@ class PostsTest extends DuskTestCase
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
                 ->click('button.btn-create')
                 ->assertRouteIs('admin.posts.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $latest_post = Post::orderBy('id', 'DESC')->limit(1)->first();
@@ -138,8 +132,7 @@ class PostsTest extends DuskTestCase
                 ->assertSee(__('partials.posts'))
                 ->assertSee(__('general.add_new'))
                 ->assertAttribute('.btn-edit', 'title', __('general.edit'))
-                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
-                ;
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'));
         });
     }
 }

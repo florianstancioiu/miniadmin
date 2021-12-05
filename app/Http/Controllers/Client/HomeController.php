@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Client;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 
@@ -31,5 +30,4 @@ class HomeController extends Controller
     {
         return view('client.contact');
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Setting;
+use Illuminate\Database\Seeder;
 
 class SettingSeeder extends Seeder
 {
@@ -14,15 +14,15 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-	    $settings = [
-	        [
+        $settings = [
+            [
                 'title' => 'Site Title',
                 'key' => 'site-title',
                 'value' => 'MiniAdmin',
                 'type' => 'text',
                 'deletable' => 0,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'title' => 'Site Tagline',
@@ -31,7 +31,7 @@ class SettingSeeder extends Seeder
                 'type' => 'textarea',
                 'deletable' => 0,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'title' => 'Favicon',
@@ -40,7 +40,7 @@ class SettingSeeder extends Seeder
                 'type' => 'image',
                 'deletable' => 0,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'title' => 'Logo',
@@ -49,7 +49,7 @@ class SettingSeeder extends Seeder
                 'type' => 'image',
                 'deletable' => 0,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'title' => 'Default User Logo',
@@ -58,7 +58,7 @@ class SettingSeeder extends Seeder
                 'type' => 'image',
                 'deletable' => 0,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
             [
                 'title' => 'Home Background',
@@ -67,9 +67,9 @@ class SettingSeeder extends Seeder
                 'type' => 'image',
                 'deletable' => 0,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ],
-	    ];
+        ];
 
         Setting::insert($settings);
     }

@@ -24,7 +24,7 @@ class DestroyPost extends FormRequest
     public function rules()
     {
         return [
-            'post' => 'required|integer|exists:posts,id'
+            'post' => 'required|integer|exists:posts,id',
         ];
     }
 }

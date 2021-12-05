@@ -2,14 +2,10 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Models\User;
-use App\Models\Permission;
-use App\Models\Role;
-use App\Models\RolePermission;
 
 class UsersTest extends DuskTestCase
 {
@@ -24,8 +20,7 @@ class UsersTest extends DuskTestCase
                 ->loginAs($admin_user)
                 ->visit(route('admin.users.index'))
                 ->assertSee(__('general.add_new'))
-                ->assertSee($last_user->getFullName())
-                ;
+                ->assertSee($last_user->getFullName());
         });
     }
 
@@ -42,8 +37,7 @@ class UsersTest extends DuskTestCase
                 ->assertAttribute('input[name="keyword"]', 'placeholder', __('general.search'))
                 ->type('keyword', $last_user->first_name)
                 ->click('button.btn-search[type="submit"')
-                ->assertSee($last_user->first_name)
-                ;
+                ->assertSee($last_user->first_name);
         });
     }
 
@@ -62,8 +56,7 @@ class UsersTest extends DuskTestCase
                 ->click('table tr:first-child button.btn-delete')
                 ->click('button.swal2-confirm')
                 ->assertSee(__('partials.success'))
-                ->assertDontSee($new_user->first_name)
-                ;
+                ->assertDontSee($new_user->first_name);
         });
     }
 
@@ -90,8 +83,7 @@ class UsersTest extends DuskTestCase
                 ->select('role_id', 1)
                 ->click('button.btn-edit-user')
                 ->assertRouteIs('admin.users.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $latest_user = User::orderBy('id', 'DESC')->limit(1)->first();
@@ -123,8 +115,7 @@ class UsersTest extends DuskTestCase
                 ->type('password_confirmation', 'password')
                 ->click('button.btn-create')
                 ->assertRouteIs('admin.users.index')
-                ->assertSee(__('partials.success'))
-                ;
+                ->assertSee(__('partials.success'));
         });
 
         $latest_user = User::orderBy('id', 'DESC')->limit(1)->first();
@@ -145,8 +136,7 @@ class UsersTest extends DuskTestCase
                 ->assertSee(__('partials.users'))
                 ->assertSee(__('general.add_new'))
                 ->assertAttribute('.btn-edit', 'title', __('general.edit'))
-                ->assertAttribute('.btn-delete', 'title', __('general.delete'))
-                ;
+                ->assertAttribute('.btn-delete', 'title', __('general.delete'));
         });
     }
 
@@ -159,8 +149,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.users.index'))
-                ->assertSee('403')
-                ;
+                ->assertSee('403');
         });
     }
 
@@ -173,8 +162,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.users.create'))
-                ->assertSee('403')
-                ;
+                ->assertSee('403');
         });
     }
 
@@ -187,8 +175,7 @@ class UsersTest extends DuskTestCase
             $browser
                 ->loginAs($guest_user)
                 ->visit(route('admin.users.edit', ['user' => 1]))
-                ->assertSee('403')
-                ;
+                ->assertSee('403');
         });
     }
 }
