@@ -3,7 +3,6 @@
 namespace Tests\Browser;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -14,7 +13,7 @@ class ProfileTest extends DuskTestCase
     {
         $guest_user = $this->guest_user;
         $new_user = User::factory()->make([
-            'email' => 'makeSureEmailDoesntExistInDB@example.com'
+            'email' => 'makeSureEmailDoesntExistInDB@example.com',
         ]);
 
         $this->browse(function (Browser $browser) use ($guest_user, $new_user) {
