@@ -12,4 +12,5 @@ return [
     'name' => 'Name',
     'email' => 'Email',
     'created_at' => 'Created At',
+    'cant_view_more_info' => 'Can\'t view more info',
 ];
