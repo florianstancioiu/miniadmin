@@ -41,10 +41,10 @@
                     @foreach($users as $user)
                         <tr>
                             <td>
-                                @if ($user->image)
-                                    <img src="{{ $user->image_url }}" class="pagination-img" alt="">
+                                @if($user->image)
+                                    <img src="{{ $user->image_url }}" class="pagination-img" alt="" data-toggle="tooltip" data-placement="top" data-html="true" title="<img class='tooltip-img' src='{{ $user->image_url }}'>">
                                 @else
-                                    <img src="{{ url('img/no-image.png') }}" class="pagination-img" alt="">
+                                    <img src="{{ url('img/no-image.png') }}" class="pagination-img" alt="" data-toggle="tooltip" data-placement="top" data-html="true" title="<img class='tooltip-img' src='{{ url('img/no-image.png') }}'>">
                                 @endif
                             </td>
                             <td>{{ $user->getFullName() }}</td>

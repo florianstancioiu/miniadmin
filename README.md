@@ -11,6 +11,7 @@ The goal of the project is to have a small admin/blog system into place that I c
 * Laravel IDE Helper
 * Laravel Sail
 * Spatie Roles and Permissions
+* EasyMDE (Markdown Editor)
 * Browser Tests (will include unit tests when I finally learn how to do them right)
 
 # Installation 

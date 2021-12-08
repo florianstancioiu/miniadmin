@@ -90,10 +90,10 @@
                         @foreach($latest_users as $user)
                             <tr>
                                 <th scope="row">
-                                    @if ($user->image)
-                                        <img class="dashboard-user-img" src="{{ $user->image_url }}" alt="">
+                                    @if($user->image)
+                                        <img src="{{ $user->image_url }}" class="pagination-img" alt="" data-toggle="tooltip" data-placement="top" data-html="true" title="<img class='tooltip-img' src='{{ $user->image_url }}'>">
                                     @else
-                                        <img class="dashboard-user-img" src="{{ url('img/no-image.png') }}" alt="">
+                                        <img src="{{ url('img/no-image.png') }}" class="pagination-img" alt="" data-toggle="tooltip" data-placement="top" data-html="true" title="<img class='tooltip-img' src='{{ url('img/no-image.png') }}'>">
                                     @endif
                                 </th>
                                 <td>{{ $user->first_name }} {{ $user->last_name }}</td>
