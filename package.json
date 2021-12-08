@@ -12,10 +12,12 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
         "@sweetalert2/theme-bootstrap-4": "^3.1.4",
+        "ansi-regex": ">=5.0.1",
         "bootstrap": "4.4.1",
         "easymde": "^2.15.0",
         "file-saver": "^2.0.5",
         "flag-icon-css": "^3.4.6",
+        "glob-parent": ">=5.1.2",
         "icheck-bootstrap": "^3.0.1",
         "inputmask": "^5.0.3",
         "jquery": "^3.4.1",
@@ -24,6 +26,7 @@
         "jsgrid": "^1.5.3",
         "jszip": "^3.3.0",
         "mustache": "^4.0.1",
+        "nth-check": ">=2.0.1",
         "overlayscrollbars": "^1.11.0",
         "sweetalert2": "^9.17.2",
         "toastr": "^2.1.4"
