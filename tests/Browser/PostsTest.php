@@ -105,7 +105,7 @@ class PostsTest extends DuskTestCase
                 ->assertSee(__('posts.create_post'))
                 ->type('title', $unsaved_post->title);
 
-            $browser->script('window.SimpleMDEInstance.value("testing")');
+            $browser->script('window.EasyMDEInstance.value("testing")');
 
             $browser
                 ->attach('image', storage_path('app/public/testing/test.jpg'))

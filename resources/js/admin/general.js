@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import SimpleMDE from 'simplemde/dist/simplemde.min';
+import EasyMDE from 'easymde/dist/easymde.min';
 
 export default class General {
 
@@ -13,10 +13,10 @@ export default class General {
     }
 
     initMdEditor() {
-        if ($(".simplemde").length >= 1) {
+        if ($(".easymde").length >= 1) {
             // create a global instance so that I can access it inside the browser tests
             // to set values when creating posts or pages
-            window.SimpleMDEInstance = new SimpleMDE({ element: $(".simplemde")[0] });
+            window.EasyMDEInstance = new EasyMDE({ element: $(".easymde")[0] });
         }
     }
 

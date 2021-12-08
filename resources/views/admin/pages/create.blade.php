@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label for="form-content">{{ __('general.content') }}</label>
-                        <textarea name="content" id="form-content" class="form-control simplemde" cols="30" rows="10" placeholder="Enter content"></textarea>
+                        <textarea name="content" id="form-content" class="form-control easymde" cols="30" rows="10" placeholder="Enter content"></textarea>
                     </div>
                 </div>
                 <div class="card-footer">

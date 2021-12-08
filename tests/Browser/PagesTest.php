@@ -105,7 +105,7 @@ class PagesTest extends DuskTestCase
                 ->assertSee(__('pages.create_page'))
                 ->type('title', $unsaved_page->title);
 
-            $browser->script('window.SimpleMDEInstance.value("testing")');
+            $browser->script('window.EasyMDEInstance.value("testing")');
 
             $browser
                 ->attach('image', storage_path('app/public/testing/test.jpg'))
