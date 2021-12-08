@@ -15,5 +15,11 @@ mix
     .js('resources/js/admin.js', 'public/js')
     .js('resources/js/client.js', 'public/js')
     .sass('resources/sass/client.scss', 'public/css')
-    .sass('resources/sass/admin.scss', 'public/css');
-    //.sourceMaps();
+    .sass('resources/sass/admin.scss', 'public/css')
+    .sourceMaps();
+
+// make the bootstrap tooltips work
+mix.autoload({
+    'jquery': ['$', 'window.jQuery', "jQuery", "window.$", "jquery", "window.jquery"],
+    'popper.js/dist/umd/popper.js': ['Popper', 'window.Popper']
+});

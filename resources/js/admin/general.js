@@ -6,6 +6,7 @@ export default class General {
     constructor() {
         this.bindEvents();
         this.initMdEditor();
+        this.initTooltips();
     }
 
     bindEvents() {
@@ -18,6 +19,10 @@ export default class General {
             // to set values when creating posts or pages
             window.EasyMDEInstance = new EasyMDE({ element: $(".easymde")[0] });
         }
+    }
+
+    initTooltips() {
+        jQuery('[data-toggle="tooltip"]').tooltip()
     }
 
     onDestroyRecordClick(event) {
